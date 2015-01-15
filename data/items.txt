@@ -1,0 +1,29 @@
+WEAPON:dagger
+WEAPON:spear
+WEAPON:pike
+WEAPON:bill hook
+WEAPON:short sword
+WEAPON:knife
+WEAPON:long sword
+WEAPON:two hand sword
+WEAPON:halberd
+WEAPON:sling
+WEAPON:hand axe
+WEAPON:battle axe
+WEAPON:pole-axe
+WEAPON:rapier
+WEAPON:saber
+WEAPON:scimatar
+FOOD:apple
+FOOD:hardtac bread
+FOOD:cabbage
+FOOD:sweetroll
+FOOD:bread roll
+DRINK:water
+DRINK:wine
+CONTAINER:waterskinn
+CONTAINER:flask
+CONTAINER:mug
+AMMO:bullet
+AMMO:small stone
+AMMO:quarrel
