@@ -10,6 +10,10 @@ int mod_actor_stat(Actor *a, char *stat_name, int value)
   {
     a->strength+=value;
   }
+  else if(strcmp(stat_name, "agility") == 0)
+  {
+    a->agility+=value;
+  }
 }
 Actor *new_actor(char *name)
 {
