@@ -6,7 +6,7 @@ int mod_actor_stat(Actor *a, char *stat_name, int value);
 
 int mod_actor_stat(Actor *a, char *stat_name, int value)
 {
-  if(!strcmp(stat_name, "strength") == 0)
+  if(strcmp(stat_name, "strength") == 0)
   {
     a->strength+=value;
   }
