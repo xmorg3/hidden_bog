@@ -1,8 +1,16 @@
+#include <string.h>
 #include "game.h"
 
 Actor * new_actor(char *name);
+int mod_actor_stat(Actor *a, char *stat_name, int value);
 
-
+int mod_actor_stat(Actor *a, char *stat_name, int value)
+{
+  if(!strcmp(stat_name, "strength") == 0)
+  {
+    a->strength+=value;
+  }
+}
 Actor *new_actor(char *name)
 {
   Actor *a;
