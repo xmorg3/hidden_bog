@@ -52,6 +52,10 @@ void draw_chargen_menu(GameCore *gc)
   fast_radio(gc, 200, 260, "Dwarf",0);
   fast_radio(gc, 200, 290, "Dark Elf",0);
   fast_radio(gc, 200, 320, "Goblin",0);
+  
+  gc->char_frame_rect = fast_rect(fr_x, fr_y, cr_w, cr_h );
+  SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect);
+  
   draw_character_attributes(gc, gc->stat_panel_x, gc->stat_panel_y, 1);
 }
 
