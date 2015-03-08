@@ -53,7 +53,10 @@ void draw_chargen_menu(GameCore *gc)
   fast_radio(gc, 200, 290, "Dark Elf",0);
   fast_radio(gc, 200, 320, "Goblin",0);
   
-  gc->char_frame_rect = fast_rect(fr_x, fr_y, cr_w, cr_h );
+  //gc->stat_panel_x = 360; //set in resources.c
+  //gc->stat_panel_y = 200; //set location for stat panel
+  
+  gc->char_frame_rect = fast_rect(360, 100, 100, 100 );
   SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect);
   
   draw_character_attributes(gc, gc->stat_panel_x, gc->stat_panel_y, 1);
