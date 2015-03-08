@@ -107,7 +107,7 @@ int load_resources(GameCore *gc)
   set_rect(&gc->button_plus_raised, 327,122,28,28); //rects for plus/minus on the source image
   set_rect(&gc->button_minus_raised, 366, 122,28,28);
   gc->stat_panel_x = 360;
-  gc->stat_panel_y = 150; //set location for stat panel
+  gc->stat_panel_y = 200; //set location for stat panel
   //first buttons for plus/minus on 
   gc->dst_stat_minus = fast_rect(gc->stat_panel_x-32+20, gc->stat_panel_y, 20, 20); 
   gc->dst_stat_plus = fast_rect( gc->stat_panel_x-32, gc->stat_panel_y, 20, 20); //stat sheets
