@@ -32,15 +32,15 @@ void print_debug_map(GameCore *gc)
   for(y = gc->player->map_y-3; y < gc->player->map_y+3; y++) {
     for(x = gc->player->map_x-3; x < gc->player->map_x+3; x++) {
       if(y== gc->player->map_y && x == gc->player->map_x){
-	printf("@");
+	//printf("@");
       }
       else {
 	if(y >= 0 && x >= 0 && y < gc->mapsize && x < gc->mapsize) {
 	  //printf("%d", gc->current_map->tiles[y][x]);
 	}
       }
-    }printf("\n");
-  }printf("\n");
+    }//printf("\n");
+  }//printf("\n");
 }
 
 void set_player_direction(GameCore *gc, int mod)

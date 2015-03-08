@@ -14,8 +14,8 @@ SDL_Rect fast_rect(int x, int y, int w, int h);//render.c
 int start_sdl(GameCore *gc)
 {
   //Temp settings
-  gc->screen_size_x = 640; //1360; //640; //set screensize. (why hardcode again?)
-  gc->screen_size_y = 480; //768; //480; //v---- run SDL_Init()
+  gc->screen_size_x = 1024; //1360; //640; //set screensize. (why hardcode again?)
+  gc->screen_size_y = 768; //768; //480; //v---- run SDL_Init()
   if (SDL_Init( SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_EVENTS  ) == -1) {
     printf("SDL_Init: %s \n", SDL_GetError() );
     return 1;

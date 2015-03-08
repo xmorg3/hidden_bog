@@ -1,9 +1,15 @@
 
 #include "game.h"
 
-void draw(GameCore *gc);
+void draw(GameCore *gc); // main drawing
 void draw_playframe(GameCore *gc);
 void draw_playport(GameCore *gc);
+
+void draw_playport_north(GameCore *gc);
+void draw_playport_east(GameCore *gc);
+void draw_playport_south(GameCore *gc);
+void draw_playport_west(GameCore *gc);
+
 void draw_game_menu(GameCore *gc);
 void draw_chargen_menu(GameCore *gc); //chargen.c
 void draw_options_menu(GameCore *gc); //gameoptions.c
@@ -20,25 +26,9 @@ void sdl_set_textpos(GameCore *gc, int x, int y);
 void set_color(GameCore *gc, int r, int g, int b); //set_font_color;
 
 void draw_message_frame(GameCore *gc);
-void resize_screen(GameCore *gc, int size_x, int size_y)
-{ //doesn't work yet, must reload the textures.
-  SDL_Rect vp;
-  vp.x=0;
-  vp.y=0;
-  vp.w = size_x;
-  vp.h = size_y;
-  SDL_DestroyRenderer(gc->renderer);
-  SDL_SetWindowSize(gc->win, size_x, size_y);
-  SDL_SetWindowFullscreen(gc->win, SDL_WINDOW_FULLSCREEN);
-  gc->renderer =
-    SDL_CreateRenderer(gc->win, -1,
-		       SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-  if (gc->renderer == NULL){
-    printf("%s \n", SDL_GetError() );
-  }
-  
-  //SDL_RenderSetViewport(gc->renderer, &vp);
-}
+void resize_screen(GameCore *gc, int size_x, int size_y);
+
+
 void draw(GameCore *gc)
 {
   SDL_RenderClear(gc->renderer); //clear screen?  
@@ -87,6 +77,110 @@ void draw_playframe(GameCore *gc)
   draw_character_portraits(gc);
   draw_mapport(gc);
 }
+
+void draw_playport(GameCore *gc) //draw the play viewport
+{
+  //sky and floor
+  SDL_RenderCopy(gc->renderer, gc->floor_bottom_fobx_blank, NULL, &gc->player_viewport);
+  SDL_RenderCopy(gc->renderer, gc->sky_top_fobx_blank, NULL, &gc->player_viewport);
+  if(gc->player->direction == NORTH) {
+    draw_playport_north(gc);
+  }
+  if(gc->player->direction == EAST) {
+    draw_playport_east(gc);
+  }
+  if(gc->player->direction == SOUTH) {
+    draw_playport_south(gc);
+  }
+  if(gc->player->direction == WEST) {
+    draw_playport_west(gc);
+  }
+}
+
+void draw_fov2(GameCore *gc, int left, int middle, int right)
+{
+  if( left == 1 || left == 2)  {SDL_RenderCopy(gc->renderer, gc->wall_left_fov2_blank, NULL, &gc->player_viewport);}
+  if( right ==1 || right == 2)  {SDL_RenderCopy(gc->renderer, gc->wall_right_fov2_blank, NULL, &gc->player_viewport);}
+  if( middle==1 || middle ==2)  {SDL_RenderCopy(gc->renderer, gc->wall_front_fov1_blank, NULL, &gc->player_viewport);}
+}
+void draw_fov1(GameCore *gc, int left, int middle, int right)
+{
+  if( left == 1 || left == 2)  {SDL_RenderCopy(gc->renderer, gc->wall_left_fov1_blank, NULL, &gc->player_viewport);}
+  if( right ==1 || right == 2)  {SDL_RenderCopy(gc->renderer, gc->wall_right_fov1_blank, NULL, &gc->player_viewport);}
+  if( middle==1 || middle== 2)  {SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);}
+}
+void draw_fov0(GameCore *gc, int left, int middle, int right)
+{
+  if( left == 1 || left == 2)  {SDL_RenderCopy(gc->renderer, gc->wall_left_fov0_blank, NULL, &gc->player_viewport);}
+  if( right ==1 || right== 2)  {SDL_RenderCopy(gc->renderer, gc->wall_right_fov0_blank, NULL, &gc->player_viewport);}
+  //if( middle==1 || middle==2)  {SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);}
+}
+
+void draw_playport_north(GameCore *gc)
+{
+  int current_tile; //set value to whatever tile we are rendering.
+  draw_fov2(gc, gc->current_map->tiles[gc->player->map_y-2][gc->player->map_x-1],
+	    gc->current_map->tiles[    gc->player->map_y-2][gc->player->map_x],
+	    gc->current_map->tiles[    gc->player->map_y-2][gc->player->map_x+1]);
+  
+  draw_fov1(gc,
+	    gc->current_map->tiles[gc->player->map_y-1][gc->player->map_x-1],
+	    gc->current_map->tiles[gc->player->map_y-1][gc->player->map_x  ],
+	    gc->current_map->tiles[gc->player->map_y-1][gc->player->map_x+1]);
+  
+  draw_fov0(gc, gc->current_map->tiles[gc->player->map_y][gc->player->map_x-1],
+	    gc->current_map->tiles[    gc->player->map_y][gc->player->map_x],
+	    gc->current_map->tiles[    gc->player->map_y][gc->player->map_x+1]);
+}
+
+
+
+void draw_playport_east(GameCore *gc)
+{
+  int current_tile; //set value to whatever tile we are rendering.
+  draw_fov2(gc, gc->current_map->tiles[gc->player->map_y-1][gc->player->map_x+2],
+	    gc->current_map->tiles[    gc->player->map_y  ][gc->player->map_x+2],
+	    gc->current_map->tiles[    gc->player->map_y+1][gc->player->map_x+2]);
+  
+  draw_fov1(gc, gc->current_map->tiles[gc->player->map_y-1][gc->player->map_x+1],
+	    gc->current_map->tiles[gc->player->map_y][gc->player->map_x+1],
+	    gc->current_map->tiles[gc->player->map_y+1][gc->player->map_x+1]);
+  
+  draw_fov0(gc, gc->current_map->tiles[gc->player->map_y-1][gc->player->map_x],
+	    gc->current_map->tiles[gc->player->map_y][gc->player->map_x],
+	    gc->current_map->tiles[gc->player->map_y+1][gc->player->map_x]);
+}
+void draw_playport_south(GameCore *gc)
+{
+  //int current_tile; //set value to whatever tile we are rendering.
+  //current_tile = gc->current_map->tiles[gc->player->map_y-1][gc->player->map_x+2];
+  draw_fov2(gc, gc->current_map->tiles[gc->player->map_y+2][gc->player->map_x+1],
+	    gc->current_map->tiles[gc->player->map_y+2][gc->player->map_x],
+	    gc->current_map->tiles[gc->player->map_y+2][gc->player->map_x-1]);
+  
+  draw_fov1(gc, gc->current_map->tiles[gc->player->map_y+1][gc->player->map_x+1],
+	    gc->current_map->tiles[gc->player->map_y+1][gc->player->map_x],
+	    gc->current_map->tiles[gc->player->map_y+1][gc->player->map_x-1]);
+  
+  draw_fov0(gc, gc->current_map->tiles[gc->player->map_y][gc->player->map_x+1],    
+	    gc->current_map->tiles[gc->player->map_y][gc->player->map_x],
+	    gc->current_map->tiles[gc->player->map_y][gc->player->map_x-1]);  
+}
+void draw_playport_west(GameCore *gc)
+{
+  draw_fov2(gc, gc->current_map->tiles[gc->player->map_y+1][gc->player->map_x-2],
+	    gc->current_map->tiles[    gc->player->map_y][gc->player->map_x-2],
+	    gc->current_map->tiles[    gc->player->map_y-1][gc->player->map_x-2]);
+  
+  draw_fov1(gc, gc->current_map->tiles[gc->player->map_y+1][gc->player->map_x-1],
+	    gc->current_map->tiles[    gc->player->map_y][gc->player->map_x-1],
+	    gc->current_map->tiles[    gc->player->map_y-1][gc->player->map_x-1]);
+  
+  draw_fov0(gc, gc->current_map->tiles[gc->player->map_y+1][gc->player->map_x],    
+	    gc->current_map->tiles[    gc->player->map_y  ][gc->player->map_x],
+	    gc->current_map->tiles[    gc->player->map_y-1][gc->player->map_x]); 
+}
+
 void draw_message_frame(GameCore *gc)
 { //draw message log to the screen
   int i;
@@ -230,145 +324,22 @@ void draw_game_menu(GameCore *gc)
   fast_button(gc, button_col,button_row+55*4, "Exit");
 }
 
-void draw_playport(GameCore *gc) //draw the play viewport
-{
-  //sky and floor
-  int current_tile; //set value to whatever tile we are rendering.
-  SDL_RenderCopy(gc->renderer, gc->floor_bottom_fobx_blank, NULL, &gc->player_viewport);
-  SDL_RenderCopy(gc->renderer, gc->sky_top_fobx_blank, NULL, &gc->player_viewport);
 
-  if(gc->player->direction == NORTH) { //new code for north, allow for expanding of tile types
-  	 //walls
-    current_tile = gc->current_map->tiles[gc->player->map_y-2][gc->player->map_x-1];
-    if( current_tile == 1)
-    	{SDL_RenderCopy(gc->renderer, gc->wall_left_fov2_blank, NULL, &gc->player_viewport);}
-    else if( current_tile == 2)
-    	{SDL_RenderCopy(gc->renderer, gc->tall_wall_left_fov2, NULL, &gc->player_viewport);}
-    current_tile = gc->current_map->tiles[gc->player->map_y-2][gc->player->map_x+1];
-    if( current_tile == 1)
-    	{SDL_RenderCopy(gc->renderer, gc->wall_right_fov2_blank, NULL, &gc->player_viewport);}
-    else if( current_tile == 2)
-    	{SDL_RenderCopy(gc->renderer, gc->tall_wall_right_fov2, NULL, &gc->player_viewport);}
-    current_tile = gc->current_map->tiles[gc->player->map_y-2][gc->player->map_x];
-    if( current_tile == 1)
-    	{SDL_RenderCopy(gc->renderer, gc->wall_front_fov1_blank, NULL, &gc->player_viewport);}
-    else if( current_tile == 2)
-    	{SDL_RenderCopy(gc->renderer, gc->tall_wall_right_fov1, NULL, &gc->player_viewport);}
-    current_tile = gc->current_map->tiles[gc->player->map_y-1][gc->player->map_x-1];
-    if( current_tile == 1)
-    	{SDL_RenderCopy(gc->renderer, gc->wall_left_fov1_blank, NULL, &gc->player_viewport);}
-    else if( current_tile == 2)
-    	{SDL_RenderCopy(gc->renderer, gc->tall_wall_left_fov1, NULL, &gc->player_viewport);}
-    current_tile = gc->current_map->tiles[gc->player->map_y-1][gc->player->map_x+1];
-    if(current_tile == 1)
-    	{SDL_RenderCopy(gc->renderer, gc->wall_right_fov1_blank, NULL, &gc->player_viewport);}
-    else if(current_tile == 2)
-    	{SDL_RenderCopy(gc->renderer, gc->tall_wall_right_fov1, NULL, &gc->player_viewport);}
-    current_tile = gc->current_map->tiles[gc->player->map_y-1][gc->player->map_x];
-    if(current_tile == 1)
-      	{SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);}
-    else if(current_tile == 2)
-    	{SDL_RenderCopy(gc->renderer, gc->tall_wall_front_fov0, NULL, &gc->player_viewport);}
-    current_tile = gc->current_map->tiles[gc->player->map_y][gc->player->map_x-1];
-    if(current_tile == 1)
-      {SDL_RenderCopy(gc->renderer, gc->wall_left_fov0_blank, NULL, &gc->player_viewport);}
-    else if(current_tile == 2)
-    	{SDL_RenderCopy(gc->renderer, gc->tall_wall_left_fov0, NULL, &gc->player_viewport);}
-    current_tile = gc->current_map->tiles[gc->player->map_y][gc->player->map_x+1];
-    if(current_tile == 1)
-      {SDL_RenderCopy(gc->renderer, gc->wall_right_fov0_blank, NULL, &gc->player_viewport);}
-    else if(current_tile == 2)
-    	{SDL_RenderCopy(gc->renderer, gc->tall_wall_right_fov0, NULL, &gc->player_viewport);}
+
+void resize_screen(GameCore *gc, int size_x, int size_y)
+{ //doesn't work yet, must reload the textures.
+  SDL_Rect vp;
+  vp.x=0;
+  vp.y=0;
+  vp.w = size_x;
+  vp.h = size_y;
+  SDL_DestroyRenderer(gc->renderer);
+  SDL_SetWindowSize(gc->win, size_x, size_y);
+  SDL_SetWindowFullscreen(gc->win, SDL_WINDOW_FULLSCREEN);
+  gc->renderer =
+    SDL_CreateRenderer(gc->win, -1,
+		       SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+  if (gc->renderer == NULL){
+    printf("%s \n", SDL_GetError() );
   }
-  if(gc->player->direction == EAST) {
-    current_tile = gc->current_map->tiles[gc->player->map_y-1][gc->player->map_x+2];
-    if( current_tile == 1)
-      {SDL_RenderCopy(gc->renderer, gc->wall_left_fov2_blank, NULL, &gc->player_viewport);}
-    else if( current_tile == 2)
-      {SDL_RenderCopy(gc->renderer, gc->tall_wall_left_fov2, NULL, &gc->player_viewport);}
-    current_tile = gc->current_map->tiles[gc->player->map_y+1][gc->player->map_x+2];
-    if( current_tile == 1)
-      {SDL_RenderCopy(gc->renderer, gc->wall_right_fov2_blank, NULL, &gc->player_viewport);}
-    else if(current_tile == 2)
-      {SDL_RenderCopy(gc->renderer, gc->tall_wall_right_fov2, NULL, &gc->player_viewport);}
-    current_tile = gc->current_map->tiles[gc->player->map_y][gc->player->map_x+2];
-    if(current_tile == 1)
-      {SDL_RenderCopy(gc->renderer, gc->wall_front_fov1_blank, NULL, &gc->player_viewport);}
-    else if (current_tile == 2)
-      {SDL_RenderCopy(gc->renderer, gc->tall_wall_front_fov1, NULL, &gc->player_viewport);}
-    current_tile = gc->current_map->tiles[gc->player->map_y-1][gc->player->map_x+1];
-    if(current_tile == 1)
-      {SDL_RenderCopy(gc->renderer, gc->wall_left_fov1_blank, NULL, &gc->player_viewport);}
-    else if (current_tile == 2)
-      {SDL_RenderCopy(gc->renderer, gc->tall_wall_left_fov1, NULL, &gc->player_viewport);}
-    current_tile = gc->current_map->tiles[gc->player->map_y+1][gc->player->map_x+1];
-    if(current_tile == 1)
-      {SDL_RenderCopy(gc->renderer, gc->wall_right_fov1_blank, NULL, &gc->player_viewport);}
-    else if(current_tile == 2)
-      {SDL_RenderCopy(gc->renderer, gc->tall_wall_right_fov1, NULL, &gc->player_viewport);}
-    current_tile = gc->current_map->tiles[gc->player->map_y][gc->player->map_x+1];
-    if(current_tile == 1)
-      {SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);}
-    else if(current_tile == 2)
-      {SDL_RenderCopy(gc->renderer, gc->tall_wall_front_fov0, NULL, &gc->player_viewport);}
-    current_tile = gc->current_map->tiles[gc->player->map_y-1][gc->player->map_x];
-    if(current_tile == 1)
-      {SDL_RenderCopy(gc->renderer, gc->wall_left_fov0_blank, NULL, &gc->player_viewport);}
-    else if(current_tile == 2)
-      {SDL_RenderCopy(gc->renderer, gc->tall_wall_left_fov0, NULL, &gc->player_viewport);}
-    current_tile = gc->current_map->tiles[gc->player->map_y+1][gc->player->map_x];
-    if(current_tile == 1)
-      {SDL_RenderCopy(gc->renderer, gc->wall_right_fov0_blank, NULL, &gc->player_viewport);}
-    else if(current_tile == 2)
-      {SDL_RenderCopy(gc->renderer, gc->tall_wall_right_fov0, NULL, &gc->player_viewport);}
-  }
-  if(gc->player->direction == SOUTH) {
-    if(gc->current_map->tiles[gc->player->map_y+2][gc->player->map_x+1] == 1)
-      SDL_RenderCopy(gc->renderer, gc->wall_left_fov2_blank, NULL, &gc->player_viewport);
-    if(gc->current_map->tiles[gc->player->map_y+2][gc->player->map_x-1] == 1)
-      SDL_RenderCopy(gc->renderer, gc->wall_right_fov2_blank, NULL, &gc->player_viewport);
-    if(gc->current_map->tiles[gc->player->map_y+2][gc->player->map_x] == 1)
-      SDL_RenderCopy(gc->renderer, gc->wall_front_fov1_blank, NULL, &gc->player_viewport);
-
-    if(gc->current_map->tiles[gc->player->map_y+1][gc->player->map_x+1] == 1)
-      {SDL_RenderCopy(gc->renderer, gc->wall_left_fov1_blank, NULL, &gc->player_viewport);}
-    if(gc->current_map->tiles[gc->player->map_y+1][gc->player->map_x-1] == 1)
-      {SDL_RenderCopy(gc->renderer, gc->wall_right_fov1_blank, NULL, &gc->player_viewport);}
-    if(gc->current_map->tiles[gc->player->map_y+1][gc->player->map_x] == 1)
-      {SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);}
-      
-    if(gc->current_map->tiles[gc->player->map_y][gc->player->map_x+1] == 1)
-      {SDL_RenderCopy(gc->renderer, gc->wall_left_fov0_blank, NULL, &gc->player_viewport);}
-    if(gc->current_map->tiles[gc->player->map_y][gc->player->map_x-1] == 1)
-      {SDL_RenderCopy(gc->renderer, gc->wall_right_fov0_blank, NULL, &gc->player_viewport);}
-  }
-  if(gc->player->direction == WEST) {
-    if(gc->current_map->tiles[gc->player->map_y+1][gc->player->map_x-2] == 1)
-      SDL_RenderCopy(gc->renderer, gc->wall_left_fov2_blank, NULL, &gc->player_viewport);
-    if(gc->current_map->tiles[gc->player->map_y-1][gc->player->map_x-2] == 1)
-      SDL_RenderCopy(gc->renderer, gc->wall_right_fov2_blank, NULL, &gc->player_viewport);
-    if(gc->current_map->tiles[gc->player->map_y][gc->player->map_x-2] == 1)
-      SDL_RenderCopy(gc->renderer, gc->wall_front_fov1_blank, NULL, &gc->player_viewport);
-      
-    if(gc->current_map->tiles[gc->player->map_y+1][gc->player->map_x-1] == 1)
-      SDL_RenderCopy(gc->renderer, gc->wall_left_fov1_blank, NULL, &gc->player_viewport);
-    if(gc->current_map->tiles[gc->player->map_y-1][gc->player->map_x-1] == 1)
-      SDL_RenderCopy(gc->renderer, gc->wall_right_fov1_blank, NULL, &gc->player_viewport);
-    if(gc->current_map->tiles[gc->player->map_y][gc->player->map_x-1] == 1)
-      SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);
-
-    if(gc->current_map->tiles[gc->player->map_y+1][gc->player->map_x] == 1)
-      SDL_RenderCopy(gc->renderer, gc->wall_left_fov0_blank, NULL, &gc->player_viewport);
-    if(gc->current_map->tiles[gc->player->map_y-1][gc->player->map_x] == 1)
-      SDL_RenderCopy(gc->renderer, gc->wall_right_fov0_blank, NULL, &gc->player_viewport);
-  }
-
-
-  //close away
-  //SDL_RenderCopy(gc->renderer, gc->wall_left_fov1_blank, NULL, &gc->player_viewport);
-  //SDL_RenderCopy(gc->renderer, gc->wall_right_fov1_blank, NULL, &gc->player_viewport);
-  //SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);
-  //up close
-  //SDL_RenderCopy(gc->renderer, gc->wall_left_fov0_blank, NULL, &gc->player_viewport);
-  //SDL_RenderCopy(gc->renderer, gc->wall_right_fov0_blank, NULL, &gc->player_viewport);
 }

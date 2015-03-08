@@ -59,10 +59,6 @@ Scene * new_map(char *name, int mapsize, char *filename)
   Scene *scn;
   scn = (Scene*)malloc(sizeof (Scene));
   strcpy(scn->name, name);
-  //scn->tiles = (int **)malloc(mapsize * sizeof(int*));//allocate each row
-  //for(i = 0; i < mapsize; i++) {
-  //  scn->tiles[i] = (int*) malloc(sizeof(int)); //allocate each int
-  //}
   scn->tiles = (int**)malloc(mapsize * sizeof(int*));
   scn->fog_tiles = (int**)malloc(mapsize * sizeof(int*));
   for(i=0; i < mapsize; i++) {
