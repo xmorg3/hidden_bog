@@ -56,9 +56,8 @@ void draw_chargen_menu(GameCore *gc)
   //gc->stat_panel_x = 360; //set in resources.c
   //gc->stat_panel_y = 200; //set location for stat panel
   
-  gc->char_frame_rect = fast_rect(360, 100, 100, 100 );
+  gc->char_frame_rect = fast_rect(360, 10, 100, 100 );
   SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect);
-  
   draw_character_attributes(gc, gc->stat_panel_x, gc->stat_panel_y, 1);
 }
 
