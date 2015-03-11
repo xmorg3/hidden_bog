@@ -63,7 +63,21 @@ Actor *new_actor(char *name)
   a->lockpicking=0;
   a->traps=0; //disarming and setting of traps.
   //perception skills
+  a->tracking=0;
+  a->ambushing=0;
+  a->lookout=0;
+  a->findhidden=0; //doors, chests, traps
   //crafting skills
+  a->woodcutting=0;
+  a->stonecutting=0;
+  a->tunneling=0;
+  a->bowmaking=0;
+  a->fletching=0;
+  a->clothmaking=0;
+  a->blacksmithing=0; //making horseshoes!
+  a->weaponsmithing=0;
+  a->armorsmithing=0;
+  a->leatherworking=0;
   return a;
 }
 
