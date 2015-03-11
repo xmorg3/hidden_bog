@@ -1,10 +1,11 @@
-<<<<<<< HEAD
-TODO:
-*Expand field of view on map.
-*Create encounters
-*Create maps and locations.
-*
-=======
-# hidden_bog
-sdl2 based rpg
->>>>>>> d66a1da5060f5721948a22b7e52ce4f0804af1b0
+Hidden Bog
+------------------------------
+an sdl2 based rpg
+hidden bog, is a grid based 2D rpg, where the player moves in a hand drawn First Person world.
+
+TODOS:
+Create 1 image with side and middle frames.
+/----\  You can render the right left side of the image for the 
+|    |  left side of teh screen, and the left side for teh right screen
+\____/  render the middle for the middle
+because its SDL2, you can scale the rects down for items further out.
