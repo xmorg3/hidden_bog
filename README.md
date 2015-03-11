@@ -9,3 +9,6 @@ Create 1 image with side and middle frames.
 |    |  left side of teh screen, and the left side for teh right screen
 \____/  render the middle for the middle
 because its SDL2, you can scale the rects down for items further out.
+
+
+Need a collection of portraits for the character selection.
