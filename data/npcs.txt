@@ -1,0 +1,28 @@
+#name
+###########humanoid types
+thief;
+warrior;
+knight;
+mage;
+robber;
+graverobber;
+###########horrors
+slime;
+seething mass;
+construct;
+###########monsters
+harpy;
+orc;
+#############animals
+serpent;
+bear;
+mountain lion;
+wild dog;
+wolf;
+brigand;
+#############undead
+skeleton;
+zombie;
+flayed;
+ghost;
+wight;
