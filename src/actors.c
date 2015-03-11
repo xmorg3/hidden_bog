@@ -35,6 +35,35 @@ Actor *new_actor(char *name)
   a->charisma=1;
   a->luck=1;
   a->bonus_attr = 10;
+  //new skills
+  a->skill_dagger=0;
+  a->skill_sword=0;
+  a->skill_axe=0;
+  a->skill_crossbow=0;
+  a->skill_archery=0;
+  a->skill_throwing=0;
+  a->skill_polearm=0; //spears halberds
+  a->skill_clubs=0; //clubs and maces
+  a->skill_spiked=0; //spiked weapons, picks, morning stars, beaks, sythes
+  a->grappling=0; //wrestling
+  a->biting=0;//chomp chomp
+  a->hand2hand=0;//martial arts
+  a->shielding=0;//bashing and blocking
+  a->dodgemelee=0;
+  a->dodgeranged=0;
+  //social skills
+  a->speeches=0; 
+  a->lying=0;
+  a->charming=0;
+  a->empathy=0; //i feel your pain.
+  a->debating=0; //arguing your point well.
+  a->quickwit=0; //a smart mouth can have an effect on a weak mind.
+  //less than honest skills
+  a->pickpocket=0;
+  a->lockpicking=0;
+  a->traps=0; //disarming and setting of traps.
+  //perception skills
+  //crafting skills
   return a;
 }
 
