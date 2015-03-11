@@ -1,5 +1,6 @@
 #name
 ###########humanoid types
+villager;
 thief;
 warrior;
 knight;
@@ -10,9 +11,14 @@ graverobber;
 slime;
 seething mass;
 construct;
+gibbering growth;
+crawling ooze;
 ###########monsters
 harpy;
 orc;
+werewolf;
+werecat;
+giant;
 #############animals
 serpent;
 bear;
