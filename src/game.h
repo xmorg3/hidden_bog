@@ -1,6 +1,6 @@
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
+#include <SDL.h>
+#include <SDL_ttf.h>
 
 enum gate_state_numbers {
   GAME_QUIT,
@@ -71,14 +71,14 @@ typedef struct _GameCore {
   SDL_Texture *character_doll;
   //note, there should be a func to load these textures on the fly?
   SDL_Texture *floor_bottom_fobx_blank,*sky_top_fobx_blank,
-    *wall_front_fov0_blank, *wall_front_fov1_blank, 
+    *wall_front_fov0_blank, *wall_front_fov1_blank,
     *wall_left_fov0_blank, *wall_left_fov1_blank,
-    *wall_left_fov2_blank, *wall_right_fov0_blank, 
-    *wall_right_fov1_blank, *wall_right_fov2_blank; 
+    *wall_left_fov2_blank, *wall_right_fov0_blank,
+    *wall_right_fov1_blank, *wall_right_fov2_blank;
   SDL_Texture  *tall_wall_front_fov0, *tall_wall_front_fov1,
     *tall_wall_left_fov0,  *tall_wall_left_fov1,  *tall_wall_left_fov2,
   	 *tall_wall_right_fov0, *tall_wall_right_fov1, *tall_wall_right_fov2;
-    
+
   SDL_Rect character_doll_rect;
   SDL_Rect char_frame_rect;
   SDL_Color current_color; //current color to draw in (like for text)

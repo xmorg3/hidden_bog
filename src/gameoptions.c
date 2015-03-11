@@ -1,4 +1,4 @@
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include "game.h"
 
 void handle_mousebutton_down_options_menu(GameCore *gc);
@@ -24,12 +24,12 @@ void handle_mousebutton_down_options_menu(GameCore *gc)
 {
   //fast_button(gc, 10,gc->screen_size_y - 58, "Back");
   //fast_button(gc, 300,gc->screen_size_y - 58, "Next");
-  if(gc->mouse_x >= 10 && gc->mouse_x <= 10+283 && 
+  if(gc->mouse_x >= 10 && gc->mouse_x <= 10+283 &&
      gc->mouse_y >= gc->screen_size_y - 58 && gc->mouse_y <= gc->screen_size_y) {
     printf("Go Back.\n");
     gc->game_state = GAME_START_MENU;
   }
-  else if (gc->mouse_x >= 300 && gc->mouse_x <= 300+283 && 
+  else if (gc->mouse_x >= 300 && gc->mouse_x <= 300+283 &&
 	   gc->mouse_y >= gc->screen_size_y-58 && gc->mouse_y <= gc->screen_size_y) {
     gc->game_state = GAME_OPTIONS_MENU;
     printf("(still in options).\n");

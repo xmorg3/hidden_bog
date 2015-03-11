@@ -14,21 +14,22 @@ SDL_Rect fast_rect(int x, int y, int w, int h);//render.c
 int start_sdl(GameCore *gc)
 {
   //Temp settings
-  gc->screen_size_x = 1024; //1360; //640; //set screensize. (why hardcode again?)
-  gc->screen_size_y = 768; //768; //480; //v---- run SDL_Init()
-  if (SDL_Init( SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_EVENTS  ) == -1) {
+  gc->screen_size_x = 720; //1360; //640; //set screensize. (why hardcode again?)
+  gc->screen_size_y = 720; //768; //480; //v---- run SDL_Init()
+  if (SDL_Init( SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_EVENTS
+          | SDL_WINDOW_FULLSCREEN_DESKTOP) == -1) {
     printf("SDL_Init: %s \n", SDL_GetError() );
     return 1;
   }
   start_ttf(gc);  //load the fonts
-  gc->win = SDL_CreateWindow("Game",  //create the window 
+  gc->win = SDL_CreateWindow("Game",  //create the window
 			     SDL_WINDOWPOS_UNDEFINED,
-			     SDL_WINDOWPOS_UNDEFINED, 
-			     gc->screen_size_x, 
-			     gc->screen_size_y, 
+			     SDL_WINDOWPOS_UNDEFINED,
+			     gc->screen_size_x,
+			     gc->screen_size_y,
 			     SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
-			     //| SDL_WINDOW_FULLSCREEN);
-			     );
+			     | SDL_WINDOW_FULLSCREEN);
+
   if (gc->win == NULL){ //error check window
     printf("%s \n", SDL_GetError() );
     return 1;
@@ -50,11 +51,11 @@ int start_sdl(GameCore *gc)
   return 0;
 }
 
-#include <SDL2/SDL_image.h>
+#include <SDL_image.h>
 
 SDL_Texture * IMG_Load_w_error(GameCore *gc, char * imgfile)
 {
-  SDL_Texture * img; 
+  SDL_Texture * img;
   img = IMG_LoadTexture(gc->renderer, imgfile);
   if(img == NULL) {
     printf("Error! someone trolled you a null surface!(%s)\n", imgfile);
@@ -69,7 +70,7 @@ void set_rect(SDL_Rect *r, int x, int y, int w, int h)
   r->w = w;
   r->h = h;
 }
-int load_resources(GameCore *gc) 
+int load_resources(GameCore *gc)
 {
   //have we decided if we are using Surfaces or Textures?
   //IMG_Load(const char *file);
@@ -78,12 +79,12 @@ int load_resources(GameCore *gc)
   gc->character_doll = IMG_Load_w_error(gc, "data/doll_male_blank.png");
   gc->t_buttons = IMG_Load_w_error(gc, "data/RPG_GUI_v1.png");
   gc->char_frame = IMG_Load_w_error(gc, "data/char_frame.png");
-  
+
   set_rect(&gc->button_raised, 14,126, 283,55);
   set_rect(&gc->button_pressed,14,204, 283,55);
   set_rect(&gc->button_highlighted,14,282, 283,55);
   set_rect(&gc->radio_raised, 18,14,24,24);
-  set_rect(&gc->radio_pressed,18,50,24,24); 
+  set_rect(&gc->radio_pressed,18,50,24,24);
   //src = fast_rect(0,0,280,800);
   set_rect(&gc->character_doll_rect, 0,0,288,800); //female rect x = 454, w = 220
   //viewport (top left)
@@ -92,7 +93,7 @@ int load_resources(GameCore *gc)
 	   5,
 	   (gc->screen_size_x/4) * 3,
 	   gc->screen_size_y - 137 ); //everything except portraits
-  
+
   set_rect(&gc->tabbed_pane,
 	   (gc->screen_size_x / 4) *3 + 5, //x
 	   5, //y
@@ -108,8 +109,8 @@ int load_resources(GameCore *gc)
   set_rect(&gc->button_minus_raised, 366, 122,28,28);
   gc->stat_panel_x = 360;
   gc->stat_panel_y = 200; //set location for stat panel
-  //first buttons for plus/minus on 
-  gc->dst_stat_minus = fast_rect(gc->stat_panel_x-32+20, gc->stat_panel_y, 20, 20); 
+  //first buttons for plus/minus on
+  gc->dst_stat_minus = fast_rect(gc->stat_panel_x-32+20, gc->stat_panel_y, 20, 20);
   gc->dst_stat_plus = fast_rect( gc->stat_panel_x-32, gc->stat_panel_y, 20, 20); //stat sheets
   load_map_wall_textures(gc, "village_day/");
   return 0;
@@ -119,8 +120,8 @@ SDL_Texture * load_texture_by_dir(GameCore *gc, char *directory, char *file)
 {
   char strfile[300];
   SDL_Texture *t;
-  strfile[0] = '\0';  
-  strcpy(strfile, "data/mods/oldschool/"); 
+  strfile[0] = '\0';
+  strcpy(strfile, "data/mods/oldschool/");
   strcat(strfile, directory); //  add the / in the argument
   strcat(strfile, file);
   printf("%s\n", strfile);

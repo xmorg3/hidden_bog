@@ -1,6 +1,6 @@
 
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL.h>
+#include <SDL_ttf.h>
+#include <SDL.h>
 
 #include "game.h"
 
@@ -43,7 +43,7 @@ SDL_Texture* sdl_printf_font(GameCore *gc, TTF_Font *font, char *message)
   SDL_Texture *texture;
   SDL_Rect ts;
 
-  TTF_SizeText(gc->font0, message, &gc->c_text_size->w, &gc->c_text_size->h);  
+  TTF_SizeText(gc->font0, message, &gc->c_text_size->w, &gc->c_text_size->h);
   surf = TTF_RenderText_Blended(font, message, gc->current_color);
   texture = SDL_CreateTextureFromSurface(gc->renderer, surf);
 
@@ -73,7 +73,7 @@ void start_ttf(GameCore *gc)
   if(!TTF_WasInit() && TTF_Init()==-1) {
     printf("TTF_Init: %s\n", TTF_GetError());
     exit(1);
-  }  
+  }
   //TTF_Font *font0;
   gc->font0 = TTF_OpenFont("data/font.ttf", 18);
   if(!gc->font0) {

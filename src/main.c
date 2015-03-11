@@ -1,5 +1,5 @@
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include "game.h"
 
 int start_sdl(GameCore *gc);
@@ -25,8 +25,8 @@ int main(int argc, char** argv){
   gc->player = player;
   gc->mapsize = 20;
   gc->current_map = new_map("nomap", gc->mapsize, NULL);
-  
-  gc->player->map_x = 4; 
+
+  gc->player->map_x = 4;
   gc->player->map_y = 4;
 
   print_in_messagebox(gc, ">");

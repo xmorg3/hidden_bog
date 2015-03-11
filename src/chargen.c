@@ -1,4 +1,4 @@
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 #include "game.h"
 
@@ -29,7 +29,7 @@ void draw_chargen_menu(GameCore *gc)
   fast_button(gc, 10,10, gc->player->name); //- player name
   //put character here?
   src = fast_rect(0,0,280,800); //set_rect(&gc->character_doll_rect, 0,0,280,800); //female rect x = 454, w = 220
-  dst = fast_rect(8,65,180,450); 
+  dst = fast_rect(8,65,180,450);
   SDL_RenderCopy(gc->renderer, gc->character_doll, &gc->character_doll_rect, &dst); //put background
   //put buttons on the right
   fast_button(gc, 10,gc->screen_size_y - 58, "Back");
@@ -37,14 +37,14 @@ void draw_chargen_menu(GameCore *gc)
 
   sdl_set_textpos(gc, 210, 80); set_color(gc, 255, 255, 255);
   SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, gc->font0, "Gender"), NULL, gc->c_text_size);
-  if(gc->player->sex == 0) { //1 male, 0 female   
+  if(gc->player->sex == 0) { //1 male, 0 female
     fast_radio(gc, 200, 100, "Male", 0 );
     fast_radio(gc, 200, 130, "Female", 1 );
   }
   else { //male 1
     fast_radio(gc, 200, 100, "Male", 1);
-    fast_radio(gc, 200,130, "Female", 0); 
-  }  
+    fast_radio(gc, 200,130, "Female", 0);
+  }
   sdl_set_textpos(gc, 210, 180); //set_color(gc, 255, 255, 255);
   SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, gc->font0, "Race"), NULL, gc->c_text_size);
   fast_radio(gc, 200, 200, "Human",0);
@@ -52,7 +52,7 @@ void draw_chargen_menu(GameCore *gc)
   fast_radio(gc, 200, 260, "Dwarf",0);
   fast_radio(gc, 200, 290, "Dark Elf",0);
   fast_radio(gc, 200, 320, "Goblin",0);
-  
+
   //gc->stat_panel_x = 360; //set in resources.c
   //gc->stat_panel_y = 200; //set location for stat panel
   //Portrait panel
@@ -76,7 +76,7 @@ void draw_minusplus_buttons(GameCore *gc, int x, int y)
   SDL_Rect dst, dst2;
   dst = fast_rect(x-32+20, y, 20, 20);
   dst2 = fast_rect(x-32, y, 20, 20);
-    
+
   SDL_RenderCopy(gc->renderer, gc->t_buttons, &gc->button_minus_raised, &dst);
   SDL_RenderCopy(gc->renderer, gc->t_buttons, &gc->button_plus_raised, &dst2);
 }
@@ -95,7 +95,7 @@ void draw_character_attributes(GameCore *gc, int x, int y, int moddable)
   SDL_SetRenderDrawColor(gc->renderer, 0,0,0,255);
   SDL_RenderFillRect(gc->renderer, &stat_fg_frame);
   //show buttongs here if moddable == 1
-  if( moddable == 1) {  
+  if( moddable == 1) {
     draw_minusplus_buttons(gc, x, y);
     draw_minusplus_buttons(gc, x, y+20);
     draw_minusplus_buttons(gc, x, y+40);
@@ -126,7 +126,7 @@ int check_clickedin(SDL_Rect *r, int mouse_x, int mouse_y)
 }
 
 void handle_mousebutton_down_chargen_menu(GameCore *gc)
-{ 
+{
   SDL_Rect b1, b2;
 
   SDL_Rect mstrength, pstrength, mintell, pintell, magi, pagi; //plus and minus buttons
@@ -179,13 +179,13 @@ void handle_mousebutton_down_chargen_menu(GameCore *gc)
   }
   else if ( check_clickedin(&pstrength, gc->mouse_x, gc->mouse_y ) == 1 ) {
     if(gc->player->bonus_attr > 0 ) {
-      gc->player->strength++; 
+      gc->player->strength++;
       gc->player->bonus_attr--;
     }
   }
   else if ( check_clickedin(&pintell, gc->mouse_x, gc->mouse_y ) == 1 ) {
     if(gc->player->bonus_attr > 0 ) {
-      gc->player->intelligence++; 
+      gc->player->intelligence++;
       gc->player->bonus_attr--;
     }
   }
@@ -201,7 +201,7 @@ void handle_mousebutton_down_chargen_menu(GameCore *gc)
   }
   else if ( check_clickedin(&pagi, gc->mouse_x, gc->mouse_y ) == 1 ) {
     if(gc->player->bonus_attr > 0 ) {
-      gc->player->agility++; 
+      gc->player->agility++;
       gc->player->bonus_attr--;
     }
   }
@@ -212,7 +212,7 @@ void handle_mousebutton_down_chargen_menu(GameCore *gc)
   }
   else if ( check_clickedin(&pwisdom, gc->mouse_x, gc->mouse_y ) == 1 ) {
     if(gc->player->bonus_attr > 0 ) {
-      gc->player->wisdom++; 
+      gc->player->wisdom++;
       gc->player->bonus_attr--;
     }
   }
@@ -223,7 +223,7 @@ void handle_mousebutton_down_chargen_menu(GameCore *gc)
   }
   else if ( check_clickedin(&pstamina, gc->mouse_x, gc->mouse_y ) == 1 ) {
     if(gc->player->bonus_attr > 0 ) {
-      gc->player->stamina++; 
+      gc->player->stamina++;
       gc->player->bonus_attr--;
     }
   }
@@ -234,7 +234,7 @@ void handle_mousebutton_down_chargen_menu(GameCore *gc)
   }
   else if ( check_clickedin(&pcharisma, gc->mouse_x, gc->mouse_y ) == 1 ) {
     if(gc->player->bonus_attr > 0 ) {
-      gc->player->charisma++; 
+      gc->player->charisma++;
       gc->player->bonus_attr--;
     }
   }
@@ -245,7 +245,7 @@ void handle_mousebutton_down_chargen_menu(GameCore *gc)
   }
   else if ( check_clickedin(&pluck, gc->mouse_x, gc->mouse_y ) == 1 ) {
     if(gc->player->bonus_attr > 0 ) {
-      gc->player->luck++; 
+      gc->player->luck++;
       gc->player->bonus_attr--;
     }
   }
@@ -266,6 +266,6 @@ void handle_mousebutton_down_chargen_menu(GameCore *gc)
 
 
   //loop through these and see if one was clicked?
-  //gc->dst_stat_minus = fast_rect(gc->stat_panel_x-32+20, gc->stat_panel_y, 20, 20); //first buttons for plus/minus on 
+  //gc->dst_stat_minus = fast_rect(gc->stat_panel_x-32+20, gc->stat_panel_y, 20, 20); //first buttons for plus/minus on
   //gc->dst_stat_plus = fast_rect( gc->stat_panel_x-32, gc->stat_panel_y, 20, 20); //stat sheets
 }

@@ -1,5 +1,5 @@
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 #include "game.h"
 
@@ -42,7 +42,7 @@ void handle_keydown(GameCore *gc)
   }
   if(k == SDLK_LEFT && gc->game_state == GAME_PLAY_IDLE) {
     set_player_direction(gc, -1);
-    
+
   }
   else if(k == SDLK_RIGHT && gc->game_state == GAME_PLAY_IDLE ) {
     set_player_direction(gc, 1);
@@ -73,30 +73,30 @@ void handle_mousebutton_down_start_menu(GameCore *gc)
   button_row = 150;//+55
   button_col = 15;//
   SDL_GetMouseState(&gc->mouse_x, &gc->mouse_y);
-  if(gc->mouse_x >= button_col && gc->mouse_x <= button_col+283 && 
-     gc->mouse_y >= button_row+55*4 && 
+  if(gc->mouse_x >= button_col && gc->mouse_x <= button_col+283 &&
+     gc->mouse_y >= button_row+55*4 &&
      gc->mouse_y <= (button_row+55*4)+55) {
     printf("Game Quit.\n");
     gc->game_state = GAME_QUIT;
   }
-  else if (gc->mouse_x >= button_col && gc->mouse_x <= button_col+283 && 
-	   gc->mouse_y >= button_row && 
+  else if (gc->mouse_x >= button_col && gc->mouse_x <= button_col+283 &&
+	   gc->mouse_y >= button_row &&
 	   gc->mouse_y <= (button_row)+55) {
     gc->game_state = GAME_CHARGEN_MENU;
     printf("New Game.\n");
   }
-  else if (gc->mouse_x >= button_col && gc->mouse_x <= button_col+283 && 
-	   gc->mouse_y >= button_row+55*1 && 
+  else if (gc->mouse_x >= button_col && gc->mouse_x <= button_col+283 &&
+	   gc->mouse_y >= button_row+55*1 &&
 	   gc->mouse_y <= (button_row+55*1)+55) {
     printf("Load Game.\n");
   }
-  else if (gc->mouse_x >= button_col && gc->mouse_x <= button_col+283 && 
-	   gc->mouse_y >= button_row+55*2 && 
+  else if (gc->mouse_x >= button_col && gc->mouse_x <= button_col+283 &&
+	   gc->mouse_y >= button_row+55*2 &&
 	   gc->mouse_y <= (button_row+55*2)+55) {
     printf("Save Game.\n");
   }
-  else if (gc->mouse_x >= button_col && gc->mouse_x <= button_col+283 && 
-	   gc->mouse_y >= button_row+55*3 && 
+  else if (gc->mouse_x >= button_col && gc->mouse_x <= button_col+283 &&
+	   gc->mouse_y >= button_row+55*3 &&
 	   gc->mouse_y <= (button_row+55*3)+55) {
     gc->game_state = GAME_OPTIONS_MENU;
     printf("Options.\n");
