@@ -41,6 +41,51 @@ typedef struct _Actor {
     charisma,
     luck,
     bonus_attr;
+    
+    /*  new skills  */
+  int skill_dagger,
+    skill_sword,
+    skill_axe,
+    skill_crossbow,
+    skill_archery,
+    skill_throwing,
+    skill_polearm, //spears halberds
+    skill_club, //clubs and maces
+    skill_spiked, //spiked weapons, picks, morning stars, beaks, sythes
+    grappling, //wrestling
+    biting,//chomp chomp
+    hand2hand,//martial arts
+    shielding,//bashing and blocking
+    dodgemelee,
+    dodgeranged,
+    //social skills
+    speeches, 
+    lying,
+    charming,
+    empathy, //i feel your pain.
+    debating, //arguing your point well.
+    quickwit, //a smart mouth can have an effect on a weak mind.
+    //less than honest skills
+    pickpocket,
+    lockpicking,
+    traps, //disarming and setting of traps.
+    //perception skills
+    tracking,
+    ambushing,
+    lookout,
+    findhidden, //doors, chests, traps
+    //crafting skills
+    woodcutting,
+    stonecutting,
+    tunneling, //find your own "path" through the maze
+    bowmaking,
+    fletching,
+    clothmaking,
+    blacksmithing, //making horseshoes!
+    weaponsmithing,
+    armorsmithing,
+    leatherworking;
+    
   int direction; //where you are facing.
   int map_x, map_y; //xy on current map
 } Actor;
