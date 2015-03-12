@@ -2,6 +2,13 @@
 //#include <SDL2/SDL.h>
 #include "game.h"
 
+/*  New wall dimensions for wall_all
+picture 598x273
+rightwall(at left x0 w118)
+leftwall( at right, x618 w118)
+middle wall x115  w505  (at 619)
+*/
+
 int start_sdl(GameCore *gc);
 SDL_Texture * IMG_Load_w_error(GameCore *gc, char * imgfile);
 void set_rect(SDL_Rect *r, int x, int y, int w, int h);
