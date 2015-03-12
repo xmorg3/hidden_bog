@@ -123,6 +123,7 @@ typedef struct _GameCore {
   SDL_Texture  *tall_wall_front_fov0, *tall_wall_front_fov1,
     *tall_wall_left_fov0,  *tall_wall_left_fov1,  *tall_wall_left_fov2,
   	 *tall_wall_right_fov0, *tall_wall_right_fov1, *tall_wall_right_fov2;
+  SDL_Texture *wall_all; //gc->wall_all = load_texture_by_dir(gc, directory, "wall_all0.png");
 
   SDL_Rect character_doll_rect;
   SDL_Rect char_frame_rect;
