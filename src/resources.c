@@ -156,8 +156,9 @@ void load_map_wall_textures(GameCore *gc, char *directory)
   gc->tall_wall_right_fov0 = load_texture_by_dir(gc, directory, "tall_wall_right_fov0.png");
   gc->tall_wall_right_fov1 = load_texture_by_dir(gc, directory, "tall_wall_right_fov1.png");
   gc->tall_wall_right_fov2 = load_texture_by_dir(gc, directory, "tall_wall_right_fov2.png");
-
   //load_texture_by_dir(gc->, "blank/", ".png");
-
-
+}
+void clear_textures()
+{
+	
 }
