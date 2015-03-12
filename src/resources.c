@@ -137,6 +137,7 @@ SDL_Texture * load_texture_by_dir(GameCore *gc, char *directory, char *file)
 }
 void load_map_wall_textures(GameCore *gc, char *directory)
 {
+  clear_textures();
   gc->floor_bottom_fobx_blank = load_texture_by_dir(gc, directory, "floor_bottom_fobx_blank.png");
   gc->sky_top_fobx_blank = load_texture_by_dir(gc, directory, "sky_top_fobx_blank.png");
   gc->wall_front_fov0_blank = load_texture_by_dir(gc,  directory, "wall_front_fov0_blank.png");
@@ -160,5 +161,23 @@ void load_map_wall_textures(GameCore *gc, char *directory)
 }
 void clear_textures()
 {
-	
+  SDL_DestroyTexture(gc->floor_bottom_fobx_blank);// = load_texture_by_dir(gc, directory, "floor_bottom_fobx_blank.png");
+  SDL_DestroyTexture(gc->sky_top_fobx_blank);// = load_texture_by_dir(gc, directory, "sky_top_fobx_blank.png");
+  SDL_DestroyTexture(gc->wall_front_fov0_blank);// = load_texture_by_dir(gc,  directory, "wall_front_fov0_blank.png");
+  SDL_DestroyTexture(gc->wall_front_fov1_blank);// = load_texture_by_dir(gc, directory, "wall_front_fov1_blank.png");
+  SDL_DestroyTexture(gc->wall_left_fov0_blank);// = load_texture_by_dir(gc, directory, "wall_left_fov0_blank.png");
+  SDL_DestroyTexture(gc->wall_left_fov1_blank);// = load_texture_by_dir(gc, directory, "wall_left_fov1_blank.png");
+  SDL_DestroyTexture(gc->wall_left_fov2_blank);// = load_texture_by_dir(gc, directory, "wall_left_fov2_blank.png");
+  SDL_DestroyTexture(gc->wall_right_fov0_blank);// = load_texture_by_dir(gc, directory, "wall_right_fov0_blank.png");
+  SDL_DestroyTexture(gc->wall_right_fov1_blank);// = load_texture_by_dir(gc, directory, "wall_right_fov1_blank.png");
+  SDL_DestroyTexture(gc->wall_right_fov2_blank);// = load_texture_by_dir(gc, directory, "wall_right_fov2_blank.png");
+  SDL_DestroyTexture(gc->wall_all);// = load_texture_by_dir(gc, directory, "wall_all0.png"); //new wall
+  SDL_DestroyTexture(gc->tall_wall_front_fov0);// = load_texture_by_dir(gc,  directory, "tall_wall_front_fov0.png");
+  SDL_DestroyTexture(gc->tall_wall_front_fov1);// = load_texture_by_dir(gc, directory,  "tall_wall_front_fov1.png");
+  SDL_DestroyTexture(gc->tall_wall_left_fov0);// = load_texture_by_dir(gc, directory, "tall_wall_left_fov0.png");
+  SDL_DestroyTexture(gc->tall_wall_left_fov1);// = load_texture_by_dir(gc, directory, "tall_wall_left_fov1.png");
+  SDL_DestroyTexture(gc->tall_wall_left_fov2);// = load_texture_by_dir(gc, directory, "tall_wall_left_fov2.png");
+  SDL_DestroyTexture(gc->tall_wall_right_fov0);// = load_texture_by_dir(gc, directory, "tall_wall_right_fov0.png");
+  SDL_DestroyTexture(gc->tall_wall_right_fov1);// = load_texture_by_dir(gc, directory, "tall_wall_right_fov1.png");
+  SDL_DestroyTexture(gc->tall_wall_right_fov2);// = load_texture_by_dir(gc, directory, "tall_wall_right_fov2.png");
 }
