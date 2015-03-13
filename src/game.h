@@ -100,6 +100,7 @@ typedef struct _GameCore {
   SDL_Window *win;
   SDL_Renderer *renderer;
   SDL_Event sdl_event;
+  SDL_DisplayMode current_dmode;
   int screen_size_x, screen_size_y;
   int game_state;
   int mapsize;

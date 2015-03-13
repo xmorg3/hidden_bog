@@ -2,9 +2,9 @@
 #include "game.h"
 
 Actor * new_actor(char *name);
-int mod_actor_stat(Actor *a, char *stat_name, int value);
+void mod_actor_stat(Actor *a, char *stat_name, int value);
 
-int mod_actor_stat(Actor *a, char *stat_name, int value)
+void mod_actor_stat(Actor *a, char *stat_name, int value)
 {
   if(strcmp(stat_name, "strength") == 0)
   {
@@ -43,7 +43,7 @@ Actor *new_actor(char *name)
   a->skill_archery=0;
   a->skill_throwing=0;
   a->skill_polearm=0; //spears halberds
-  a->skill_clubs=0; //clubs and maces
+  a->skill_club=0; //clubs and maces
   a->skill_spiked=0; //spiked weapons, picks, morning stars, beaks, sythes
   a->grappling=0; //wrestling
   a->biting=0;//chomp chomp

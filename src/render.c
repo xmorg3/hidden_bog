@@ -106,14 +106,17 @@ middle wall x115 w505 (at 619)
 */
 
 void draw_fov2(GameCore *gc, int left, int middle, int right)
-{
+{//gc->wall_all
   SDL_Rect left_wall, right_wall, middle_wall;
   left_wall = fast_rect(618, 0, 118, 273);
   right_wall = fast_rect(0, 0, 118, 273);
   middle_wall = fast_rect(115, 0, 505,273);
   if( left == 1 || left == 2)  {SDL_RenderCopy(gc->renderer, gc->wall_left_fov2_blank, NULL, &gc->player_viewport);}
+    // {SDL_RenderCopy(gc->renderer, gc->wall_all, &left_wall, &gc->player_viewport);}
   if( right ==1 || right == 2)  {SDL_RenderCopy(gc->renderer, gc->wall_right_fov2_blank, NULL, &gc->player_viewport);}
+    // {SDL_RenderCopy(gc->renderer, gc->wall_all, &right_wall, &gc->player_viewport);}
   if( middle==1 || middle ==2)  {SDL_RenderCopy(gc->renderer, gc->wall_front_fov1_blank, NULL, &gc->player_viewport);}
+    // {SDL_RenderCopy(gc->renderer, gc->wall_all, &middle_wall, &gc->player_viewport);}
 }
 void draw_fov1(GameCore *gc, int left, int middle, int right)
 {
@@ -128,12 +131,28 @@ void draw_fov1(GameCore *gc, int left, int middle, int right)
 void draw_fov0(GameCore *gc, int left, int middle, int right)
 {
   SDL_Rect left_wall, right_wall, middle_wall;
+  SDL_Rect drect;
   left_wall = fast_rect(618, 0, 118, 273);
   right_wall = fast_rect(0, 0, 118, 273);
   middle_wall = fast_rect(115, 0, 505,273);
+
+  
   if( left == 1 || left == 2)  {SDL_RenderCopy(gc->renderer, gc->wall_left_fov0_blank, NULL, &gc->player_viewport);}
   if( right ==1 || right== 2)  {SDL_RenderCopy(gc->renderer, gc->wall_right_fov0_blank, NULL, &gc->player_viewport);}
-  //if( middle==1 || middle==2)  {SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);}
+  if( middle==1 || middle==2)  {SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);}
+  /*if( left == 1 || left == 2)  //{SDL_RenderCopy(gc->renderer, gc->wall_left_fov2_blank, NULL, &gc->player_viewport);}
+    //gc->player_viewport
+    {
+      SDL_RenderCopy(gc->renderer, gc->wall_all, &left_wall, &gc->player_viewport);
+      drect = fast_rect(0,0,gc->player_viewport.w/4, gc->player_viewport.h);
+    }
+  if( right ==1 || right == 2)  //{SDL_RenderCopy(gc->renderer, gc->wall_right_fov2_blank, NULL, &gc->player_viewport);}
+    {
+      drect = fast_rect(gc->player_viewport.h/4*3, 0, gc->player_viewport.w/4, gc->player_viewport.h );
+      SDL_RenderCopy(gc->renderer, gc->wall_all, &right_wall, &gc->player_viewport);
+    }
+    //if( middle==1 || middle ==2)  //{SDL_RenderCopy(gc->renderer, gc->wall_front_fov1_blank, NULL, &gc->player_viewport);}
+    //{SDL_RenderCopy(gc->renderer, gc->wall_all, &middle_wall, &gc->player_viewport);}*/
 }
 
 void draw_playport_north(GameCore *gc)

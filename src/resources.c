@@ -17,6 +17,7 @@ void load_map_wall_textures(GameCore *gc, char *directory);
 
 void start_ttf(GameCore *gc); //text.c
 SDL_Rect fast_rect(int x, int y, int w, int h);//render.c
+void clear_textures(GameCore *gc);
 
 int start_sdl(GameCore *gc)
 {
@@ -53,6 +54,10 @@ int start_sdl(GameCore *gc)
     printf("Error no font (data/font.ttf) ->from resources.c\n");
     return 1;
   }
+  //get the display mode.
+  SDL_GetCurrentDisplayMode(0, &gc->current_dmode);
+  gc->screen_size_x = gc->current_dmode.w;
+  gc->screen_size_y = gc->current_dmode.h;
 
   gc->game_state = 1; //the game started
   return 0;
@@ -137,7 +142,8 @@ SDL_Texture * load_texture_by_dir(GameCore *gc, char *directory, char *file)
 }
 void load_map_wall_textures(GameCore *gc, char *directory)
 {
-  clear_textures();
+  clear_textures(gc);
+  gc->wall_all = load_texture_by_dir(gc, directory, "wall_all0.png"); //new wall
   gc->floor_bottom_fobx_blank = load_texture_by_dir(gc, directory, "floor_bottom_fobx_blank.png");
   gc->sky_top_fobx_blank = load_texture_by_dir(gc, directory, "sky_top_fobx_blank.png");
   gc->wall_front_fov0_blank = load_texture_by_dir(gc,  directory, "wall_front_fov0_blank.png");
@@ -148,7 +154,7 @@ void load_map_wall_textures(GameCore *gc, char *directory)
   gc->wall_right_fov0_blank = load_texture_by_dir(gc, directory, "wall_right_fov0_blank.png");
   gc->wall_right_fov1_blank = load_texture_by_dir(gc, directory, "wall_right_fov1_blank.png");
   gc->wall_right_fov2_blank = load_texture_by_dir(gc, directory, "wall_right_fov2_blank.png");
-  gc->wall_all = load_texture_by_dir(gc, directory, "wall_all0.png"); //new wall
+  
   gc->tall_wall_front_fov0 = load_texture_by_dir(gc,  directory, "tall_wall_front_fov0.png");
   gc->tall_wall_front_fov1 = load_texture_by_dir(gc, directory,  "tall_wall_front_fov1.png");
   gc->tall_wall_left_fov0 = load_texture_by_dir(gc, directory, "tall_wall_left_fov0.png");
@@ -159,7 +165,7 @@ void load_map_wall_textures(GameCore *gc, char *directory)
   gc->tall_wall_right_fov2 = load_texture_by_dir(gc, directory, "tall_wall_right_fov2.png");
   //load_texture_by_dir(gc->, "blank/", ".png");
 }
-void clear_textures()
+void clear_textures(GameCore *gc)
 {
   SDL_DestroyTexture(gc->floor_bottom_fobx_blank);// = load_texture_by_dir(gc, directory, "floor_bottom_fobx_blank.png");
   SDL_DestroyTexture(gc->sky_top_fobx_blank);// = load_texture_by_dir(gc, directory, "sky_top_fobx_blank.png");
