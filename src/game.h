@@ -27,6 +27,7 @@ enum facing_direction {
 typedef struct _Actor {
   char name[25];
   int sex; //1 male, 0 female
+  int race; //number count for radio button in race selector.
   int portrait;
   int health, fatigue, mana;
   int level,
