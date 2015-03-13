@@ -283,9 +283,20 @@ void handle_mousebutton_down_chargen_menu(GameCore *gc)
     printf("selected female\n");
     set_rect(&gc->character_doll_rect, 454,0,220,800);
   }
+  
+  race_rect = fast_rect(200,200,28,28);
+  if(check_clickedin(&race_rect, gc->mouse_x, gc->mouse_y ) == 1) {
+    gc->player->race = 0;
+  }
 
   //loop through these and see if one was clicked?
   //race  a->race = 0;
+  /*  fast_radio(gc, 200, 200, "Human",0); //0
+  fast_radio(gc, 200, 230, "Elf",0); //1
+  fast_radio(gc, 200, 260, "Dwarf",0); //2
+  fast_radio(gc, 200, 290, "Dark Elf",0);//3
+  fast_radio(gc, 200, 320, "Goblin",0); //4
+  fast_radio(gc, 200, 350, "Half-Ork",0); //4*/
   //else if ( check_clickedin(&rradio_race_human, gc->mouse_x, gc->mouse_y ) == 1 ) {
   //  a->race=human;
   //}
