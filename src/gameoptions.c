@@ -17,6 +17,9 @@ void draw_options_menu(GameCore *gc)
   SDL_RenderCopy(gc->renderer, gc->w_background, NULL, NULL); //put background
   //put name on the top
   fast_button(gc, 10,10, "Player"); //- player name
+  
+  //put text here.
+  
   fast_button(gc, 10,gc->screen_size_y - 58, "Back");
   fast_button(gc, 300,gc->screen_size_y - 58, "Next");
 }
