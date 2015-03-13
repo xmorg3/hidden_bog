@@ -303,7 +303,7 @@ void handle_mousebutton_down_chargen_menu(GameCore *gc)
     set_rect(&gc->character_doll_rect, 454,0,220,800);
   }
   
-  for(i=0;i<4;i++) {
+  for(i=0;i<5;i++) {
     race_rect = fast_rect(200,200+i*30,28,28);
     if(check_clickedin(&race_rect, gc->mouse_x, gc->mouse_y ) == 1) {
       gc->player->race = i;
