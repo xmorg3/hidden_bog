@@ -80,9 +80,11 @@ break;
  
  if(gc->player->sex == 0) {  //check sex for portraits
   SDL_RenderCopy(gc->renderer, gc->portraits_human_male,&r, &gc->char_frame_rect); //TODO: get female portraits
+  //check race, there are a total of 10 png's 
  }
  else { //1
   SDL_RenderCopy(gc->renderer, gc->portraits_human_male,&r, &gc->char_frame_rect); //male portraits
+  //check race, there are a total of 10 png's 
  }
   SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect);  
   draw_minusplus_buttons(gc, 443, 145);
