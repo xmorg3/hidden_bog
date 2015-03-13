@@ -1,6 +1,17 @@
 #name
 ###########humanoid types
+town cryer;
 villager;
+priest;
+friar;
+monk;
+princess;
+king;
+queen;
+healer;
+merchant;
+innkeeper;
+barmaid;
 thief;
 warrior;
 knight;
@@ -16,9 +27,16 @@ crawling ooze;
 ###########monsters
 harpy;
 orc;
+giant spider;
 werewolf;
 werecat;
 giant;
+minotaur;
+gorgon;
+flesh golum;
+iron titan;
+wyvvern;
+worm;
 #############animals
 serpent;
 bear;
@@ -28,6 +46,10 @@ wolf;
 brigand;
 #############undead
 skeleton;
+skeletal warrior;
+skeletal archer;
+reverant;
+liche;
 zombie;
 flayed;
 ghost;
