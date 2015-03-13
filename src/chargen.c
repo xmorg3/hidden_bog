@@ -283,9 +283,11 @@ void handle_mousebutton_down_chargen_menu(GameCore *gc)
     set_rect(&gc->character_doll_rect, 454,0,220,800);
   }
 
-
-
   //loop through these and see if one was clicked?
+  //race  a->race = 0;
+  //else if ( check_clickedin(&rradio_race_human, gc->mouse_x, gc->mouse_y ) == 1 ) {
+  //  a->race=human;
+  //}
   //gc->dst_stat_minus = fast_rect(gc->stat_panel_x-32+20, gc->stat_panel_y, 20, 20); //first buttons for plus/minus on
   //gc->dst_stat_plus = fast_rect( gc->stat_panel_x-32, gc->stat_panel_y, 20, 20); //stat sheets
 }
