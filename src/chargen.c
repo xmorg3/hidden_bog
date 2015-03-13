@@ -47,12 +47,30 @@ void draw_chargen_menu(GameCore *gc)
   }
   sdl_set_textpos(gc, 210, 180); //set_color(gc, 255, 255, 255);
   SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, gc->font0, "Race"), NULL, gc->c_text_size);
-  fast_radio(gc, 200, 200, "Human",0); //0
-  fast_radio(gc, 200, 230, "Elf",0); //1
-  fast_radio(gc, 200, 260, "Dwarf",0); //2
-  fast_radio(gc, 200, 290, "Dark Elf",0);//3
-  fast_radio(gc, 200, 320, "Goblin",0); //4
-  fast_radio(gc, 200, 350, "Half-Ork",0); //4
+  /*for(i=0;i<4;i++) { 
+race_rect = fast_rect(200,200+i*30,28,28); 
+if(check_clickedin(&race_rect, gc->mouse_x, gc->mouse_y ) == 1) { 
+ gc->player->race = i; 
+break; 
+} 
+*/
+  if(gc->player->race == 0) {  fast_radio(gc, 200, 200, "Human",1); }//0
+  else { fast_radio(gc, 200, 200, "Human",0); }
+  
+  if(gc->player->race == 1) {  fast_radio(gc, 200, 230, "Elf",1); } //1
+  else { fast_radio(gc, 200, 230, "Elf",0); }
+  
+  if(gc->player->race == 2) {  fast_radio(gc, 200, 260, "Dwarf",1); } //2
+  else {fast_radio(gc, 200, 260, "Dwarf",1);}
+  
+  if(gc->player->race == 3) { fast_radio(gc, 200, 290, "Dark Elf",1); }//3
+  else{fast_radio(gc, 200, 290, "Dark Elf",0);}//3
+  
+  if(gc->player->race == 4) { fast_radio(gc, 200, 320, "Goblin",1);}
+  else{fast_radio(gc, 200, 320, "Goblin",0); }//4
+  
+  if(gc->player->race == 5) { fast_radio(gc, 200, 350, "Half-Ork",1); }
+  else{fast_radio(gc, 200, 350, "Half-Ork",0);} //5
 
   //gc->stat_panel_x = 360; //set in resources.c
   //gc->stat_panel_y = 200; //set location for stat panel
