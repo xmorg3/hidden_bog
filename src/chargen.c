@@ -137,6 +137,7 @@ int check_clickedin(SDL_Rect *r, int mouse_x, int mouse_y)
 
 void handle_mousebutton_down_chargen_menu(GameCore *gc)
 {
+  int i;
   SDL_Rect b1, b2;
 
   SDL_Rect mstrength, pstrength, mintell, pintell, magi, pagi; //plus and minus buttons
@@ -284,10 +285,14 @@ void handle_mousebutton_down_chargen_menu(GameCore *gc)
     set_rect(&gc->character_doll_rect, 454,0,220,800);
   }
   
-  race_rect = fast_rect(200,200,28,28);
-  if(check_clickedin(&race_rect, gc->mouse_x, gc->mouse_y ) == 1) {
-    gc->player->race = 0;
+  for(i=0;i<4;i++) {
+    race_rect = fast_rect(200,200+i*30,28,28);
+    if(check_clickedin(&race_rect, gc->mouse_x, gc->mouse_y ) == 1) {
+      gc->player->race = i;
+      break;
+    }
   }
+  
 
   //loop through these and see if one was clicked?
   //race  a->race = 0;
