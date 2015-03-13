@@ -59,7 +59,12 @@ void draw_chargen_menu(GameCore *gc)
   r = fast_rect(gc->player->portrait*128,0,128,128);
   gc->char_frame_rect = fast_rect(323, 40, 128, 128 );
  
-  SDL_RenderCopy(gc->renderer, gc->portraits_human_male,&r, &gc->char_frame_rect);
+ if(gc->player->sex == 0) {  //check sex for portraits
+  SDL_RenderCopy(gc->renderer, gc->portraits_human_male,&r, &gc->char_frame_rect); //TODO: get female portraits
+ }
+ else { //1
+  SDL_RenderCopy(gc->renderer, gc->portraits_human_male,&r, &gc->char_frame_rect); //male portraits
+ }
   SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect);  
   draw_minusplus_buttons(gc, 443, 145);
   draw_character_attributes(gc, gc->stat_panel_x, gc->stat_panel_y, 1);
