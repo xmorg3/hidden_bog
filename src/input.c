@@ -61,7 +61,7 @@ void handle_mousebutton_down(GameCore *gc)
     handle_mousebutton_down_start_menu(gc);
   }
   else if (gc->game_state == GAME_CHARGEN_MENU) {
-    handle_mousebutton_down_chargen_menu(gc);
+    handle_mousebutton_down_chargen_menu(gc); //chargen.c ?
   }
   else if (gc->game_state == GAME_OPTIONS_MENU) {
     handle_mousebutton_down_options_menu(gc);

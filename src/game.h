@@ -27,6 +27,7 @@ enum facing_direction {
 typedef struct _Actor {
   char name[25];
   int sex; //1 male, 0 female
+  int portrait;
   int health, fatigue, mana;
   int level,
     experience,
@@ -115,6 +116,7 @@ typedef struct _GameCore {
   SDL_Texture *t_buttons;
   SDL_Texture *char_frame; //place on top of the character's portrait.
   SDL_Texture *character_doll;
+  SDL_Texture *portraits_human_male;
   //note, there should be a func to load these textures on the fly?
   SDL_Texture *floor_bottom_fobx_blank,*sky_top_fobx_blank,
     *wall_front_fov0_blank, *wall_front_fov1_blank,

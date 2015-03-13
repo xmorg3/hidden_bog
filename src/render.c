@@ -72,7 +72,7 @@ void draw_playframe(GameCore *gc)
   //SDL_SetRenderDrawColor(gc->renderer, 0,0,0,0);
   SDL_RenderFillRect(gc->renderer, &gc->player_viewport);  // message_log, tabbed_pane;
   SDL_RenderFillRect(gc->renderer, &gc->message_log);
-  SDL_RenderFillRect(gc->renderer, &gc->tabbed_pane);
+  //SDL_RenderFillRect(gc->renderer, &gc->tabbed_pane);
   //draw_message_frame(gc);
   draw_character_portraits(gc);
   draw_mapport(gc);
@@ -262,11 +262,14 @@ void set_map_tile_color(GameCore *gc, int location_x, int location_y, int x, int
 void draw_character_portraits(GameCore *gc)
 {
   int fr_x, fr_y, cr_w, cr_h;
+  SDL_Rect r;
   fr_x = 5;
   fr_y = gc->screen_size_y - 128;
   cr_w = 128;
   cr_h = 128;
   gc->char_frame_rect = fast_rect(fr_x, fr_y, cr_w, cr_h );
+  r= fast_rect(gc->player->portrait*128,0,128,128);
+  SDL_RenderCopy(gc->renderer, gc->portraits_human_male,&r, &gc->char_frame_rect);
   SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect);
   fr_x = fr_x+128;
   gc->char_frame_rect = fast_rect(fr_x, fr_y, cr_w, cr_h );

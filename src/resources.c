@@ -30,6 +30,9 @@ int start_sdl(GameCore *gc)
     return 1;
   }
   start_ttf(gc);  //load the fonts
+  SDL_GetCurrentDisplayMode(0, &gc->current_dmode);
+  gc->screen_size_x = gc->current_dmode.w;
+  gc->screen_size_y = gc->current_dmode.h;
   gc->win = SDL_CreateWindow("Game",  //create the window
 			     SDL_WINDOWPOS_UNDEFINED,
 			     SDL_WINDOWPOS_UNDEFINED,
@@ -55,9 +58,7 @@ int start_sdl(GameCore *gc)
     return 1;
   }
   //get the display mode.
-  SDL_GetCurrentDisplayMode(0, &gc->current_dmode);
-  gc->screen_size_x = gc->current_dmode.w;
-  gc->screen_size_y = gc->current_dmode.h;
+  
 
   gc->game_state = 1; //the game started
   return 0;
@@ -91,6 +92,7 @@ int load_resources(GameCore *gc)
   gc->character_doll = IMG_Load_w_error(gc, "data/doll_male_blank.png");
   gc->t_buttons = IMG_Load_w_error(gc, "data/RPG_GUI_v1.png");
   gc->char_frame = IMG_Load_w_error(gc, "data/char_frame.png");
+  gc->portraits_human_male = IMG_Load_w_error(gc, "data/char_male.png");
 
   set_rect(&gc->button_raised, 14,126, 283,55);
   set_rect(&gc->button_pressed,14,204, 283,55);
@@ -103,7 +105,7 @@ int load_resources(GameCore *gc)
   set_rect(&gc->player_viewport,
 	   5,
 	   5,
-	   (gc->screen_size_x/4) * 3,
+	   (gc->screen_size_x/4) * 3 - 5,
 	   gc->screen_size_y - 137 ); //everything except portraits
 
   set_rect(&gc->tabbed_pane,

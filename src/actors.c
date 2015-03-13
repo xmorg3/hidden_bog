@@ -21,6 +21,7 @@ Actor *new_actor(char *name)
   a = (Actor *)malloc(sizeof(Actor));
   strcpy(a->name, name);
   a->sex = 1;
+  a->portrait=0;
   a->health=1;
   a->fatigue=1;
   a->mana=1;

@@ -23,7 +23,7 @@ void fast_radio(GameCore *gc, int x, int y, char *text, int selected); //does no
 
 void draw_chargen_menu(GameCore *gc)
 {//int screen_size_x, screen_size_y;
-  SDL_Rect dst, src;
+  SDL_Rect dst, src, r;
   SDL_RenderCopy(gc->renderer, gc->w_background, NULL, NULL); //put background
   //put name on the top
   fast_button(gc, 10,10, gc->player->name); //- player name
@@ -56,8 +56,12 @@ void draw_chargen_menu(GameCore *gc)
   //gc->stat_panel_x = 360; //set in resources.c
   //gc->stat_panel_y = 200; //set location for stat panel
   //Portrait panel
+  r = fast_rect(gc->player->portrait*128,0,128,128);
   gc->char_frame_rect = fast_rect(323, 40, 128, 128 );
-  SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect);
+ 
+  SDL_RenderCopy(gc->renderer, gc->portraits_human_male,&r, &gc->char_frame_rect);
+  SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect);  
+  draw_minusplus_buttons(gc, 443, 145);
   draw_character_attributes(gc, gc->stat_panel_x, gc->stat_panel_y, 1);
 }
 
@@ -131,6 +135,7 @@ void handle_mousebutton_down_chargen_menu(GameCore *gc)
 
   SDL_Rect mstrength, pstrength, mintell, pintell, magi, pagi; //plus and minus buttons
   SDL_Rect mwisdom, pwisdom, mstamina, pstamina, mcharisma, pcharisma, mluck, pluck;
+  SDL_Rect mportrait, pportrait;
   SDL_Rect rmale, rfemale; //radio buttons for male/female
   //fast_radio(gc, 200, 100, "Male");
   //fast_radio(gc, 200, 130, "Female");
@@ -163,9 +168,19 @@ void handle_mousebutton_down_chargen_menu(GameCore *gc)
   pluck  = fast_rect(gc->dst_stat_minus.x, gc->dst_stat_plus.y  +20*6, gc->dst_stat_plus.w, gc->dst_stat_plus.h);
   mluck  = fast_rect(gc->dst_stat_plus.x, gc->dst_stat_plus.y  +20*6, gc->dst_stat_plus.w, gc->dst_stat_plus.h);
 
+  mportrait = fast_rect(413,145, 20,20);
+  pportrait = fast_rect(413+20, 145, 20,20);
+  //draw_minusplus_buttons(gc, 443, 145);
+  
   if( check_clickedin(&b1, gc->mouse_x, gc->mouse_y ) == 1 ) {
     printf("Go Back.\n");
     gc->game_state = GAME_START_MENU;
+  }
+  else if ( check_clickedin(&mportrait, gc->mouse_x, gc->mouse_y ) == 1 ) {
+    if(gc->player->portrait > 0 ) {gc->player->portrait--;}
+  }
+  else if ( check_clickedin(&pportrait, gc->mouse_x, gc->mouse_y ) == 1 ) {
+    if(gc->player->portrait < 2 ) {gc->player->portrait++;}
   }
   else if ( check_clickedin(&b2, gc->mouse_x, gc->mouse_y ) == 1 ) {
     //gc->game_state = GAME_PLAY_INTRO_STORY;
