@@ -61,7 +61,7 @@ break;
   else { fast_radio(gc, 200, 230, "Elf",0); }
   
   if(gc->player->race == 2) {  fast_radio(gc, 200, 260, "Dwarf",1); } //2
-  else {fast_radio(gc, 200, 260, "Dwarf",1);}
+  else {fast_radio(gc, 200, 260, "Dwarf",0);}
   
   if(gc->player->race == 3) { fast_radio(gc, 200, 290, "Dark Elf",1); }//3
   else{fast_radio(gc, 200, 290, "Dark Elf",0);}//3
@@ -164,6 +164,7 @@ void handle_mousebutton_down_chargen_menu(GameCore *gc)
   SDL_Rect mwisdom, pwisdom, mstamina, pstamina, mcharisma, pcharisma, mluck, pluck;
   SDL_Rect mportrait, pportrait;
   SDL_Rect rmale, rfemale; //radio buttons for male/female
+  SDL_Rect race_rect;
   //fast_radio(gc, 200, 100, "Male");
   //fast_radio(gc, 200, 130, "Female");
 
@@ -305,7 +306,7 @@ void handle_mousebutton_down_chargen_menu(GameCore *gc)
     set_rect(&gc->character_doll_rect, 454,0,220,800);
   }
   
-  for(i=0;i<5;i++) {
+  for(i=0;i<6;i++) {
     race_rect = fast_rect(200,200+i*30,28,28);
     if(check_clickedin(&race_rect, gc->mouse_x, gc->mouse_y ) == 1) {
       gc->player->race = i;

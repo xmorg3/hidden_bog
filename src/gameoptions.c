@@ -21,7 +21,7 @@ char optstr[128];
   
   //put text here.
   //SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, gc->font0, "Gender"), NULL, gc->c_text_size);
-  sprintf(optstr, "Video Mode: %dx%d", gc->screen_width, gc->screen_height );
+  sprintf(optstr, "Video Mode: %dx%d", gc->screen_size_x, gc->screen_size_y );
   r_vidmode = fast_rect(50,50, 128*8, 12);
   SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, gc->font0, optstr), NULL, &r_vidmode );
   fast_button(gc, 10,gc->screen_size_y - 58, "Back");
