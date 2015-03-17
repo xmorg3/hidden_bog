@@ -26,11 +26,12 @@ void draw_add_skills_dialogue(GamCore *gc)
 //left of each skill.
 //frame and frame shadow are the border of the window. inside the window is the skillpane, a black box where the skills
 //will be printed.  Bubblelist_frame is the border of bubblelist. Bubblelist is a box off to the right of the skill
-//defines the skill, and is activated when clicking on a skill. below, near the bottom of the window is the "ok" button.
-  SDL_Rect frame, frame_shadow, skillpane;
+//defines the skill, and is activated when clicking on a skill. below, near the bottom of the window is the "accept" button.
+  SDL_Rect frame, frame_shadow, skillpane, bubblelist_frame, bubblelist;
   frame = fast_rect(50,50, gc->screen_size_x -50, gc->screen_size_y-50); //make a square
   frame_shadow = fast_rect(50 +3,50 +3, gc->screen_size_x -50 -3, gc->screen_size_y-50 -3 ); //make it looks nice?
   
+  fast_button(gc, gc->screen_size_x - 300, gc->screen_size_y -50 -3 -50, "Accept"); //accept button
 }
 void draw_chargen_menu(GameCore *gc)
 {//int screen_size_x, screen_size_y;
