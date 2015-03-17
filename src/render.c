@@ -222,6 +222,8 @@ void draw_playport_west(GameCore *gc)
 
 void draw_message_frame(GameCore *gc)
 { //draw message log to the screen
+//depriciated, no longer used by will be converted to display naration messages.
+//will show a message box in the middle of the screen with an "ok" button.
   int i;
   set_color(gc, 255, 255, 255);
   for(i=0; i<6; i++) {
