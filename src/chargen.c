@@ -29,7 +29,9 @@ void draw_add_skills_dialogue(GamCore *gc)
 //defines the skill, and is activated when clicking on a skill. below, near the bottom of the window is the "accept" button.
   SDL_Rect frame, frame_shadow, skillpane, bubblelist_frame, bubblelist;
   frame = fast_rect(50,50, gc->screen_size_x -50, gc->screen_size_y-50); //make a square
-  frame_shadow = fast_rect(50 +3,50 +3, gc->screen_size_x -50 -3, gc->screen_size_y-50 -3 ); //make it looks nice?
+  frame_shadow = fast_rect(50 +3,50 +3, gc->screen_size_x -50 -3, gc->screen_size_x -50 -3); //make it looks nice?
+  skill_pane = fast_rect(   0 +3+10,50 +3+10, gc->screen_size_x -50 -3-10, gc->screen_size_y-50 -3 -10 );
+  //print skills here
   
   fast_button(gc, gc->screen_size_x - 300, gc->screen_size_y -50 -3 -50, "Accept"); //accept button
 }
