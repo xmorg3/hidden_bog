@@ -22,8 +22,8 @@ void clear_textures(GameCore *gc);
 int start_sdl(GameCore *gc)
 {
   //Temp settings
-  gc->screen_size_x = 720; //1360; //640; //set screensize. (why hardcode again?)
-  gc->screen_size_y = 720; //768; //480; //v---- run SDL_Init()
+  gc->screen_size_x = 1024; //1360; //640; //set screensize. (why hardcode again?)
+  gc->screen_size_y = 600; //768; //480; //v---- run SDL_Init()
   if (SDL_Init( SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_EVENTS
           | SDL_WINDOW_FULLSCREEN_DESKTOP) == -1) {
     printf("SDL_Init: %s \n", SDL_GetError() );

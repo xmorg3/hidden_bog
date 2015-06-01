@@ -7,7 +7,7 @@ void draw_character_attributes(GameCore *gc, int x, int y, int moddable);
 void draw_character_1attribute(GameCore *gc, int x, int y, int stat, char *str); //macro to draw each
 void draw_minusplus_buttons(GameCore *gc, int x, int y);
 void draw_character_attributes(GameCore *gc, int x, int y, int moddable);//draw attribs in box
-void draw_add_skills_dialogue(GamCore *gc); //puts a dialogue that lists the skills.
+void draw_add_skills_dialogue(GameCore *gc); //puts a dialogue that lists the skills.
 
 void handle_mousebutton_down_chargen_menu(GameCore *gc);
 
@@ -21,7 +21,7 @@ void set_color(GameCore *gc, int r, int g, int b); //set_font_color;
 void fast_radio(GameCore *gc, int x, int y, char *text, int selected); //does not uncheck? //render.c
 
 
-void draw_add_skills_dialogue(GamCore *gc)
+void draw_add_skills_dialogue(GameCore *gc)
 { //create a popup window which lists skills and how much to put into them by adding plus/minus buttons to the 
 //left of each skill.
 //frame and frame shadow are the border of the window. inside the window is the skillpane, a black box where the skills
@@ -30,7 +30,7 @@ void draw_add_skills_dialogue(GamCore *gc)
   SDL_Rect frame, frame_shadow, skillpane, bubblelist_frame, bubblelist;
   frame = fast_rect(50,50, gc->screen_size_x -50, gc->screen_size_y-50); //make a square
   frame_shadow = fast_rect(50 +3,50 +3, gc->screen_size_x -50 -3, gc->screen_size_x -50 -3); //make it looks nice?
-  skill_pane = fast_rect(   0 +3+10,50 +3+10, gc->screen_size_x -50 -3-10, gc->screen_size_y-50 -3 -10 );
+  skillpane = fast_rect( 0 +3+10,50 +3+10, gc->screen_size_x -50 -3-10, gc->screen_size_y-50 -3 -10 );
   //print skills here
   
   fast_button(gc, gc->screen_size_x - 300, gc->screen_size_y -50 -3 -50, "Accept"); //accept button
