@@ -166,6 +166,17 @@ void load_map_wall_textures(GameCore *gc, char *directory)
   gc->tall_wall_right_fov0 = load_texture_by_dir(gc, directory, "tall_wall_right_fov0.png");
   gc->tall_wall_right_fov1 = load_texture_by_dir(gc, directory, "tall_wall_right_fov1.png");
   gc->tall_wall_right_fov2 = load_texture_by_dir(gc, directory, "tall_wall_right_fov2.png");
+
+  gc->door_front_fov0_blank = load_texture_by_dir(gc, directory, "door_front_fov0_blank.png");
+  gc->door_front_fov1_blank = load_texture_by_dir(gc, directory, "door_front_fov1_blank.png");
+  
+  gc->door_left_fov0_blank = load_texture_by_dir(gc, directory, "door_left_fov0_blank.png");
+  gc->door_left_fov1_blank = load_texture_by_dir(gc, directory, "door_left_fov1_blank.png");
+  gc->door_left_fov2_blank = load_texture_by_dir(gc, directory, "door_left_fov2_blank.png");
+
+  gc->door_right_fov0_blank = load_texture_by_dir(gc, directory, "door_right_fov0_blank.png");
+  gc->door_right_fov1_blank = load_texture_by_dir(gc, directory, "door_right_fov1_blank.png");
+  gc->door_right_fov2_blank = load_texture_by_dir(gc, directory, "door_right_fov2_blank.png");
   //load_texture_by_dir(gc->, "blank/", ".png");
 }
 void clear_textures(GameCore *gc)
