@@ -177,6 +177,7 @@ void draw_fov0(GameCore *gc, int left, int middle, int right)
     //SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);
     SDL_RenderCopy(gc->renderer, gc->door_front_fov0_blank, NULL, &gc->player_viewport);
   }
+  //item1_fov0  = 4
  
 }
 
@@ -266,28 +267,32 @@ void draw_message_frame(GameCore *gc)
 
 void set_map_tile_color(GameCore *gc, int location_x, int location_y, int x, int y)
 {
-  if( y == 4 && x == 4) {
+  if( y == 4 && x == 4) { //the players location
     SDL_SetRenderDrawColor(gc->renderer, 100,0,0,0);
   } 
-  else if((location_y > 0 && location_x > 0 &&
+  else if((location_y > 0 && location_x > 0 &&  // V--- set fog color
 	   location_y < gc->mapsize &&
 	   location_x < gc->mapsize) &&
-	  gc->current_map->fog_tiles[location_y][location_x] == 0 )// V--- set walls
+	  gc->current_map->fog_tiles[location_y][location_x] == 0 )
     {
-      SDL_SetRenderDrawColor(gc->renderer, 30,30,30,0);
+      SDL_SetRenderDrawColor(gc->renderer, 20,20,20,0);
     }
-  else if( (location_y > 0 &&
-	    location_x > 0 &&
+  else if( (location_y > 0 && location_x > 0 &&
 	    location_y < gc->mapsize &&
 	    location_x < gc->mapsize) &&
-	   gc->current_map->tiles[location_y][location_x] == 1) {
-    SDL_SetRenderDrawColor(gc->renderer, 100,100,100,0);
+	   gc->current_map->tiles[location_y][location_x] == 1) {  //walls
+    SDL_SetRenderDrawColor(gc->renderer, 50,50,50,0);
   }
-  else if( (location_y > 0 && location_x > 0 && location_y < gc->mapsize && location_x < gc->mapsize) && gc->current_map->tiles[location_y][location_x] == 2) {
-	SDL_SetRenderDrawColor(gc->renderer, 100,100,100,0);
+  else if( (location_y > 0 && location_x > 0 && location_y < gc->mapsize &&
+	    location_x < gc->mapsize) && gc->current_map->tiles[location_y][location_x] == 2) { //tall walls
+	SDL_SetRenderDrawColor(gc->renderer, 50,50,50,0);
   }
-  else { //-- set
-    SDL_SetRenderDrawColor(gc->renderer, 255,255,255,0);
+  else if( (location_y > 0 && location_x > 0 && location_y < gc->mapsize &&
+	    location_x < gc->mapsize) && gc->current_map->tiles[location_y][location_x] == 3) { //doors
+    SDL_SetRenderDrawColor(gc->renderer, 50,80,50,0);
+  }
+  else { //-- set walkable
+    SDL_SetRenderDrawColor(gc->renderer, 180,180,180,0);
   }
 }
 void draw_character_portraits(GameCore *gc)
