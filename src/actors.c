@@ -2,7 +2,11 @@
 #include "game.h"
 
 Actor * new_actor(char *name);
+
+void render_actor_stats(); //display scores
+void render_actor_stat_page(); //display page for scores
 void mod_actor_stat(Actor *a, char *stat_name, int value);
+
 
 void mod_actor_stat(Actor *a, char *stat_name, int value)
 {

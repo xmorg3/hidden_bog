@@ -129,8 +129,8 @@ int load_resources(GameCore *gc)
   //first buttons for plus/minus on
   gc->dst_stat_minus = fast_rect(gc->stat_panel_x-32+20, gc->stat_panel_y, 20, 20);
   gc->dst_stat_plus = fast_rect( gc->stat_panel_x-32, gc->stat_panel_y, 20, 20); //stat sheets
-  //load_map_wall_textures(gc, "village_day/");
-  load_map_wall_textures(gc, "castle_dungeon/");
+  load_map_wall_textures(gc, "village_day/");
+  //load_map_wall_textures(gc, "castle_dungeon/");
   return 0;
 }//load_resources
 

@@ -7,6 +7,9 @@ typedef struct _Scene { //Scene structure.
   int **tiles; //tiles!unsigned short
 } Scene;
 */
+//0 ground, 1 wall, 2 tall wall, 3 door
+//4 archway, 5 water, 6 hole(void?)
+
 int test_map[20][20] = {
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
   {1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1},
