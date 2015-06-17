@@ -19,6 +19,8 @@ void start_ttf(GameCore *gc); //text.c
 SDL_Rect fast_rect(int x, int y, int w, int h);//render.c
 void clear_textures(GameCore *gc);
 
+
+#include <SDL2/SDL_opengl.h> //new render code.
 int start_sdl(GameCore *gc)
 {
   //Temp settings
@@ -33,20 +35,21 @@ int start_sdl(GameCore *gc)
   SDL_GetCurrentDisplayMode(0, &gc->current_dmode);
   gc->screen_size_x = gc->current_dmode.w;
   gc->screen_size_y = gc->current_dmode.h;
-  gc->win = SDL_CreateWindow("Game",  //create the window
-			     SDL_WINDOWPOS_UNDEFINED,
-			     SDL_WINDOWPOS_UNDEFINED,
-			     gc->screen_size_x,
-			     gc->screen_size_y,
-			     SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE
-			     | SDL_WINDOW_FULLSCREEN);
+  
+  SDL_RendererInfo displayRendererInfo; //new
+  SDL_CreateWindowAndRenderer(gc->screen_size_x,
+			      gc->screen_size_y,
+			      SDL_WINDOW_OPENGL,
+			      &gc->win,
+			      &gc->renderer );
+  SDL_GetRendererInfo(gc->renderer, &displayRendererInfo);
 
   if (gc->win == NULL){ //error check window
     printf("%s \n", SDL_GetError() );
     return 1;
   }
   //SDL_DestroyRenderer(gc->renderer);
-  gc->renderer = SDL_CreateRenderer(gc->win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+  //gc->renderer = SDL_CreateRenderer(gc->win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
   if (gc->renderer == NULL){
     printf("%s \n", SDL_GetError() );
     return 1;
