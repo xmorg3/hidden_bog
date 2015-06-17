@@ -28,6 +28,8 @@ void set_color(GameCore *gc, int r, int g, int b); //set_font_color;
 void draw_message_frame(GameCore *gc);
 void resize_screen(GameCore *gc, int size_x, int size_y);
 
+void gl_draw_game_menu(GameCore *gc); //glfunctions.c
+
 
 void draw(GameCore *gc)
 {
@@ -395,6 +397,8 @@ void draw_game_menu(GameCore *gc)
   button_row = 150;//+55
   button_col = 15;//
   SDL_RenderCopy(gc->renderer, gc->w_background, NULL, NULL); //put background
+  
+  gl_draw_game_menu(gc);
   fast_button(gc, button_col,button_row,      "New Game");
   fast_button(gc, button_col,button_row+55*1, "Load Game");
   fast_button(gc, button_col,button_row+55*2, "Save Game");
