@@ -18,9 +18,10 @@ void load_map_wall_textures(GameCore *gc, char *directory);
 void start_ttf(GameCore *gc); //text.c
 SDL_Rect fast_rect(int x, int y, int w, int h);//render.c
 void clear_textures(GameCore *gc);
+void display_initGL(); //glfunctions.c
+int display_setviewport( int width, int height ); //glfunctions.c
 
-
-#include <SDL2/SDL_opengl.h> //new render code.
+//#include <SDL2/SDL_opengl.h> //new render code.
 int start_sdl(GameCore *gc)
 {
   //Temp settings
@@ -49,7 +50,8 @@ int start_sdl(GameCore *gc)
     return 1;
   }
   //SDL_DestroyRenderer(gc->renderer);
-  //gc->renderer = SDL_CreateRenderer(gc->win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+  //gc->renderer = SDL_CreateRenderer(gc->win, -1,
+  //SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
   if (gc->renderer == NULL){
     printf("%s \n", SDL_GetError() );
     return 1;
@@ -61,7 +63,8 @@ int start_sdl(GameCore *gc)
     return 1;
   }
   //get the display mode.
-  
+  display_initGL(); //glfunctions.c
+  display_setviewport( gc->screen_size_x, gc->screen_size_y ); //glfunctions.c(minus sidne/bottom
 
   gc->game_state = 1; //the game started
   return 0;

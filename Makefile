@@ -2,7 +2,7 @@
 
 CC = clang -g 
 
-LIBS = -lSDL2 -lSDL2_image -lSDL2_ttf -lm
+LIBS = -lSDL2 -lSDL2_image -lSDL2_ttf -lm -lGL
 
 FLAGS = `sdl2-config --cflags --libs` -I/usr/local/include -L/usr/local/lib
 
@@ -16,7 +16,8 @@ FILES = src/main.c \
 	src/crafting.c \
 	src/gameoptions.c \
 	src/chargen.c \
-	src/scene.c
+	src/scene.c \
+	src/glfunctions.c
 
 #game.exe: src/SDL_collide.c src/actors.c src/datafunctions.c src/gameui.c
 # src/groups.c src/menus.c src/resources.c src/fonts.c src/maps.c 
