@@ -67,7 +67,9 @@ void draw_background_texture(GameCore *gc, SDL_Texture *t)
 {
   //render a GL backgroup
   //bind texture here!
-  glBindTexture( GL_TEXTURE_2D, t );
+  //glBindTexture( GL_TEXTURE_2D, t );
+  SDL_GL_BindTexture(t, NULL, NULL );
+  glEnable(GL_BLEND);
   glBegin( GL_TRIANGLE_STRIP );            /* Drawing Using Triangles */
   glNormal3f(0, 0, 0);
   
