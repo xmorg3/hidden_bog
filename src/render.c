@@ -19,6 +19,8 @@ void set_map_tile_color(GameCore *gc, int location_x, int location_y, int x, int
 void fast_button(GameCore *gc, int x, int y, char *text);
 SDL_Rect fast_rect(int x, int y, int w, int h);
 void fast_radio(GameCore *gc, int x, int y, char *text, int selected); //does not uncheck?
+void display_render(GameCore *gc);
+
 
 //text.c
 SDL_Texture* sdl_printf_font(GameCore *gc, TTF_Font *font, char *message);
@@ -28,8 +30,9 @@ void set_color(GameCore *gc, int r, int g, int b); //set_font_color;
 void draw_message_frame(GameCore *gc);
 void resize_screen(GameCore *gc, int size_x, int size_y);
 
-void gl_draw_game_menu(GameCore *gc); //glfunctions.c
+//void gl_draw_game_menu(GameCore *gc); //glfunctions.c
 
+void draw_background_texture(GameCore *gc, SDL_Texture *t);
 
 void draw(GameCore *gc)
 {
@@ -396,14 +399,16 @@ void draw_game_menu(GameCore *gc)
   int button_row, button_col; //, button_col1_to;
   button_row = 150;//+55
   button_col = 15;//
-  SDL_RenderCopy(gc->renderer, gc->w_background, NULL, NULL); //put background
+  //SDL_RenderCopy(gc->renderer, gc->w_background, NULL, NULL); //put background
+  //draw_background_texture(gc, gc->w_background);//SDLTexture *t
   
-  gl_draw_game_menu(gc);
-  fast_button(gc, button_col,button_row,      "New Game");
-  fast_button(gc, button_col,button_row+55*1, "Load Game");
-  fast_button(gc, button_col,button_row+55*2, "Save Game");
-  fast_button(gc, button_col,button_row+55*3, "Options");
-  fast_button(gc, button_col,button_row+55*4, "Exit");
+  //gl_draw_game_menu(gc);
+  //fast_button(gc, button_col,button_row,      "New Game");
+  //fast_button(gc, button_col,button_row+55*1, "Load Game");
+  //fast_button(gc, button_col,button_row+55*2, "Save Game");
+  //fast_button(gc, button_col,button_row+55*3, "Options");
+  //fast_button(gc, button_col,button_row+55*4, "Exit");
+  display_render(gc);
 }
 
 

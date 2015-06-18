@@ -95,6 +95,16 @@ int load_resources(GameCore *gc)
   //IMG_Load(const char *file);
   gc->t_background = IMG_Load_w_error(gc, "data/paper_background.png");
   gc->w_background = IMG_Load_w_error(gc, "data/wood_background.png");
+
+  //glBindTexture( GL_TEXTURE_2D, scn->texture[i] ); //Create the texture.
+		  /* Generate The Texture */
+  //glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
+  //glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, sdlImage->w, 
+  //sdlImage->h, 0, GL_BGRA,GL_UNSIGNED_BYTE, 
+  //sdlImage->pixels );
+
+
+  
   gc->character_doll = IMG_Load_w_error(gc, "data/doll_male_blank.png");
   gc->t_buttons = IMG_Load_w_error(gc, "data/RPG_GUI_v1.png");
   gc->char_frame = IMG_Load_w_error(gc, "data/char_frame.png");

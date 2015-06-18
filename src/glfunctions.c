@@ -1,8 +1,13 @@
 #include <SDL2/SDL_opengl.h> //new render code.
+#include <SDL2/SDL.h>
+#include "game.h"
+
 
 void display_initGL();
 int display_setviewport( int width, int height );
-void display_render();
+void display_render(GameCore *gc);
+void draw_background_texture(GameCore *gc, SDL_Texture *t);
+
 void display_initGL()
 {
     /* Enable smooth shading */
@@ -42,8 +47,6 @@ int display_setviewport( int width, int height )
     return 1;
 }
 
-#include <SDL2/SDL.h>
-#include "game.h"
 void display_render(GameCore *gc)
 {
     /* Set the background black */
@@ -55,6 +58,23 @@ void display_render(GameCore *gc)
     glTranslatef( 0.0f, 0.0f, 0.0f );
  
     //run macrofucntions.
+    draw_background_texture(gc, gc->w_background);
     
     SDL_RenderPresent(gc->renderer);
+}
+
+void draw_background_texture(GameCore *gc, SDL_Texture *t)
+{
+  //render a GL backgroup
+  //bind texture here!
+  glBindTexture( GL_TEXTURE_2D, t );
+  glBegin( GL_TRIANGLE_STRIP );            /* Drawing Using Triangles */
+  glNormal3f(0, 0, 0);
+  
+  glTexCoord2f(0, 0); glVertex3f(0, 0,0); //Floor
+  glTexCoord2f(0, 1); glVertex3f(0,-1,0); //top line
+  glTexCoord2f(1, 1); glVertex3f(1,-1,0); //left line
+  glTexCoord2f(1, 0); glVertex3f(1, 0,0); //bottom line
+  
+  glEnd();
 }
