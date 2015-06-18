@@ -70,6 +70,7 @@ void draw_background_texture(GameCore *gc, SDL_Texture *t)
   //glBindTexture( GL_TEXTURE_2D, t );
   SDL_GL_BindTexture(t, NULL, NULL );
   glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glBegin( GL_TRIANGLE_STRIP );            /* Drawing Using Triangles */
   glNormal3f(0, 0, 0);
   
