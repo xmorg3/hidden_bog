@@ -1,4 +1,5 @@
 
+#include <SDL2/SDL.h>
 #include "game.h"
 
 void draw(GameCore *gc); // main drawing
@@ -32,7 +33,7 @@ void resize_screen(GameCore *gc, int size_x, int size_y);
 
 //void gl_draw_game_menu(GameCore *gc); //glfunctions.c
 
-void draw_background_texture(GameCore *gc, SDL_Texture *t);
+//void draw_background_texture(GameCore *gc, SDL_Texture *t);
 
 void draw(GameCore *gc)
 {
@@ -187,9 +188,6 @@ void draw_fov0(GameCore *gc, int left, int middle, int right)
 }
 
 
-
-
-
 void draw_playport_north(GameCore *gc)
 {
   int current_tile; //set value to whatever tile we are rendering.
@@ -206,8 +204,6 @@ void draw_playport_north(GameCore *gc)
 	    gc->current_map->tiles[    gc->player->map_y][gc->player->map_x],
 	    gc->current_map->tiles[    gc->player->map_y][gc->player->map_x+1]);
 }
-
-
 
 void draw_playport_east(GameCore *gc)
 {
@@ -399,16 +395,16 @@ void draw_game_menu(GameCore *gc)
   int button_row, button_col; //, button_col1_to;
   button_row = 150;//+55
   button_col = 15;//
-  //SDL_RenderCopy(gc->renderer, gc->w_background, NULL, NULL); //put background
+  SDL_RenderCopy(gc->renderer, gc->w_background, NULL, NULL); //put background
   //draw_background_texture(gc, gc->w_background);//SDLTexture *t
   
   //gl_draw_game_menu(gc);
-  //fast_button(gc, button_col,button_row,      "New Game");
-  //fast_button(gc, button_col,button_row+55*1, "Load Game");
-  //fast_button(gc, button_col,button_row+55*2, "Save Game");
-  //fast_button(gc, button_col,button_row+55*3, "Options");
-  //fast_button(gc, button_col,button_row+55*4, "Exit");
-  display_render(gc);
+  fast_button(gc, button_col,button_row,      "New Game");
+  fast_button(gc, button_col,button_row+55*1, "Load Game");
+  fast_button(gc, button_col,button_row+55*2, "Save Game");
+  fast_button(gc, button_col,button_row+55*3, "Options");
+  fast_button(gc, button_col,button_row+55*4, "Exit");
+  //display_render(gc);
 }
 
 

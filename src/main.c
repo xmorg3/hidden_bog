@@ -1,5 +1,5 @@
 
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include "game.h"
 
 int start_sdl(GameCore *gc);

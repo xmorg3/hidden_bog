@@ -1,5 +1,6 @@
 
-//#include <SDL2/SDL.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include "game.h"
 
 /*  New wall dimensions for wall_all
@@ -40,7 +41,8 @@ int start_sdl(GameCore *gc)
   SDL_RendererInfo displayRendererInfo; //new
   SDL_CreateWindowAndRenderer(gc->screen_size_x,
 			      gc->screen_size_y,
-			      SDL_WINDOW_OPENGL,
+			      //SDL_WINDOW_OPENGL,
+				  SDL_WINDOW_FULLSCREEN_DESKTOP,
 			      &gc->win,
 			      &gc->renderer );
   SDL_GetRendererInfo(gc->renderer, &displayRendererInfo);
@@ -63,14 +65,13 @@ int start_sdl(GameCore *gc)
     return 1;
   }
   //get the display mode.
-  display_initGL(); //glfunctions.c
-  display_setviewport( gc->screen_size_x, gc->screen_size_y ); //glfunctions.c(minus sidne/bottom
+  //display_initGL(); //glfunctions.c
+  //display_setviewport( gc->screen_size_x, gc->screen_size_y ); //glfunctions.c(minus sidne/bottom
 
   gc->game_state = 1; //the game started
   return 0;
 }
 
-#include <SDL_image.h>
 
 SDL_Texture * IMG_Load_w_error(GameCore *gc, char * imgfile)
 {
