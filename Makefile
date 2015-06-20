@@ -17,8 +17,9 @@ FILES = src/main.c \
 	src/gameoptions.c \
 	src/chargen.c \
 	src/scene.c \
-	src/glfunctions.c
+	src/maps.c \
 
+#src/glfunctions.c
 #game.exe: src/SDL_collide.c src/actors.c src/datafunctions.c src/gameui.c
 # src/groups.c src/menus.c src/resources.c src/fonts.c src/maps.c 
 #src/movables.c src/render.c src/input.c src/world.c src/Main.c

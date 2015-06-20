@@ -1,6 +1,6 @@
 
-#include <SDL.h>
-#include <SDL_ttf.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 
 enum gate_state_numbers {
   GAME_QUIT,
@@ -148,3 +148,37 @@ typedef struct _GameCore {
   Scene *current_map;
 
 } GameCore;
+
+/* Maps.h */
+
+//Load a map from Flare (clint Bellinger)
+/*typedef struct _PlayMap {
+  int width;
+  int height;
+  int tilewidth;
+  int tileheight;
+  int location[3]; //
+  char *music;
+  char *tileset;
+  char *map_title;
+  //ignore tilesets for now :p
+  unsigned int *background_layer;
+  unsigned int *object_layer;
+  unsigned int *collision_layer;
+} PlayMap;*/
+
+typedef struct _PlayMap { //maps.c
+  int width;
+  int height;
+  int tilewidth;
+  int tileheight;
+  int location[3]; //
+  char *music;
+  char *tileset;
+  char *map_title;
+  //ignore tilesets for now :p
+  int *background_layer;
+  int *object_layer;
+  int *collision_layer;
+  int *fog_layer;
+} PlayMap; //maps.c

@@ -20,7 +20,7 @@ void set_map_tile_color(GameCore *gc, int location_x, int location_y, int x, int
 void fast_button(GameCore *gc, int x, int y, char *text);
 SDL_Rect fast_rect(int x, int y, int w, int h);
 void fast_radio(GameCore *gc, int x, int y, char *text, int selected); //does not uncheck?
-void display_render(GameCore *gc);
+//void display_render(GameCore *gc);
 
 
 //text.c

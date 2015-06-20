@@ -1,4 +1,4 @@
-#include <SDL.h>
+#include <SDL2/SDL.h>
 #include "game.h"
 
 /*
@@ -56,13 +56,15 @@ int test_fog[20][20] = {
   {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0}
 };
 
-Scene * new_map(char *name, int mapsize, char *filename)
+PlayMap * new_map(char *name, int mapsize, char *filename)
 { //creates a new scene
   int i, j;
-  Scene *scn;
-  scn = (Scene*)malloc(sizeof (Scene));
-  strcpy(scn->name, name);
-  scn->tiles = (int**)malloc(mapsize * sizeof(int*));
+  PlayMap *scn;
+  scn = (PlayMap*)malloc(sizeof (PlayMap));
+  strcpy(scn->map_title, name);
+  scn->background_layer = (int**)malloc(mapsize * sizeof(int*));
+  scn->object_layer = (int**)malloc(mapsize * sizeof(int*));
+  scn->collision_layer = (int**)malloc(mapsize * sizeof(int*));
   scn->fog_tiles = (int**)malloc(mapsize * sizeof(int*));
   for(i=0; i < mapsize; i++) {
     scn->tiles[i] = (int*) malloc(mapsize * sizeof(int));

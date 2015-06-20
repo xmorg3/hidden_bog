@@ -19,8 +19,8 @@ void load_map_wall_textures(GameCore *gc, char *directory);
 void start_ttf(GameCore *gc); //text.c
 SDL_Rect fast_rect(int x, int y, int w, int h);//render.c
 void clear_textures(GameCore *gc);
-void display_initGL(); //glfunctions.c
-int display_setviewport( int width, int height ); //glfunctions.c
+//void display_initGL(); //glfunctions.c
+//int display_setviewport( int width, int height ); //glfunctions.c
 
 //#include <SDL2/SDL_opengl.h> //new render code.
 int start_sdl(GameCore *gc)
