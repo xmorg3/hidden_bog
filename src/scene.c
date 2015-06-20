@@ -62,19 +62,28 @@ PlayMap * new_map(char *name, int mapsize, char *filename)
   PlayMap *scn;
   scn = (PlayMap*)malloc(sizeof (PlayMap));
   strcpy(scn->map_title, name);
-  scn->background_layer = (int**)malloc(mapsize * sizeof(int*));
-  scn->object_layer = (int**)malloc(mapsize * sizeof(int*));
-  scn->collision_layer = (int**)malloc(mapsize * sizeof(int*));
-  scn->fog_tiles = (int**)malloc(mapsize * sizeof(int*));
-  for(i=0; i < mapsize; i++) {
-    scn->tiles[i] = (int*) malloc(mapsize * sizeof(int));
-    scn->fog_tiles[i] = (int*) malloc(mapsize * sizeof(int));
-  }
-  for(j = 0; j < mapsize; j++) {
-    for(i = 0; i < mapsize; i++) {
-      scn->tiles[j][i] = test_map[j][i];
-      scn->fog_tiles[j][i] = test_fog[j][i];
-    }
-  }
+
+  //gc->playmap->background_layer =  (int *)malloc(sizeof(int) * (100 * 100));        //with preallocating
+
+  //scn->background_layer = (int**)malloc(mapsize * sizeof(int*));
+  //scn->object_layer = (int**)malloc(mapsize * sizeof(int*));
+  //scn->collision_layer = (int**)malloc(mapsize * sizeof(int*));
+  //scn->fog_layer = (int**)malloc(mapsize * sizeof(int*));
+  scn->background_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
+  //scn->object_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
+  //scn->collision_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
+  scn->fog_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
+
+  //we did
+  //for(i=0; i < mapsize; i++) {
+  //  scn->background_layer[i] = (int*) malloc(mapsize * sizeof(int));
+  //  scn->fog_layer[i] = (int*) malloc(mapsize * sizeof(int));
+  //}
+  //for(j = 0; j < mapsize; j++) {
+  //  for(i = 0; i < mapsize; i++) {
+  //    scn->background_layer[j][i] = test_map[j][i];
+  //    scn->fog_layer[j][i] = test_fog[j][i];
+  //  }
+  //}
   return scn;
 }

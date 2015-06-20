@@ -94,8 +94,8 @@ typedef struct _Actor {
 
 typedef struct _Scene { //Scene structure.
   char name[75]; //name of place
-  int **tiles; //tiles!
-  int **fog_tiles;
+  int **background_layer; //tiles!
+  int **fog_layer;
 } Scene;
 
 typedef struct _GameCore {

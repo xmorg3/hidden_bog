@@ -60,49 +60,49 @@ void set_player_move_foreward(GameCore *gc) //update.c
 {//if location = n,  current_map[y-1][x] //prevent outof bound loops
   int x,y;
   if(gc->player->direction == NORTH && gc->player->map_y > 2) { 
-    if(gc->current_map->tiles[gc->player->map_y-1][gc->player->map_x] == 0)
+    if(gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x] == 0)
       {  
 	gc->player->map_y--;
-	gc->current_map->fog_tiles[gc->player->map_y-1][gc->player->map_x] = 1;
-	gc->current_map->fog_tiles[gc->player->map_y-1][gc->player->map_x+1] = 1;
-	gc->current_map->fog_tiles[gc->player->map_y-1][gc->player->map_x-1] = 1;
+	gc->current_map->fog_layer[gc->player->map_y-1][gc->player->map_x] = 1;
+	gc->current_map->fog_layer[gc->player->map_y-1][gc->player->map_x+1] = 1;
+	gc->current_map->fog_layer[gc->player->map_y-1][gc->player->map_x-1] = 1;
 	if( (gc->player->map_y -2) > 0 )
-	  gc->current_map->fog_tiles[gc->player->map_y-2][gc->player->map_x] = 1;
+	  gc->current_map->fog_layer[gc->player->map_y-2][gc->player->map_x] = 1;
       }
     
   }
   if(gc->player->direction == EAST && gc->player->map_x < gc->mapsize -2) {
-    if(gc->current_map->tiles[gc->player->map_y][gc->player->map_x+1] == 0)
+    if(gc->current_map->background_layer[gc->player->map_y][gc->player->map_x+1] == 0)
       {
 	gc->player->map_x++;
-	gc->current_map->fog_tiles[gc->player->map_y][gc->player->map_x+1] = 1;
-	gc->current_map->fog_tiles[gc->player->map_y-1][gc->player->map_x+1] = 1;
-	gc->current_map->fog_tiles[gc->player->map_y+1][gc->player->map_x+1] = 1;
+	gc->current_map->fog_layer[gc->player->map_y][gc->player->map_x+1] = 1;
+	gc->current_map->fog_layer[gc->player->map_y-1][gc->player->map_x+1] = 1;
+	gc->current_map->fog_layer[gc->player->map_y+1][gc->player->map_x+1] = 1;
 	if( (gc->player->map_x +2) < gc->mapsize )
-	  gc->current_map->fog_tiles[gc->player->map_y][gc->player->map_x+2] = 1;
+	  gc->current_map->fog_layer[gc->player->map_y][gc->player->map_x+2] = 1;
       }
   }
   if(gc->player->direction == SOUTH && gc->player->map_y < gc->mapsize -2) { 
-    if(gc->current_map->tiles[gc->player->map_y+1][gc->player->map_x] == 0)
+    if(gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x] == 0)
       {
 	gc->player->map_y++;
-	gc->current_map->fog_tiles[gc->player->map_y+1][gc->player->map_x] = 1;
-	gc->current_map->fog_tiles[gc->player->map_y+1][gc->player->map_x+1] = 1;
-	gc->current_map->fog_tiles[gc->player->map_y+1][gc->player->map_x-1] = 1;
+	gc->current_map->fog_layer[gc->player->map_y+1][gc->player->map_x] = 1;
+	gc->current_map->fog_layer[gc->player->map_y+1][gc->player->map_x+1] = 1;
+	gc->current_map->fog_layer[gc->player->map_y+1][gc->player->map_x-1] = 1;
 	if( (gc->player->map_y +2) < gc->mapsize )
-	  gc->current_map->fog_tiles[gc->player->map_y+2][gc->player->map_x] = 1;
+	  gc->current_map->fog_layer[gc->player->map_y+2][gc->player->map_x] = 1;
 	
       }
   }
   if(gc->player->direction == WEST && gc->player->map_x > 2) {
-    if(gc->current_map->tiles[gc->player->map_y][gc->player->map_x-1] == 0)
+    if(gc->current_map->background_layer[gc->player->map_y][gc->player->map_x-1] == 0)
       {
 	gc->player->map_x--;
-	gc->current_map->fog_tiles[gc->player->map_y][gc->player->map_x-1] = 1;
-	gc->current_map->fog_tiles[gc->player->map_y-1][gc->player->map_x-1] = 1;
-	gc->current_map->fog_tiles[gc->player->map_y+1][gc->player->map_x-1] = 1;
+	gc->current_map->fog_layer[gc->player->map_y][gc->player->map_x-1] = 1;
+	gc->current_map->fog_layer[gc->player->map_y-1][gc->player->map_x-1] = 1;
+	gc->current_map->fog_layer[gc->player->map_y+1][gc->player->map_x-1] = 1;
 	if( (gc->player->map_x -2 ) > 0 )
-	  gc->current_map->fog_tiles[gc->player->map_y][gc->player->map_x-2] = 1;
+	  gc->current_map->fog_layer[gc->player->map_y][gc->player->map_x-2] = 1;
       }
   }
   print_debug_map(gc);
@@ -110,19 +110,19 @@ void set_player_move_foreward(GameCore *gc) //update.c
 void set_player_move_backward(GameCore *gc) //update.c                                                                                                                  
 {
   if(gc->player->direction == NORTH) {
-    if(gc->current_map->tiles[gc->player->map_y+1][gc->player->map_x] == 0)
+    if(gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x] == 0)
     gc->player->map_y++;
   }
   if(gc->player->direction == EAST) { 
-    if(gc->current_map->tiles[gc->player->map_y][gc->player->map_x-1] == 0)
+    if(gc->current_map->background_layer[gc->player->map_y][gc->player->map_x-1] == 0)
     gc->player->map_x--;
   }
   if(gc->player->direction == SOUTH) {
-    if(gc->current_map->tiles[gc->player->map_y-1][gc->player->map_x] == 0)
+    if(gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x] == 0)
     gc->player->map_y--;
   }
   if(gc->player->direction == WEST) {
-    if(gc->current_map->tiles[gc->player->map_y][gc->player->map_x+1] == 0)
+    if(gc->current_map->background_layer[gc->player->map_y][gc->player->map_x+1] == 0)
     gc->player->map_x++;
   } 
   print_debug_map(gc);
