@@ -77,14 +77,14 @@ void read_map_file(PlayMap *m, const char *filename)
   tempstr = strtok( NULL, "=\n" );
   printf("Looking for map %s\n", tempstr);
   i=0;
-  for(y = 0; y < m->height; y++)
-    {
-      for(x = 0; x < m->width; x++)
-	{
-	  m->background_layer[i] = atoi(strtok(NULL, ",\n"));
-	  i++;
-	} //printf("\n");
-    }
+  for(y = 0; y < m->height; y++) {
+	  for(x = 0; x < m->width; x++) {
+		  //m->background_layer[i] = atoi(strtok(NULL, ",\n"));
+		  m->background_layer[y][x] = atoi(strtok(NULL, ",\n"));
+		  m->fog_layer[y][x] = 0;
+		  i++;
+	  }
+  }
   //Get the next layer(note this layer is with tiles 32x64?
   strtok(NULL, "\n");
   //tempstr = strtok( strstr(data, "object"), "=\n" ); 

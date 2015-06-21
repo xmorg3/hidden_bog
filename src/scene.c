@@ -10,6 +10,9 @@ typedef struct _Scene { //Scene structure.
 //0 ground, 1 wall, 2 tall wall, 3 door
 //4 archway, 5 water, 6 hole(void?)
 
+PlayMap * new_map(char *name, int mapsize );
+void read_map_file(PlayMap *m, const char *filename); //maps.c
+
 int test_map[20][20] = {
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
   {1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1},
@@ -65,25 +68,29 @@ PlayMap * new_map(char *name, int mapsize, char *filename)
 
   //gc->playmap->background_layer =  (int *)malloc(sizeof(int) * (100 * 100));        //with preallocating
 
-  //scn->background_layer = (int**)malloc(mapsize * sizeof(int*));
-  //scn->object_layer = (int**)malloc(mapsize * sizeof(int*));
-  //scn->collision_layer = (int**)malloc(mapsize * sizeof(int*));
-  //scn->fog_layer = (int**)malloc(mapsize * sizeof(int*));
-  scn->background_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
+  scn->background_layer = (int**)malloc(mapsize * sizeof(int*));
+  scn->object_layer = (int**)malloc(mapsize * sizeof(int*));
+  scn->collision_layer = (int**)malloc(mapsize * sizeof(int*));
+  scn->fog_layer = (int**)malloc(mapsize * sizeof(int*));
+  //scn->background_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
   //scn->object_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
   //scn->collision_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
-  scn->fog_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
+  //scn->fog_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
+  for(i=0; i < mapsize; i++) { //allocating for the rows
+	scn->background_layer[i] = (int*) malloc(mapsize * sizeof(int));
+	scn->fog_layer[i] = (int*) malloc(mapsize * sizeof(int));
+  }
 
-  //we did
-  //for(i=0; i < mapsize; i++) {
-  //  scn->background_layer[i] = (int*) malloc(mapsize * sizeof(int));
-  //  scn->fog_layer[i] = (int*) malloc(mapsize * sizeof(int));
-  //}
+  if(filename != NULL){
+	  read_map_file(scn, filename);
+  }
+  //loading the "test map"
   //for(j = 0; j < mapsize; j++) {
-  //  for(i = 0; i < mapsize; i++) {
-  //    scn->background_layer[j][i] = test_map[j][i];
-  //    scn->fog_layer[j][i] = test_fog[j][i];
-  //  }
+  //	  for(i = 0; i < mapsize; i++) {
+  //	  scn->background_layer[j][i] = test_map[j][i];
+  //  scn->fog_layer[j][i] = test_fog[j][i];
   //}
-  return scn;
+  //}
+return scn;
 }
+
