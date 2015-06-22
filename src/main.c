@@ -24,8 +24,7 @@ int main(int argc, char** argv){
   gc->c_text_size = (SDL_Rect *) malloc(sizeof(SDL_Rect));
   gc->player = player;
   gc->mapsize = 20;
-  gc->current_map = new_map("nomap", gc->mapsize, NULL);
-
+  gc->current_map = new_map("nomap", 20, "data/maps/v_hamsford.txt");
   gc->player->map_x = 4;
   gc->player->map_y = 4;
 
@@ -46,7 +45,7 @@ int main(int argc, char** argv){
     draw(gc);
   }
 
-  SDL_Delay(1000);
+  SDL_Delay(500);
   SDL_DestroyTexture(gc->t_buttons);
   SDL_DestroyTexture(gc->t_background);
   SDL_DestroyRenderer(gc->renderer);

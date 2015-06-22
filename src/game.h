@@ -175,10 +175,10 @@ typedef struct _PlayMap { //maps.c
   int location[3]; //
   char *music;
   char *tileset;
-  char *map_title;
+  char map_title[65];
   //ignore tilesets for now :p
-  int *background_layer;
-  int *object_layer;
-  int *collision_layer;
-  int *fog_layer;
+  int **background_layer;
+  int **object_layer;
+  int **collision_layer;
+  int **fog_layer;
 } PlayMap; //maps.c

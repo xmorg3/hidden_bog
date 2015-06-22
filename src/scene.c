@@ -10,7 +10,7 @@ typedef struct _Scene { //Scene structure.
 //0 ground, 1 wall, 2 tall wall, 3 door
 //4 archway, 5 water, 6 hole(void?)
 
-PlayMap * new_map(char *name, int mapsize );
+PlayMap * new_map(char *name, int mapsize, char *filename );
 void read_map_file(PlayMap *m, const char *filename); //maps.c
 
 int test_map[20][20] = {
@@ -78,6 +78,8 @@ PlayMap * new_map(char *name, int mapsize, char *filename)
   //scn->fog_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
   for(i=0; i < mapsize; i++) { //allocating for the rows
 	scn->background_layer[i] = (int*) malloc(mapsize * sizeof(int));
+	scn->object_layer[i] = (int*) malloc(mapsize * sizeof(int));
+	scn->collision_layer[i] = (int*) malloc(mapsize * sizeof(int));
 	scn->fog_layer[i] = (int*) malloc(mapsize * sizeof(int));
   }
 
