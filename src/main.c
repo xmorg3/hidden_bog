@@ -14,7 +14,7 @@ void print_in_messagebox(GameCore *gc, char *text);
 
 Actor * new_actor(char *name); //actors.c
 
-Scene * new_map(char *name, int mapsize, char *filename); //scene.c
+PlayMap * new_map(char *name, int mapsize, char *filename); //scene.c
 
 int main(int argc, char** argv){
   GameCore *gc;
