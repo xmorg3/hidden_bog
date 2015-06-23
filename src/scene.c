@@ -62,25 +62,25 @@ int test_fog[20][20] = {
 PlayMap * new_map(char *name, int mapsize, char *filename)
 { //creates a new scene
   int i, j;
-  PlayMap *scn;
-  scn = (PlayMap*)malloc(sizeof (PlayMap));
+  PlayMap *current_map;
+  current_map = (PlayMap*)malloc(sizeof (PlayMap));
   strcpy(scn->map_title, name);
 
   //gc->playmap->background_layer =  (int *)malloc(sizeof(int) * (100 * 100));        //with preallocating
 
-  scn->background_layer = (int**)malloc(mapsize * sizeof(int*));
-  scn->object_layer = (int**)malloc(mapsize * sizeof(int*));
-  scn->collision_layer = (int**)malloc(mapsize * sizeof(int*));
-  scn->fog_layer = (int**)malloc(mapsize * sizeof(int*));
+  current_map->background_layer = (int**)malloc(mapsize * sizeof(int*));
+  current_map->object_layer = (int**)malloc(mapsize * sizeof(int*));
+  current_map->collision_layer = (int**)malloc(mapsize * sizeof(int*));
+  current_map->fog_layer = (int**)malloc(mapsize * sizeof(int*));
   //scn->background_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
   //scn->object_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
   //scn->collision_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
   //scn->fog_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
   for(i=0; i < mapsize; i++) { //allocating for the rows
-	scn->background_layer[i] = (int*) malloc(mapsize * sizeof(int));
-	scn->object_layer[i] = (int*) malloc(mapsize * sizeof(int));
-	scn->collision_layer[i] = (int*) malloc(mapsize * sizeof(int));
-	scn->fog_layer[i] = (int*) malloc(mapsize * sizeof(int));
+	current_map->background_layer[i] = (int*) malloc(mapsize * sizeof(int));
+	current_map->object_layer[i] = (int*) malloc(mapsize * sizeof(int));
+	current_map->collision_layer[i] = (int*) malloc(mapsize * sizeof(int));
+	current_map->fog_layer[i] = (int*) malloc(mapsize * sizeof(int));
   }
 
   if(filename != NULL){
@@ -93,6 +93,6 @@ PlayMap * new_map(char *name, int mapsize, char *filename)
   //  scn->fog_layer[j][i] = test_fog[j][i];
   //}
   //}
-return scn;
+return current_map;
 }
 
