@@ -98,6 +98,22 @@ typedef struct _Scene { //Scene structure.
   int **fog_layer;
 } Scene;
 
+typedef struct _PlayMap { //maps.c //newstuff
+  int width;
+  int height;
+  int tilewidth;
+  int tileheight;
+  int location[3]; //
+  char *music;
+  char *tileset;
+  char map_title[65];
+  //ignore tilesets for now :p
+  int **background_layer;
+  int **object_layer;
+  int **collision_layer;
+  int **fog_layer;
+} PlayMap; //maps.c
+
 typedef struct _GameCore {
   SDL_Window *win;
   SDL_Renderer *renderer;
@@ -145,7 +161,7 @@ typedef struct _GameCore {
   SDL_Rect dst_stat_plus, dst_stat_minus;
 
   Actor *player;
-  Scene *current_map;
+  PlayMap *current_map;
 
 } GameCore;
 
@@ -167,18 +183,4 @@ typedef struct _GameCore {
   unsigned int *collision_layer;
 } PlayMap;*/
 
-typedef struct _PlayMap { //maps.c
-  int width;
-  int height;
-  int tilewidth;
-  int tileheight;
-  int location[3]; //
-  char *music;
-  char *tileset;
-  char map_title[65];
-  //ignore tilesets for now :p
-  int **background_layer;
-  int **object_layer;
-  int **collision_layer;
-  int **fog_layer;
-} PlayMap; //maps.c
+
