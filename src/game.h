@@ -92,11 +92,11 @@ typedef struct _Actor {
   int map_x, map_y; //xy on current map
 } Actor;
 
-typedef struct _Scene { //Scene structure.
-  char name[75]; //name of place
-  int **background_layer; //tiles!
-  int **fog_layer;
-} Scene;
+//typedef struct _Scene { //Scene structure.
+//  char name[75]; //name of place
+//  int **background_layer; //tiles!
+//  int **fog_layer;
+//} Scene;
 
 typedef struct _PlayMap { //maps.c //newstuff
   int width;
