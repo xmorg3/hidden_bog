@@ -64,7 +64,7 @@ PlayMap * new_map(char *name, int mapsize, char *filename)
   int i, j;
   PlayMap *current_map;
   current_map = (PlayMap*)malloc(sizeof (PlayMap));
-  strcpy(scn->map_title, name);
+  strcpy(current_map->map_title, name);
 
   //gc->playmap->background_layer =  (int *)malloc(sizeof(int) * (100 * 100));        //with preallocating
 
@@ -72,10 +72,10 @@ PlayMap * new_map(char *name, int mapsize, char *filename)
   current_map->object_layer = (int**)malloc(mapsize * sizeof(int*));
   current_map->collision_layer = (int**)malloc(mapsize * sizeof(int*));
   current_map->fog_layer = (int**)malloc(mapsize * sizeof(int*));
-  //scn->background_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
-  //scn->object_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
-  //scn->collision_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
-  //scn->fog_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
+  //current_map->background_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
+  //current_map->object_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
+  //current_map->collision_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
+  //current_map->fog_layer = (int *)malloc(sizeof(int) * (mapsize*mapsize));
   for(i=0; i < mapsize; i++) { //allocating for the rows
 	current_map->background_layer[i] = (int*) malloc(mapsize * sizeof(int));
 	current_map->object_layer[i] = (int*) malloc(mapsize * sizeof(int));
@@ -84,7 +84,7 @@ PlayMap * new_map(char *name, int mapsize, char *filename)
   }
 
   if(filename != NULL){
-	  read_map_file(scn, filename);
+	  read_map_file(current_map, filename);
   }
   //loading the "test map"
   //for(j = 0; j < mapsize; j++) {
