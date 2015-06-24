@@ -118,7 +118,7 @@ void draw_fov2(GameCore *gc, int left, int middle, int right)
   left_wall = fast_rect(618, 0, 118, 273);
   right_wall = fast_rect(0, 0, 118, 273);
   middle_wall = fast_rect(115, 0, 505,273);
-  if( left == 2 || left == 3)  {SDL_RenderCopy(gc->renderer, gc->wall_left_fov2_blank, NULL, &gc->player_viewport);}
+  if( left == 2 || left == 3) { SDL_RenderCopy(gc->renderer, gc->wall_left_fov2_blank, NULL, &gc->player_viewport); }
   if( left == 4) {
     SDL_RenderCopy(gc->renderer, gc->wall_left_fov2_blank, NULL, &gc->player_viewport);
     SDL_RenderCopy(gc->renderer, gc->door_left_fov2_blank, NULL, &gc->player_viewport);
@@ -281,15 +281,15 @@ void set_map_tile_color(GameCore *gc, int location_x, int location_y, int x, int
   else if( (location_y > 0 && location_x > 0 &&
 	    location_y < gc->mapsize &&
 	    location_x < gc->mapsize) &&
-	   gc->current_map->background_layer[location_y][location_x] == 1) {  //walls
+	   gc->current_map->background_layer[location_y][location_x] == 2) {  //walls
     SDL_SetRenderDrawColor(gc->renderer, 50,50,50,0);
   }
   else if( (location_y > 0 && location_x > 0 && location_y < gc->mapsize &&
-	    location_x < gc->mapsize) && gc->current_map->background_layer[location_y][location_x] == 2) { //tall walls
+	    location_x < gc->mapsize) && gc->current_map->background_layer[location_y][location_x] == 3) { //tall walls
 	SDL_SetRenderDrawColor(gc->renderer, 50,50,50,0);
   }
   else if( (location_y > 0 && location_x > 0 && location_y < gc->mapsize &&
-	    location_x < gc->mapsize) && gc->current_map->background_layer[location_y][location_x] == 3) { //doors
+	    location_x < gc->mapsize) && gc->current_map->background_layer[location_y][location_x] == 4) { //doors
     SDL_SetRenderDrawColor(gc->renderer, 50,80,50,0);
   }
   else { //-- set walkable
