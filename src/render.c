@@ -180,7 +180,7 @@ void draw_fov0(GameCore *gc, int left, int middle, int right)
   
   if( middle==2 || middle ==3)  {SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);}
   if( middle == 4)  {
-    //SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);
+    SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);
     SDL_RenderCopy(gc->renderer, gc->door_front_fov0_blank, NULL, &gc->player_viewport);
   }
   //item1_fov0  = 4
