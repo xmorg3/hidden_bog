@@ -101,6 +101,7 @@ void draw_playport(GameCore *gc) //draw the play viewport
   if(gc->player->direction == WEST) {
     draw_playport_west(gc);
   }
+  SDL_RenderCopy(gc->renderer, gc->play_port_frame, NULL, &gc->player_viewport_frame);
 }
 
 
@@ -111,7 +112,7 @@ rightwall(at left x0 w118)
 middle wall x115 w505 (at 619)
 */
 
-
+//left(2-3,4), right, middle
 void draw_fov2(GameCore *gc, int left, int middle, int right)
 {//gc->wall_all
   SDL_Rect left_wall, right_wall, middle_wall;
@@ -143,12 +144,12 @@ void draw_fov1(GameCore *gc, int left, int middle, int right)
   left_wall = fast_rect(618, 0, 118, 273);
   right_wall = fast_rect(0, 0, 118, 273);
   middle_wall = fast_rect(115, 0, 505,273);
-  if( middle==2 || middle ==3)  {SDL_RenderCopy(gc->renderer, gc->wall_left_fov1_blank, NULL, &gc->player_viewport);}
+  if( left==2 || left ==3)  {SDL_RenderCopy(gc->renderer, gc->wall_left_fov1_blank, NULL, &gc->player_viewport);}
   if( left == 4)  {
     SDL_RenderCopy(gc->renderer, gc->wall_left_fov1_blank, NULL, &gc->player_viewport);
     SDL_RenderCopy(gc->renderer, gc->door_left_fov1_blank, NULL, &gc->player_viewport);
   }
-  //if( middle==2 || middle ==3)  {SDL_RenderCopy(gc->renderer, gc->wall_right_fov1_blank, NULL, &gc->player_viewport);}
+  if( right ==2 || right ==3) {SDL_RenderCopy(gc->renderer, gc->wall_right_fov1_blank, NULL, &gc->player_viewport);}
   if( right == 4)  {
     SDL_RenderCopy(gc->renderer, gc->wall_right_fov1_blank, NULL, &gc->player_viewport);
     SDL_RenderCopy(gc->renderer, gc->door_right_fov1_blank, NULL, &gc->player_viewport);
@@ -169,21 +170,23 @@ void draw_fov0(GameCore *gc, int left, int middle, int right)
 
   // ------------------------------------->walls
   if( left==2 || left ==3)  {
-    SDL_RenderCopy(gc->renderer, gc->wall_left_fov1_blank, NULL, &gc->player_viewport);}
-  if( right==2 || right ==3 ) {
-    SDL_RenderCopy(gc->renderer, gc->wall_right_fov1_blank, NULL, &gc->player_viewport);}
-   if( middle==2 || middle ==3)  { //middle wall
-    SDL_RenderCopy(gc->renderer, gc->wall_right_fov0_blank, NULL, &gc->player_viewport);
-  }
-  // ------------------------------------->door!
+    SDL_RenderCopy(gc->renderer, gc->wall_left_fov0_blank, NULL, &gc->player_viewport);}
   if( left == 4)  {
     SDL_RenderCopy(gc->renderer, gc->wall_left_fov0_blank, NULL, &gc->player_viewport);
     SDL_RenderCopy(gc->renderer, gc->door_left_fov0_blank, NULL, &gc->player_viewport);
+  }
+  
+  if( right==2 || right ==3 ) {
+    SDL_RenderCopy(gc->renderer, gc->wall_right_fov0_blank, NULL, &gc->player_viewport);
   }
   if( right == 4)  {
     SDL_RenderCopy(gc->renderer, gc->wall_right_fov0_blank, NULL, &gc->player_viewport);
     SDL_RenderCopy(gc->renderer, gc->door_right_fov0_blank, NULL, &gc->player_viewport);
   }
+   
+  if( middle==2 || middle ==3)  { //middle wall
+    SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);
+  } 
   if( middle == 4)  {
     SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);
     SDL_RenderCopy(gc->renderer, gc->door_front_fov0_blank, NULL, &gc->player_viewport);
@@ -255,9 +258,7 @@ void draw_playport_west(GameCore *gc)
 }
 
 void draw_message_frame(GameCore *gc)
-{ //draw message log to the screen
-//depriciated, no longer used by will be converted to display naration messages.
-//will show a message box in the middle of the screen with an "ok" button.
+{
   int i;
   set_color(gc, 255, 255, 255);
   for(i=0; i<6; i++) {

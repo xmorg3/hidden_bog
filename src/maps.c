@@ -46,12 +46,6 @@ void read_map_file(PlayMap *m, const char *filename)
   size_t result;
   int x, y, i; //loop through reading the map
   
-  for(y = 0; y < m->height; y++) {
-  	for(x = 0; x < m->width; x++) {
-		m->fog_layer[y][x] = 0;
-	}
-  }
-  
   f = fopen(filename , "rb" ); //Open the file
   if(f == NULL) { fputs("FileNotFound error",stderr); exit (1); }
   fseek(f , 0 , SEEK_END);
@@ -72,7 +66,11 @@ void read_map_file(PlayMap *m, const char *filename)
   strtok(strstr(data,"height"), "=\n"); //find height
   m->height = atoi( strtok(NULL, "=\n"));
   printf("Map height is %d, :D\n", m->height);  //We are OK up to here. (line3)
-
+  for(y = 0; y < m->height; y++) {
+    for(x = 0; x < m->width; x++) {
+      m->fog_layer[y][x] = 0;
+    }
+  }  
   tempstr = strtok( strstr(data, "background"), "=" );
   tempstr = strtok( strstr(data, "background"), "=" );
   tempstr = strtok( strstr(data, "background"), "=" );

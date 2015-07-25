@@ -110,6 +110,7 @@ int load_resources(GameCore *gc)
   gc->t_buttons = IMG_Load_w_error(gc, "data/RPG_GUI_v1.png");
   gc->char_frame = IMG_Load_w_error(gc, "data/char_frame.png");
   gc->portraits_human_male = IMG_Load_w_error(gc, "data/char_male.png");
+  gc->play_port_frame = IMG_Load_w_error(gc, "data/bark_frame.png");
 
   set_rect(&gc->button_raised, 14,126, 283,55);
   set_rect(&gc->button_pressed,14,204, 283,55);
@@ -124,7 +125,11 @@ int load_resources(GameCore *gc)
 	   5,
 	   (gc->screen_size_x/4) * 3 - 5,
 	   gc->screen_size_y - 137 ); //everything except portraits
-
+  set_rect(&gc->player_viewport_frame,
+	   0,
+	   0,
+	   (gc->screen_size_x/4) * 3,// - 5,
+	   gc->screen_size_y - 137+5 ); //everything except portraits
   set_rect(&gc->tabbed_pane,
 	   (gc->screen_size_x / 4) *3 + 5, //x
 	   5, //y

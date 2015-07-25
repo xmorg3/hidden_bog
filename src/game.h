@@ -146,10 +146,10 @@ typedef struct _GameCore {
   SDL_Texture *wall_all; //gc->wall_all = load_texture_by_dir(gc, directory, "wall_all0.png");
   SDL_Texture *door_front_fov0_blank, *door_front_fov1_blank, *door_left_fov0_blank, *door_left_fov1_blank,
     *door_left_fov2_blank, *door_right_fov0_blank, *door_right_fov1_blank, *door_right_fov2_blank,
-    *item1_fov0, *item2_fov0, *item3_fov0, *item4_fov0, *item5_fov0;
+    *item1_fov0, *item2_fov0, *item3_fov0, *item4_fov0, *item5_fov0, *play_port_frame;
   
   SDL_Rect character_doll_rect;
-  SDL_Rect char_frame_rect;
+  SDL_Rect char_frame_rect, player_viewport_frame;
   SDL_Color current_color; //current color to draw in (like for text)
   TTF_Font *current_font;
   TTF_Font *font0;
