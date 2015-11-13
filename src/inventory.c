@@ -10,3 +10,9 @@ void drop_item(GameCore *gc);
 
 void render_inventory(GameCore *gc) //render the inventory screen
 {}
+
+void add_item_to_inventory(GameCore *gc) //pick up an item
+{}
+
+void drop_item(GameCore *gc) //remove an item from your inventory.
+{}
