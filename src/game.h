@@ -25,9 +25,20 @@ enum facing_direction {
   WEST  = 3
 };
 
-typedef struct _Inventory {
-  
+typedef struct _Inventory { //object for your inventory as a whole
+  int helmet;
+  int shoulders;
+  int chest;
+  int gloves;
+  int legs;
+  int feet;
+  int left_hand;
+  int right_hand;
+  int backpack[35]; //you can cary a total of 35 items in your backpack.
 } Inventory;
+typedef struct _Item {
+  int id, name, weight, type;
+}Item;
 
 typedef struct _Actor {
   char name[25];
