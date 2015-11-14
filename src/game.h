@@ -159,7 +159,7 @@ typedef struct _GameCore {
     *item1_fov0, *item2_fov0, *item3_fov0, *item4_fov0, *item5_fov0, *play_port_frame;
   
   SDL_Rect character_doll_rect;
-  SDL_Rect char_frame_rect, player_viewport_frame;
+  SDL_Rect char_frame_rect, player_viewport_frame, automap_frame_rect;
   SDL_Color current_color; //current color to draw in (like for text)
   TTF_Font *current_font;
   TTF_Font *font0;
