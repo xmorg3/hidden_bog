@@ -351,7 +351,7 @@ void draw_mapport(GameCore *gc)
   screen_fract = gc->screen_size_x / 28;
   SDL_Rect amap_tiles[52]; //how many tiles is V---loop*loop
   i=0;
-  SDL_RenderCopy(gc->renderer, gc->automap_frame, NULL, &gc->tabbed_pane); 
+  SDL_RenderCopy(gc->renderer, gc->automap_frame, NULL, &gc->automap_frame_rect);//&gc->tabbed_pane); 
   for(y=0; y < 7; y++) { //vertical loop
     for(x=0; x < 7; x++) { //horizantal loop
       fr_x = gc->tabbed_pane.x + 1+(x * screen_fract); //set start x
