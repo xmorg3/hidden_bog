@@ -77,6 +77,7 @@ void draw_playframe(GameCore *gc)
   //SDL_GetRenderDrawColor(gc->renderer, 0,0,0,0); 
   //SDL_SetRenderDrawColor(gc->renderer, 0,0,0,0);
   SDL_RenderFillRect(gc->renderer, &gc->player_viewport);  // message_log, tabbed_pane;
+  
   SDL_RenderFillRect(gc->renderer, &gc->message_log);
   //SDL_RenderFillRect(gc->renderer, &gc->tabbed_pane);
   //draw_message_frame(gc);
@@ -350,6 +351,7 @@ void draw_mapport(GameCore *gc)
   screen_fract = gc->screen_size_x / 28;
   SDL_Rect amap_tiles[52]; //how many tiles is V---loop*loop
   i=0;
+  SDL_RenderCopy(gc->renderer, gc->automap_frame, NULL, &gc->tabbed_pane); 
   for(y=0; y < 7; y++) { //vertical loop
     for(x=0; x < 7; x++) { //horizantal loop
       fr_x = gc->tabbed_pane.x + 1+(x * screen_fract); //set start x
