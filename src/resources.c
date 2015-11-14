@@ -111,6 +111,7 @@ int load_resources(GameCore *gc)
   gc->char_frame = IMG_Load_w_error(gc, "data/char_frame.png");
   gc->portraits_human_male = IMG_Load_w_error(gc, "data/char_male.png");
   gc->play_port_frame = IMG_Load_w_error(gc, "data/bark_frame.png");
+  gc->automap_frame = IMG_Load_w_error(gc, "data/bark_frame_automap.png");
 
   set_rect(&gc->button_raised, 14,126, 283,55);
   set_rect(&gc->button_pressed,14,204, 283,55);
