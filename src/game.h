@@ -141,7 +141,7 @@ typedef struct _GameCore {
   SDL_Texture *t_background;
   SDL_Texture *w_background; //wood background
   SDL_Texture *t_buttons;
-  SDL_Texture *char_frame; //place on top of the character's portrait.
+  SDL_Texture *char_frame, *automap_frame; //place on top of the character's portrait.
   SDL_Texture *character_doll;
   SDL_Texture *portraits_human_male;
   //note, there should be a func to load these textures on the fly?
@@ -159,7 +159,7 @@ typedef struct _GameCore {
     *item1_fov0, *item2_fov0, *item3_fov0, *item4_fov0, *item5_fov0, *play_port_frame;
   
   SDL_Rect character_doll_rect;
-  SDL_Rect char_frame_rect, player_viewport_frame, automap_frame;
+  SDL_Rect char_frame_rect, player_viewport_frame;
   SDL_Color current_color; //current color to draw in (like for text)
   TTF_Font *current_font;
   TTF_Font *font0;
