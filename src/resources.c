@@ -19,10 +19,7 @@ void load_map_wall_textures(GameCore *gc, char *directory);
 void start_ttf(GameCore *gc); //text.c
 SDL_Rect fast_rect(int x, int y, int w, int h);//render.c
 void clear_textures(GameCore *gc);
-//void display_initGL(); //glfunctions.c
-//int display_setviewport( int width, int height ); //glfunctions.c
 
-//#include <SDL2/SDL_opengl.h> //new render code.
 int start_sdl(GameCore *gc)
 {
   //Temp settings
@@ -51,9 +48,6 @@ int start_sdl(GameCore *gc)
     printf("%s \n", SDL_GetError() );
     return 1;
   }
-  //SDL_DestroyRenderer(gc->renderer);
-  //gc->renderer = SDL_CreateRenderer(gc->win, -1,
-  //SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
   if (gc->renderer == NULL){
     printf("%s \n", SDL_GetError() );
     return 1;
@@ -64,9 +58,6 @@ int start_sdl(GameCore *gc)
     printf("Error no font (data/font.ttf) ->from resources.c\n");
     return 1;
   }
-  //get the display mode.
-  //display_initGL(); //glfunctions.c
-  //display_setviewport( gc->screen_size_x, gc->screen_size_y ); //glfunctions.c(minus sidne/bottom
 
   gc->game_state = 1; //the game started
   return 0;
@@ -94,17 +85,8 @@ int load_resources(GameCore *gc)
 {
   //have we decided if we are using Surfaces or Textures?
   //IMG_Load(const char *file);
-  gc->t_background = IMG_Load_w_error(gc, "data/paper_background.png");
-  gc->w_background = IMG_Load_w_error(gc, "data/wood_background.png");
-
-  //glBindTexture( GL_TEXTURE_2D, scn->texture[i] ); //Create the texture.
-		  /* Generate The Texture */
-  //glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST );
-  //glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, sdlImage->w, 
-  //sdlImage->h, 0, GL_BGRA,GL_UNSIGNED_BYTE, 
-  //sdlImage->pixels );
-
-
+  gc->t_background = IMG_Load_w_error(gc, "data/paper_background.png"); //background
+  gc->w_background = IMG_Load_w_error(gc, "data/wood_background.png");  //background
   
   gc->character_doll = IMG_Load_w_error(gc, "data/doll_male_blank.png");
   gc->t_buttons = IMG_Load_w_error(gc, "data/RPG_GUI_v1.png");
@@ -118,10 +100,8 @@ int load_resources(GameCore *gc)
   set_rect(&gc->button_highlighted,14,282, 283,55);
   set_rect(&gc->radio_raised, 18,14,24,24);
   set_rect(&gc->radio_pressed,18,50,24,24);
-  //src = fast_rect(0,0,280,800);
   set_rect(&gc->character_doll_rect, 0,0,288,800); //female rect x = 454, w = 220
-  //viewport (top left)
-  set_rect(&gc->player_viewport,
+  set_rect(&gc->player_viewport, //viewport (top left)
 	   5,
 	   5,
 	   (gc->screen_size_x/4) * 3 - 5,
@@ -171,7 +151,7 @@ SDL_Texture * load_texture_by_dir(GameCore *gc, char *directory, char *file)
   t = IMG_Load_w_error(gc, strfile);
   return t;
 }
-void load_map_wall_textures(GameCore *gc, char *directory)
+void load_map_wall_textures(GameCore *gc, char *directory) //loads all the textures form "directory"
 {
   clear_textures(gc);
   gc->wall_all = load_texture_by_dir(gc, directory, "wall_all0.png"); //new wall
@@ -208,7 +188,7 @@ void load_map_wall_textures(GameCore *gc, char *directory)
   gc->item1_fov0 = load_texture_by_dir(gc, directory, "item1_fov0.png");
   //load_texture_by_dir(gc->, "blank/", ".png");
 }
-void clear_textures(GameCore *gc)
+void clear_textures(GameCore *gc)  //clears all loaded textures.
 {
   SDL_DestroyTexture(gc->floor_bottom_fobx_blank);// = load_texture_by_dir(gc, directory, "floor_bottom_fobx_blank.png");
   SDL_DestroyTexture(gc->sky_top_fobx_blank);// = load_texture_by_dir(gc, directory, "sky_top_fobx_blank.png");
