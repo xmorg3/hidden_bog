@@ -120,7 +120,7 @@ int load_resources(GameCore *gc)
   	(gc->screen_size_x / 4) *3, //x
   	0, //y);
   	gc->screen_size_x - (gc->screen_size_x / 4) *3 + 5, //w
-	   (gc->screen_size_y - 128)/2 - 30  ); //h
+	   (gc->screen_size_y - 128)/2 +30   ); //h
   //message log (bottom)
   set_rect(&gc->message_log,
 	   5,
