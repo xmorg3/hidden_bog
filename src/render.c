@@ -50,8 +50,9 @@ void draw(GameCore *gc)
   else if (gc->game_state == GAME_PLAY_INTRO_STORY) {
   }
   else if (gc->game_state == GAME_PLAY_IDLE) {
-    draw_playframe(gc);
+    
     draw_playport(gc);
+    draw_playframe(gc);
   }
   else if (gc->game_state == GAME_PLAYER_MOVE) {
   }
@@ -73,12 +74,11 @@ void draw(GameCore *gc)
 }
 void draw_playframe(GameCore *gc)
 { //draw frame with other items inside.
-  SDL_RenderCopy(gc->renderer, gc->t_background, NULL, NULL); //put background
+  //SDL_RenderCopy(gc->renderer, gc->t_background, NULL, NULL); //put background
   //SDL_GetRenderDrawColor(gc->renderer, 0,0,0,0); 
   //SDL_SetRenderDrawColor(gc->renderer, 0,0,0,0);
-  SDL_RenderFillRect(gc->renderer, &gc->player_viewport);  // message_log, tabbed_pane;
-  
-  SDL_RenderFillRect(gc->renderer, &gc->message_log);
+  //SDL_RenderFillRect(gc->renderer, &gc->player_viewport);  // message_log, tabbed_pane;
+  //SDL_RenderFillRect(gc->renderer, &gc->message_log);
   //SDL_RenderFillRect(gc->renderer, &gc->tabbed_pane);
   //draw_message_frame(gc);
   draw_character_portraits(gc);
@@ -325,8 +325,8 @@ void draw_character_portraits(GameCore *gc)
 {
   int fr_x, fr_y, cr_w, cr_h;
   SDL_Rect r;
-  fr_x = 5;
-  fr_y = gc->screen_size_y - 128;
+  fr_x = gc->screen_size_x / 75; //5;
+  fr_y = (gc->screen_size_y / 75)*74 - 128;
   cr_w = 128;
   cr_h = 128;
   gc->char_frame_rect = fast_rect(fr_x, fr_y, cr_w, cr_h );
@@ -348,10 +348,10 @@ void draw_mapport(GameCore *gc)
   int x,y,i, screen_fract;
   int fr_x, fr_y, cr_w, cr_h;
   int location_x, location_y;
-  screen_fract = gc->screen_size_x / 28;
+  screen_fract = gc->screen_size_x / 38;
   SDL_Rect amap_tiles[52]; //how many tiles is V---loop*loop
   i=0;
-  SDL_RenderCopy(gc->renderer, gc->automap_frame, NULL, &gc->automap_frame_rect);//&gc->tabbed_pane); 
+  //SDL_RenderCopy(gc->renderer, gc->automap_frame, NULL, &gc->automap_frame_rect);//&gc->tabbed_pane); 
   for(y=0; y < 7; y++) { //vertical loop
     for(x=0; x < 7; x++) { //horizantal loop
       fr_x = gc->tabbed_pane.x + 1+(x * screen_fract); //set start x
@@ -359,29 +359,15 @@ void draw_mapport(GameCore *gc)
       amap_tiles[i] = fast_rect( fr_x, fr_y, screen_fract -1, screen_fract -1);
       location_x = gc->player->map_x -4+x;
       location_y = gc->player->map_y -4+y;
-      set_map_tile_color(gc, location_x, location_y, x, y);     
-      SDL_RenderFillRect(gc->renderer, &amap_tiles[i]);
+      set_map_tile_color(gc, location_x, location_y, x, y); //set thecolor 
+      SDL_RenderFillRect(gc->renderer, &amap_tiles[i]); //render it
+      //render something here.
+      SDL_RenderCopy(gc->renderer, NULL, NULL, &amap_tiles[i]);
       i++;
     }
   }
-  
-  //for(i=0; i<25; i++){
-  //  SDL_RenderFillRect(gc->renderer, &amap_tiles[i]);
-  //}
-  //code here. gc->current_map->tiles[y][x]
-  //gc->player->map_x/map_y
-  /*typedef struct _Scene { //Scene structure.
-    char name[75]; //name of place
-      int **tiles; //tiles!
-      } Scene;*/
-  //SDL_RenderFillRect(gc->renderer, &gc->tabbed_pane);
   SDL_SetRenderDrawColor(gc->renderer, 0,0,0,0);
   set_color(gc, 255, 255, 255);
-  //#####
-  //#####
-  //##@##
-  //#####
-  //#####
 }
 SDL_Rect fast_rect(int x, int y, int w, int h)
 {

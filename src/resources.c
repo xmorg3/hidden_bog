@@ -102,26 +102,25 @@ int load_resources(GameCore *gc)
   set_rect(&gc->radio_pressed,18,50,24,24);
   set_rect(&gc->character_doll_rect, 0,0,288,800); //female rect x = 454, w = 220
   set_rect(&gc->player_viewport, //viewport (top left)
-	   5,
-	   5,
-	   (gc->screen_size_x/4) * 3 - 5,
-	   gc->screen_size_y - 137 ); //everything except portraits
-  set_rect(&gc->player_viewport_frame,
-	   0,
-	   0,
-	   (gc->screen_size_x/4) * 3,// - 5,
-	   gc->screen_size_y - 137+5 ); //everything except portraits
-  set_rect(&gc->tabbed_pane,
-	   (gc->screen_size_x / 4) *3 + 5, //x
-	   5, //y
+	   5, 5,
+	   //(gc->screen_size_x/4) * 3 - 5,
+	   //gc->screen_size_y - 137 );
+	   gc->screen_size_x, gc->screen_size_y );
+  set_rect(&gc->player_viewport_frame,//everything except portraits
+	   0, 0,
+	   //(gc->screen_size_x/4) * 3,// - 5,
+	   //gc->screen_size_y - 137+5 ); //everything except portraits
+	   gc->screen_size_x, gc->screen_size_y );
+  set_rect(&gc->tabbed_pane, //The automap and extra below.
+	   (gc->screen_size_x / 5) *4 + 5, //x
+	   (gc->screen_size_y / 44), //hight of automap
 	   gc->screen_size_x - (gc->screen_size_x / 4) *3 + 5, //w
 	   gc->screen_size_y - 128  ); //h
-  set_rect(&gc->automap_frame_rect,
-  	(gc->screen_size_x / 4) *3, //x
-  	0, //y);
-  	gc->screen_size_x - (gc->screen_size_x / 4) *3 + 5, //w
-	   (gc->screen_size_y - 128)/2 +30   ); //h
-  //message log (bottom)
+  set_rect(&gc->automap_frame_rect, //just the automap
+	   (gc->screen_size_x / 4) *3, //x
+	   0, //y);
+	   gc->screen_size_x - (gc->screen_size_x / 4) *3 + 5, //w
+	   (gc->screen_size_y - 128)/2  ); //h
   set_rect(&gc->message_log,
 	   5,
 	   gc->screen_size_y -128,
