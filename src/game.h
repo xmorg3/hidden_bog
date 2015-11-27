@@ -139,7 +139,7 @@ typedef struct _GameCore {
   char messagelist[7][125];
 
   SDL_Texture *t_background;
-  SDL_Texture *w_background; //wood background
+  SDL_Texture *w_background, *paper_tavern, *paper_armory; //wood background
   SDL_Texture *t_buttons;
   SDL_Texture *char_frame, *automap_frame; //place on top of the character's portrait.
   SDL_Texture *character_doll;

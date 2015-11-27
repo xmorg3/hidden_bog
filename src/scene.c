@@ -12,6 +12,7 @@ typedef struct _Scene { //Scene structure.
 
 PlayMap * new_map(char *name, int mapsize, char *filename ); //create the scene (map)
 void read_map_file(PlayMap *m, const char *filename); //maps.c
+void on_load_new_scene(PlayMap *m, char *scne_type); //what happens whne you load a new scene
 
 int test_map[20][20] = {
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
@@ -63,11 +64,8 @@ PlayMap * new_map(char *name, int mapsize, char *filename)
 { //creates a new scene
   int i, j;
   PlayMap *current_map;
-  current_map = (PlayMap*)malloc(sizeof (PlayMap));
-  strcpy(current_map->map_title, name);
-
-  //gc->playmap->background_layer =  (int *)malloc(sizeof(int) * (100 * 100));        //with preallocating
-
+  current_map = (PlayMap*)malloc(sizeof (PlayMap)); //allocate teh current map
+  strcpy(current_map->map_title, name); //name of map
   current_map->background_layer = (int**)malloc(mapsize * sizeof(int*)); //backgroun layer(osare)
   current_map->object_layer = (int**)malloc(mapsize * sizeof(int*)); //objects(like treasure chests?)
   current_map->collision_layer = (int**)malloc(mapsize * sizeof(int*)); //walls?
@@ -84,3 +82,8 @@ PlayMap * new_map(char *name, int mapsize, char *filename)
 return current_map;
 }
 
+
+void on_load_new_scene(GameCore *gc, PlayMap *m, char *scene_type)
+{
+  load_map_wall_textures(gc, scene_type);
+}

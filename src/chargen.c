@@ -38,7 +38,7 @@ void draw_add_skills_dialogue(GameCore *gc)
 void draw_chargen_menu(GameCore *gc)
 {//int screen_size_x, screen_size_y;
   SDL_Rect dst, src, r;
-  SDL_RenderCopy(gc->renderer, gc->w_background, NULL, NULL); //put background
+  SDL_RenderCopy(gc->renderer, gc->paper_tavern, NULL, NULL); //put background
   //put name on the top
   fast_button(gc, 10,10, gc->player->name); //- player name
   //put character here?
