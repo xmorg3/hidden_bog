@@ -145,7 +145,7 @@ SDL_Texture * load_texture_by_dir(GameCore *gc, char *directory, char *file)
   char strfile[300];
   SDL_Texture *t;
   strfile[0] = '\0';
-  strcpy(strfile, "data/mods/oldschool/");
+  strcpy(strfile, "data/tiles/");
   strcat(strfile, directory); //  add the / in the argument
   strcat(strfile, file);
   printf("%s\n", strfile);

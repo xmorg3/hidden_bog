@@ -13,7 +13,7 @@ typedef struct _Scene { //Scene structure.
 PlayMap * new_map(char *name, int mapsize, char *filename ); //create the scene (map)
 void read_map_file(PlayMap *m, const char *filename); //maps.c
 void on_load_new_scene(GameCore *gc, PlayMap *m, char *scne_type); //what happens whne you load a new scene
-void load_wall_textures(GameCore *gc, char *scene_type);
+void load_map_wall_textures(GameCore *gc, char *scene_type);
 
 int test_map[20][20] = {
   {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1},
