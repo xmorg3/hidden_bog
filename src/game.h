@@ -124,6 +124,15 @@ typedef struct _PlayMap { //maps.c //newstuff
   int **fog_layer;
 } PlayMap; //maps.c
 
+typedef struct Npctab { //tab
+  int npcid;
+  char name[25];
+  int health,health_max;
+  char image[25], faction[25];
+  char hit[8], damage[8];
+  char weapon[25], lootlist[25],talklist[25];
+} NPCTAB_;
+
 typedef struct _GameCore {
   SDL_Window *win;
   SDL_Renderer *renderer;

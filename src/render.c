@@ -333,15 +333,15 @@ void draw_character_portraits(GameCore *gc)
   r= fast_rect(gc->player->portrait*128,0,128,128);
   SDL_RenderCopy(gc->renderer, gc->portraits_human_male,&r, &gc->char_frame_rect);
   SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect);
-  fr_x = fr_x+128;
-  gc->char_frame_rect = fast_rect(fr_x, fr_y, cr_w, cr_h );
-  SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect);
-  fr_x = fr_x+128;
-  gc->char_frame_rect = fast_rect(fr_x, fr_y, cr_w, cr_h );
-  SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect); 
-  fr_x = fr_x+128;
-  gc->char_frame_rect = fast_rect(fr_x, fr_y, cr_w, cr_h );
-  SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect);
+  //fr_x = fr_x+128;
+  //gc->char_frame_rect = fast_rect(fr_x, fr_y, cr_w, cr_h );
+  //SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect);
+  //fr_x = fr_x+128;
+  //gc->char_frame_rect = fast_rect(fr_x, fr_y, cr_w, cr_h );
+  //SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect); 
+  //fr_x = fr_x+128;
+  //gc->char_frame_rect = fast_rect(fr_x, fr_y, cr_w, cr_h );
+  //SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect);
 }
 void draw_mapport(GameCore *gc)
 {

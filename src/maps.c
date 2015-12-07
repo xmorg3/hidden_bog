@@ -35,6 +35,24 @@ typedef struct _OsareMap {
   new_str = strstr(data, tag);
 }*/
 
+void read_data_file(GameCore *gc, void *table, const char *filename) //read a data file into a struct 
+{
+  FILE *f;  long lSize;
+  int count, end, state;
+  char *data,*tempstr;
+  size_t result;
+  int x, y, i; //loop through reading the map
+  
+  f = fopen(filename , "rb" ); //Open the file
+  if(f == NULL) { fputs("FileNotFound error",stderr); exit (1); }
+  fseek(f, 0, SEEK_END);
+  lSize = ftell(f);
+  rewind(f);
+  data = (char*) malloc (sizeof(char)*lSize);
+  if (data == NULL) 
+    {fputs ("Memory error",stderr); exit (2);}
+  result = fread (data,1,lSize,f); // copy the file into the buffer:
+}
 
 void read_map_file(PlayMap *m, const char *filename) 
 {
