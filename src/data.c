@@ -15,7 +15,11 @@
 //);
 int load_data_from_db(GameCore *gc);
 static int callback(void *NotUsed, int argc, char **argv, char **azColName);
-static int callback(void *NotUsed, int argc, char **argv, char **azColName)
+static int cb_get_npc(void *NotUsed, int argc, char **argv, char **azColName)
+{
+  return 0;
+}
+static int cb_get_item(void *NotUsed, int argc, char **argv, char **azColName)
 {
   return 0;
 }
@@ -32,7 +36,8 @@ int load_data_from_db(GameCore *gc)
     sqlite3_close(db);
     return(1);
   }
-  result_code = sqlite3_exec(db, "somesql", callback, 0, &zErrMsg);
+  result_code = sqlite3_exec(db, "select * from npc;", cb_get_npc, 0, &zErrMsg);
+  result_code = sqlite3_exec(db, "select * from item;", cb_get_item, 0, &zErrMsg);
 
   sqlite3_close(db);
   return 0;
