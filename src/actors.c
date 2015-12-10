@@ -7,6 +7,7 @@ void render_actor_stats(); //display scores
 void render_actor_stat_page(); //display page for scores
 void mod_actor_stat(Actor *a, char *stat_name, int value);
 void set_actor_sex(Actor *a, char *gender);
+void mod_npc values(Actor *a, int mapid);
 
 //mapid	name	gender	health	healthmax	image	faction	hitdice	hitbonus	damagedice	damagebonus	weapon	lootlist	talklist
 //1000	a pirate	female	8	8	fpirate_01.png	pirate	1	0	1	1	saber	pirate	female_pirate
@@ -34,6 +35,7 @@ void mod_actor_stat(Actor *a, char *stat_name, int value)
 }
 Actor *new_actor(char *name)
 {
+  a->npc_map_id = 0;
   Actor *a;
   a = (Actor *)malloc(sizeof(Actor));
   strcpy(a->name, name);
