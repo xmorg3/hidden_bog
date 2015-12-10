@@ -41,6 +41,7 @@ typedef struct _Item {
 }Item;
 
 typedef struct _Actor {
+  int npc_map_id; //for npc's
   char name[25];
   int sex; //1 male, 0 female
   int race; //number count for radio button in race selector.
