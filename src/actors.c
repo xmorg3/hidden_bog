@@ -10,14 +10,15 @@ void set_actor_sex(Actor *a, char *gender);
 
 //mapid	name	gender	health	healthmax	image	faction	hitdice	hitbonus	damagedice	damagebonus	weapon	lootlist	talklist
 //1000	a pirate	female	8	8	fpirate_01.png	pirate	1	0	1	1	saber	pirate	female_pirate
-void set_actor_sex(Actor *a, char *gender)
-{
-  if(!strcmp(gender, "male")) {
-    a->sex = 1;
+char *get_actor_gender(Actor *a)
+{char s[7];
+  if (a->sex = 1) {
+    strcpy(s, "male");
   }
   else {
-    a->sex = 2;
+    strcpy(s, "female");
   }
+  return s;
 }
 
 void mod_actor_stat(Actor *a, char *stat_name, int value)
