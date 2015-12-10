@@ -2,7 +2,7 @@
 
 CC = clang -g 
 
-LIBS = -lSDL2 -lSDL2_image -lSDL2_ttf -lm -lGL
+LIBS = -lSDL2 -lSDL2_image -lSDL2_ttf -lm -lGL -lsqlite3
 
 FLAGS = `sdl2-config --cflags --libs` -I/usr/local/include -L/usr/local/lib
 
@@ -18,6 +18,7 @@ FILES = src/main.c \
 	src/chargen.c \
 	src/scene.c \
 	src/maps.c \
+	src/data.c \
 
 #src/glfunctions.c
 #game.exe: src/SDL_collide.c src/actors.c src/datafunctions.c src/gameui.c
