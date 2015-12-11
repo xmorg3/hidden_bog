@@ -35,6 +35,8 @@ static int cb_get_npc(void *NotUsed, int argc, char **argv, char **azColName)
   a[next_actor].npc_map_id = atoi(argv[0]); 
   strcpy(a[next_actor].name, argv[1]);
   a[next_actor].sex = atoi(argv[2]); 
+  a[next_actor].health = atoi(argv[3]);
+  a[next_actor].health_max = atoi(argv[4]);
   
   printf("values : %d\n", argc);
   
