@@ -23,7 +23,8 @@ static int cb_get_npc(void *NotUsed, int argc, char **argv, char **azColName)
   //1000	a pirate	female	8	8	fpirate_01.png	pirate	1	0	1	1	saber	pirate	female_pirate
   a = (Actor *)malloc(sizeof(Actor) * argc); //allocate the npc's
   for(i=0; i<argc; i++){
-    a->npc_map_id = atoi(argv[i][1]); printf("testing load %d", a->npc_map_id);
+    printf("%s <-what is this\n", argv[i]);
+    //a->npc_map_id = atoi(argv[i][1]); printf("testing load %d", a->npc_map_id);
   }
   
   return 0;
