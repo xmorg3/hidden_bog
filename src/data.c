@@ -18,16 +18,15 @@ int load_data_from_db(GameCore *gc);
 static int callback(void *NotUsed, int argc, char **argv, char **azColName);
 static int cb_get_npc(void *NotUsed, int argc, char **argv, char **azColName)
 { //load all into ?
-  int i, x, y;
+  int i, col_counter;
   Actor *a;
+  //0-------1--------2------3-4----5--------------6-----7-8-9-10-11----12------13
+  //14------15-------16----17-18---19------------20----21-22-23-24-25--26-----27
   //1000	a pirate	female	8	8	fpirate_01.png	pirate	1	0	1	1	saber	pirate	female_pirate
   a = (Actor *)malloc(sizeof(Actor) * argc); //allocate the npc's
-  for(y=0; y<argc /14; y++){
-    //y = argc /14;
-    for(x = 0; x < 14;x++)
-      {
-        printf("%s\t", argv[y*x]);
-      } printf("\n");
+  col_counter = 0;
+  for(i=0; i<argc; i++){
+  printf("%s\t", argv[i]); col_counter++; if( row_counter==13 ){printf("\n"); row_counter = 0;}
     //a->npc_map_id = atoi(argv[i][1]); printf("testing load %d", a->npc_map_id);
   }
   
