@@ -31,7 +31,7 @@ static int cb_get_npc(void *NotUsed, int argc, char **argv, char **azColName)
     col_counter++; if( col_counter==14 ){printf("\n"); col_counter = 0;}
     
     //a->npc_map_id = atoi(argv[i][1]); printf("testing load %d", a->npc_map_id);
-  } printf("values : d%\n", argc);
+  } printf("values : %d\n", argc);
   
   return 0;
 }
