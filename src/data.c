@@ -5,6 +5,7 @@
 
 #include "game.h"
 #include <sqlite3.h>
+#include <stdio.h>
 
 //int sqlite3_exec(
 //  sqlite3*,                                  /* An open database */
@@ -17,8 +18,14 @@ int load_data_from_db(GameCore *gc);
 static int callback(void *NotUsed, int argc, char **argv, char **azColName);
 static int cb_get_npc(void *NotUsed, int argc, char **argv, char **azColName)
 { //load all into ?
+  int i;
   Actor *a;
-  a=(Actor *)malloc(sizeof(Actor * argc);
+  //1000	a pirate	female	8	8	fpirate_01.png	pirate	1	0	1	1	saber	pirate	female_pirate
+  a = (Actor *)malloc(sizeof(Actor *argc); //allocate the npc's
+  for(i=0; i<argc; i++){
+    a->npc_map_id = atoi(argv[i][1]); printf("testing load %s", a->npc_map_id);
+  }
+  
   return 0;
 }
 static int cb_get_item(void *NotUsed, int argc, char **argv, char **azColName)
