@@ -24,7 +24,7 @@ static int cb_get_npc(void *NotUsed, int argc, char **argv, char **azColName)
   a = (Actor *)malloc(sizeof(Actor) * argc); //allocate the npc's
   for(y=0; y<argc /14; y++){
     //y = argc /14;
-    for(x = 0; x < 14;)
+    for(x = 0; x < 14;x++)
       {
         printf("%s\t", argv[y*x]);
       } printf("\n");
