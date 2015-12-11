@@ -16,7 +16,9 @@
 int load_data_from_db(GameCore *gc);
 static int callback(void *NotUsed, int argc, char **argv, char **azColName);
 static int cb_get_npc(void *NotUsed, int argc, char **argv, char **azColName)
-{
+{ //load all into ?
+  Actor *a;
+  a=(Actor *)malloc(sizeof(Actor * argc);
   return 0;
 }
 static int cb_get_item(void *NotUsed, int argc, char **argv, char **azColName)

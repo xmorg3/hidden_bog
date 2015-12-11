@@ -7,19 +7,23 @@ void render_actor_stats(); //display scores
 void render_actor_stat_page(); //display page for scores
 void mod_actor_stat(Actor *a, char *stat_name, int value);
 void set_actor_sex(Actor *a, char *gender);
-void mod_npc values(Actor *a, int mapid);
+void mod_npc(Actor *a, int mapid);
 
 //mapid	name	gender	health	healthmax	image	faction	hitdice	hitbonus	damagedice	damagebonus	weapon	lootlist	talklist
 //1000	a pirate	female	8	8	fpirate_01.png	pirate	1	0	1	1	saber	pirate	female_pirate
 char *get_actor_gender(Actor *a)
-{char s[7];
-  if (a->sex = 1) {
-    strcpy(s, "male");
+{
+  //char s[7];
+  if (a->sex == 1) {
+    return "male";
+  }
+  else if(a->sex == 0) {
+    return "female";
   }
   else {
-    strcpy(s, "female");
+    return "neutral";
   }
-  return s;
+  return "neutral";
 }
 
 void mod_actor_stat(Actor *a, char *stat_name, int value)
@@ -35,11 +39,11 @@ void mod_actor_stat(Actor *a, char *stat_name, int value)
 }
 Actor *new_actor(char *name)
 {
-  a->npc_map_id = 0;
   Actor *a;
   a = (Actor *)malloc(sizeof(Actor));
   strcpy(a->name, name);
-  a->sex = 1; //1male,0female
+  a->npc_map_id = 0;
+  a->sex = 1; //1male,0female,2neutral
   a->race = 0;
   a->portrait=0;
   a->health=1;
