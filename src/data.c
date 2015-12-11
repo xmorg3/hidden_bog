@@ -39,7 +39,7 @@ int load_data_from_db(GameCore *gc)
   int result_code;
   char *zErrMsg = 0;
   
-  result_code = sqlite3_open("gamedata.db", &db);
+  result_code = sqlite3_open("data/gamedata.db", &db);
   if( result_code ){
     fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
     sqlite3_close(db);
