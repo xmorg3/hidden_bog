@@ -25,12 +25,16 @@ static int cb_get_npc(void *NotUsed, int argc, char **argv, char **azColName)
   int i, next_actor;
   //load all into ?
   //CAllback is performed on each row, for lop is not required!!!
+  //mapid	name	gender	health	healthmax	image	faction	hitdice	hitbonus	damagedice	damagebonus	weapon	lootlist	talklist
   //0-------1--------2------3-4----5--------------6-----7-8-9-10-11----12------13
   //14------15-------16----17-18---19------------20----21-22-23-24-25--26-----27
-  //1000	a pirate	female	8	8	fpirate_01.png	pirate	1	0	1	1	saber	pirate	female_pirate
+  //1000	a pirate	female(i)	8	8	fpirate_01.png	pirate	1	0	1	1	saber	pirate	female_pirate
   for(i=0; i<RECORD_MAX; i++){if(a[i].npc_map_id == -1){next_actor = i;}} //find the next empty space.
   printf("%s|%s|%s", argv[0],argv[1],argv[2]);
-  a[next_actor].npc_map_id = atoi(argv[i]);
+  
+  a[next_actor].npc_map_id = atoi(argv[0]); 
+  strcpy(a[next_actor].name, argv[1]);
+  a[next_actor].sex = atoi(argv[2]); 
   
   printf("values : %d\n", argc);
   
