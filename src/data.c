@@ -26,11 +26,12 @@ static int cb_get_npc(void *NotUsed, int argc, char **argv, char **azColName)
   a = (Actor *)malloc(sizeof(Actor) * argc); //allocate the npc's
   col_counter = 0;
   for(i=0; i<argc; i++){
-  printf("%s|", argv[i]); 
-  a[i].npc_map_id = atoi(argv[i]);  col_counter++; if( col_counter==14 ){printf("\n"); col_counter = 0;}
-  
+    printf("%s|", argv[i]); 
+    //a[i].npc_map_id = atoi(argv[i]);  
+    col_counter++; if( col_counter==14 ){printf("\n"); col_counter = 0;}
+    
     //a->npc_map_id = atoi(argv[i][1]); printf("testing load %d", a->npc_map_id);
-  }
+  } printf("values : d%\n", argc);
   
   return 0;
 }
