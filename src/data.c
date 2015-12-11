@@ -41,12 +41,12 @@ int load_data_from_db(GameCore *gc)
   
   result_code = sqlite3_open("data/gamedata.db", &db);
   if( result_code ){
-    fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
+    printf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
     sqlite3_close(db);
     return(1);
   }
   result_code = sqlite3_exec(db, "select * from npc;", cb_get_npc, 0, &zErrMsg);
-  result_code = sqlite3_exec(db, "select * from item;", cb_get_item, 0, &zErrMsg);
+  //result_code = sqlite3_exec(db, "select * from item;", cb_get_item, 0, &zErrMsg);
 
   sqlite3_close(db);
   return 0;
