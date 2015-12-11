@@ -8,6 +8,7 @@ int load_resources(GameCore *gc);
 int update(GameCore *gc); //handle_keydown handle_mousebutton_down
 void draw(GameCore *gc);
 void input(GameCore *gc);
+int load_data_from_db(GameCore *gc);
 
 void print_in_messagebox(GameCore *gc, char *text);
 
@@ -35,6 +36,7 @@ int main(int argc, char** argv){
   print_in_messagebox(gc, ">");
   print_in_messagebox(gc, ">");
 
+  load_data_from_db(gc);
 
   start_sdl(gc); //gc->game_state = 1, resources.c
   load_resources(gc);
