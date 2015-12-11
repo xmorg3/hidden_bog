@@ -7,6 +7,10 @@
 #include <sqlite3.h>
 #include <stdio.h>
 
+#define RECORD_MAX 25
+
+Actor a[RECORD_MAX];
+
 //int sqlite3_exec(
 //  sqlite3*,                                  /* An open database */
 //  const char *sql,                           /* SQL to be evaluated */
@@ -17,21 +21,18 @@
 int load_data_from_db(GameCore *gc);
 static int callback(void *NotUsed, int argc, char **argv, char **azColName);
 static int cb_get_npc(void *NotUsed, int argc, char **argv, char **azColName)
-{ //load all into ?
-  int i, col_counter;
-  Actor *a;
+{ 
+  int i, next_actor;
+  //load all into ?
+  //CAllback is performed on each row, for lop is not required!!!
   //0-------1--------2------3-4----5--------------6-----7-8-9-10-11----12------13
   //14------15-------16----17-18---19------------20----21-22-23-24-25--26-----27
   //1000	a pirate	female	8	8	fpirate_01.png	pirate	1	0	1	1	saber	pirate	female_pirate
-  a = (Actor *)malloc(sizeof(Actor) * argc); //allocate the npc's
-  col_counter = 0;
-  for(i=0; i<argc; i++){
-    printf("%s|", argv[i]); 
-    //a[i].npc_map_id = atoi(argv[i]);  
-    col_counter++; if( col_counter==14 ){printf("\n"); col_counter = 0;}
-    
-    //a->npc_map_id = atoi(argv[i][1]); printf("testing load %d", a->npc_map_id);
-  } printf("values : %d\n", argc);
+  for(i=0; i<RECORD_MAX; i++){if(a[i].npc_map_id == -1){next_actor = i;}} //find the next empty space.
+  printf("%s|%s|%s", argv[0],argv[1],argv[2]);
+  a[next_actor].npc_map_id = atoi(argv[i]);
+  
+  printf("values : %d\n", argc);
   
   return 0;
 }
@@ -43,9 +44,9 @@ static int cb_get_item(void *NotUsed, int argc, char **argv, char **azColName)
 int load_data_from_db(GameCore *gc)
 {
   sqlite3 *db;
-  int result_code;
+  int result_code, actor_count_loop;
   char *zErrMsg = 0;
-  
+  for(actor_count_loop=0; actor_count_loop < RECORD_MAX; actor_count_loop++) {a[actor_count_loop].npc_map_id = -1;}
   result_code = sqlite3_open("data/gamedata.db", &db);
   if( result_code ){
     fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
