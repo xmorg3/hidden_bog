@@ -26,7 +26,7 @@ static int cb_get_npc(void *NotUsed, int argc, char **argv, char **azColName)
     //y = argc /14;
     for(x = 0; x < 14;)
       {
-        printf("%s\t", argv[i]);
+        printf("%s\t", argv[y*x]);
       } printf("\n");
     //a->npc_map_id = atoi(argv[i][1]); printf("testing load %d", a->npc_map_id);
   }
