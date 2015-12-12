@@ -38,7 +38,10 @@ static int cb_get_npc(void *NotUsed, int argc, char **argv, char **azColName)
   a[next_actor].sex = atoi(argv[2]); 
   a[next_actor].health = atoi(argv[3]);
   a[next_actor].health_max = atoi(argv[4]);
-  a[next_actor].sprite = IMG_Load_w_error(gc, argv[5]); //GC?
+  //a[next_actor].sprite = IMG_Load_w_error(gc, argv[5]); //GC?
+  strcpy(a[next_actor].sprite_path, argv[5]); //load it later because we cannot access gc
+  //no faction info? argv[6]
+  //hitdice	hitbonus	damagedice	damagebonus	weapon	lootlist	talklist all need to be worked.
   
   printf("values : %d\n", argc);
   
