@@ -69,7 +69,7 @@ SDL_Texture * IMG_Load_w_error(GameCore *gc, char * imgfile)
   SDL_Texture * img;
   img = IMG_LoadTexture(gc->renderer, imgfile);
   if(img == NULL) {
-    printf("Error! someone trolled you a null surface!(%s)\n", imgfile);
+    printf("Error! someone trolled you a null surface!(%s)\n(\t%s\n)", imgfile, IMG_GetError() );
   }
   return img;
 }

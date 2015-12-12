@@ -36,10 +36,11 @@ int main(int argc, char** argv){
   print_in_messagebox(gc, ">");
   print_in_messagebox(gc, ">");
 
-  load_data_from_db(gc);
+ 
 
   start_sdl(gc); //gc->game_state = 1, resources.c
   load_resources(gc);
+  load_data_from_db(gc);
   gc->game_state = GAME_START_MENU;
   while(gc->game_state > 0) {
     input(gc);

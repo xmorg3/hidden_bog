@@ -7,6 +7,7 @@
 #include <sqlite3.h>
 #include <stdio.h>
 
+
 #define RECORD_MAX 25
 
 Actor a[RECORD_MAX];
