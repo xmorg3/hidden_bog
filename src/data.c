@@ -26,7 +26,7 @@ static int cb_get_npc(void *NotUsed, int argc, char **argv, char **azColName)
   int i, next_actor;
   //load all into ?
   //CAllback is performed on each row, for lop is not required!!!
-  //mapid	name	gender	health	healthmax	image	faction	hitdice	hitbonus	damagedice	damagebonus	weapon	lootlist	talklist
+  //mapi name gender health healthmax image faction hitdice hitbonus damagedice damagebonus weapon lootlist talklist
   //0-------1--------2------3-4----5--------------6-----7-8-9-10-11----12------13
   //14------15-------16----17-18---19------------20----21-22-23-24-25--26-----27
   //1000	a pirate	female(i)	8	8	fpirate_01.png	pirate	1	0	1	1	saber	pirate	female_pirate
@@ -41,8 +41,7 @@ static int cb_get_npc(void *NotUsed, int argc, char **argv, char **azColName)
   //a[next_actor].sprite = IMG_Load_w_error(gc, argv[5]); //GC?
   strcpy(a[next_actor].sprite_path, argv[5]); //load it later because we cannot access gc
   //no faction info? argv[6]
-  //hitdice	hitbonus	damagedice	damagebonus	weapon	lootlist	talklist all need to be worked.
-  
+  //hitdice hitbonus damagedice damagebonus weapon lootlist talklist all need to be worked.  
   printf("values : %d\n", argc);
   
   return 0;
@@ -57,16 +56,27 @@ int load_data_from_db(GameCore *gc)
   sqlite3 *db;
   int result_code, actor_count_loop;
   char *zErrMsg = 0;
-  for(actor_count_loop=0; actor_count_loop < RECORD_MAX; actor_count_loop++) {a[actor_count_loop].npc_map_id = -1;}
-  result_code = sqlite3_open("data/gamedata.db", &db);
+  char fullpath[120];
+  for(actor_count_loop=0; actor_count_loop < RECORD_MAX; actor_count_loop++) 
+    { //set them all to -1
+      a[actor_count_loop].npc_map_id = -1;
+    }
+  result_code = sqlite3_open("data/gamedata.db", &db);//open db
   if( result_code ){
     fprintf(stderr, "Can't open database: %s\n", sqlite3_errmsg(db));
     sqlite3_close(db);
     return(1);
   }
+  //run sql and cb_get_npc on each row
   result_code = sqlite3_exec(db, "select * from npc;", cb_get_npc, 0, &zErrMsg);
   //result_code = sqlite3_exec(db, "select * from item;", cb_get_item, 0, &zErrMsg);
-
+  for(actor_count_loop = 0; actor_count_loop < RECORD_MAX; actor_count_loop++) {
+    if( a[actor_count_loop].npc_map_id > -1){ //if its not blank, load texture
+      strcpy(fullpath, "data/npc/"); //
+      a[actor_count_loop].sprite = 
+	IMG_Load_w_error(gc, strcat(fullpath, a[actor_count_loop].sprite_path));
+    }
+  }
   sqlite3_close(db);
   return 0;
 }

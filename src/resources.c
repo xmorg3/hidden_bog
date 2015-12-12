@@ -82,12 +82,10 @@ void set_rect(SDL_Rect *r, int x, int y, int w, int h)
   r->h = h;
 }
 int load_resources(GameCore *gc)
-{
-  //have we decided if we are using Surfaces or Textures?
+{ //have we decided if we are using Surfaces or Textures?
   //IMG_Load(const char *file);
   gc->t_background = IMG_Load_w_error(gc, "data/paper_background.png"); //background
   gc->w_background = IMG_Load_w_error(gc, "data/wood_background.png");  //background
-  
   gc->character_doll = IMG_Load_w_error(gc, "data/doll_male_blank.png");
   gc->t_buttons = IMG_Load_w_error(gc, "data/RPG_GUI_v1.png");
   gc->char_frame = IMG_Load_w_error(gc, "data/char_frame.png");
@@ -148,7 +146,7 @@ SDL_Texture * load_texture_by_dir(GameCore *gc, char *directory, char *file)
   strcpy(strfile, "data/tiles/");
   strcat(strfile, directory); //  add the / in the argument
   strcat(strfile, file);
-  printf("%s\n", strfile);
+  //printf("%s\n", strfile);
   t = IMG_Load_w_error(gc, strfile);
   return t;
 }
@@ -191,7 +189,7 @@ void load_map_wall_textures(GameCore *gc, char *directory) //loads all the textu
 }
 void clear_textures(GameCore *gc)  //clears all loaded textures.
 {
-  SDL_DestroyTexture(gc->floor_bottom_fobx_blank);// = load_texture_by_dir(gc, directory, "floor_bottom_fobx_blank.png");
+  SDL_DestroyTexture(gc->floor_bottom_fobx_blank);//load_texture_by_dir(gc, directory, "floor_bottom_fobx_blank.png");
   SDL_DestroyTexture(gc->sky_top_fobx_blank);// = load_texture_by_dir(gc, directory, "sky_top_fobx_blank.png");
   SDL_DestroyTexture(gc->wall_front_fov0_blank);// = load_texture_by_dir(gc,  directory, "wall_front_fov0_blank.png");
   SDL_DestroyTexture(gc->wall_front_fov1_blank);// = load_texture_by_dir(gc, directory, "wall_front_fov1_blank.png");
