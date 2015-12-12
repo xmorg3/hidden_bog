@@ -18,6 +18,7 @@ Actor a[RECORD_MAX];
 //  void *,                                    /* 1st argument to callback */
 //  char **errmsg                              /* Error msg written here */
 //);
+SDL_Texture * IMG_Load_w_error(GameCore *gc, char * imgfile);
 int load_data_from_db(GameCore *gc);
 static int callback(void *NotUsed, int argc, char **argv, char **azColName);
 static int cb_get_npc(void *NotUsed, int argc, char **argv, char **azColName)
@@ -37,6 +38,7 @@ static int cb_get_npc(void *NotUsed, int argc, char **argv, char **azColName)
   a[next_actor].sex = atoi(argv[2]); 
   a[next_actor].health = atoi(argv[3]);
   a[next_actor].health_max = atoi(argv[4]);
+  a[next_actor].sprite = IMG_Load_w_error(gc, argv[5]); //GC?
   
   printf("values : %d\n", argc);
   
