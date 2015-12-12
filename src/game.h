@@ -46,6 +46,7 @@ typedef struct _Actor {
   int sex; //1 male, 0 female
   int race; //number count for radio button in race selector.
   int portrait;
+  SDL_Texture *sprite; //your picture!
   int health, health_max, fatigue, fatigue_max, mana, mana_max;
   int level,
     experience,
