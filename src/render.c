@@ -214,6 +214,23 @@ void draw_fov0(GameCore *gc, int left, int middle, int right)
   }
 }
 
+SDL_Texture * get_texture_by_objectid(int textureid)
+{
+  int i;
+  for(i=0; i<25; i++){
+    if{gc->npc[i].npc_map_id == textureid) {
+      return gc->npc[i].sprite;
+    }
+  }
+}
+void draw_oov0(GameCore *gc, int left, int middle, int right) //drop objects in view
+{
+  if(middle >= 1000) { //its an object
+    SDL_RenderCopy(gc->renderer, get_texture_by_objectid(middle), NULL, &gc->player_viewport); //NOTE! make them as big as the viewport!
+  }
+    
+}
+
 
 void draw_playport_north(GameCore *gc)
 {

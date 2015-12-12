@@ -101,51 +101,37 @@ void read_map_file(PlayMap *m, const char *filename)
   printf("Looking for map %s\n", tempstr);
   i=0;
   for(y = 0; y < m->height; y++) {
-	  for(x = 0; x < m->width; x++) {
-		  //m->background_layer[i] = atoi(strtok(NULL, ",\n"));
-		  m->background_layer[y][x] = atoi(strtok(NULL, ",\n"));
-		  //m->fog_layer[y][x] = 0;
-		  i++;
-	  }
+    for(x = 0; x < m->width; x++) { //ground layer
+      m->background_layer[y][x] = atoi(strtok(NULL, ",\n"));
+      i++;
+    }
   }
   //Get the next layer(note this layer is with tiles 32x64?
   strtok(NULL, "\n");
-  //tempstr = strtok( strstr(data, "object"), "=\n" ); 
-  //printf("Looking for object layer: %s\n", tempstr);
-
   tempstr = strtok( strstr(data, "data"), "=\n" ); 
   printf("Looking for object data: %s\n", tempstr);
   tempstr = strtok( NULL, "=\n" );
-
   printf("looking for object layer.\n");
   i=0;
-  for(y=0; y < m->height; y++)
-    {
-      for(x=0; x < m->width; x++)
-	{
-	  //m->object_layer[y][x] = 0;
-	  m->object_layer[y][x] = atoi(strtok(NULL, ",\n"));
-	  //printf("%d, ", m->object_layer[i]);
-	  i++;
-	}
+  for(y=0; y < m->height; y++) {
+    for(x=0; x < m->width; x++) { //object layer.
+      m->object_layer[y][x] = atoi(strtok(NULL, ",\n"));
+      i++;
     }
+  }
 
   tempstr = strtok( strstr(data, "data"), "=\n" );
   printf("Looking for collision data: %s\n", tempstr);
   tempstr = strtok( NULL, "=\n" );
-
   printf("looking for collision layer.\n");
   i=0;
-  for(y=0; y < m->height; y++)
-    {
-      for(x=0; x < m->width; x++)
-        {
-          m->collision_layer[y][x] = 0;
-          m->collision_layer[y][x] = atoi(strtok(NULL, ",\n"));
-	  //printf("%d, ", m->collision_layer[i]);
-          i++;
-        }
+  for(y=0; y < m->height; y++) {
+    for(x=0; x < m->width; x++) {
+      m->collision_layer[y][x] = 0;
+      m->collision_layer[y][x] = atoi(strtok(NULL, ",\n"));
+      i++;
     }
+  }
   //fclose(f);
   printf("finished reading file\n");
   free(data);
@@ -169,14 +155,12 @@ void write_map_file(char *mapname, char **mapchars, int height, int width, const
   strcat(mappath, fn);
   fp = fopen(mappath, "w+");
   fputs (mapname, fp); fputc('\n', fp);
-  for(y = 0; y < height; y++)
-    {
-      for(x=0; x< width; x++)
-	{
-	  fputc(mapchars[y][x], fp);
-	}
-      fputc('\n', fp);
+  for(y = 0; y < height; y++) {
+    for(x=0; x< width; x++) {
+      fputc(mapchars[y][x], fp);
     }
+    fputc('\n', fp);
+  }
   fputc('\n', fp); fputc('\n', fp);
   fclose(fp);
 }
@@ -186,25 +170,27 @@ void world_gen(SDL_Surface *s, int catlevel, int templevel, int evlevel)
   int tcolor, tred, tgreen, tblue;
   SDL_Rect maprect[300][400];
   SDL_LockSurface(s);
-  for(y=0; y<300; y++)
-    {
-      for(x=0; x<400;x++)
-	{
-	  maprect[y][x].w = 2;
-	  maprect[y][x].h = 2;
-	  maprect[y][x].x = 2*x;
-	  maprect[y][x].y = 2*y;
-	  //seas
-	  if(x < 100 || x > 300) {tred = 0; tgreen = 0; tblue=100;}
-	  else{tred = 0; tgreen = 100; tblue = 0;}
-	  tcolor = SDL_MapRGB(s->format, 
-			      tred + rand()%25, 
-			      tgreen + rand()%25, 
-			      tblue + rand()%25);
-	  SDL_FillRect(s, &maprect[y][x], tcolor);
-	  //sdlprintf(gc, 25, 25, "World Map"); print later :D
-	}
+  for(y=0; y<300; y++) {
+    for(x=0; x<400;x++)	{
+      maprect[y][x].w = 2;
+      maprect[y][x].h = 2;
+      maprect[y][x].x = 2*x;
+      maprect[y][x].y = 2*y;
+      //seas
+      if(x < 100 || x > 300) {
+	tred = 0; tgreen = 0; tblue=100;
+      }
+      else {
+	tred = 0; tgreen = 100; tblue = 0;
+      }
+      tcolor = SDL_MapRGB(s->format, 
+			  tred + rand()%25, 
+			  tgreen + rand()%25, 
+			  tblue + rand()%25);
+      SDL_FillRect(s, &maprect[y][x], tcolor);
+      //sdlprintf(gc, 25, 25, "World Map"); print later :D
     }
+  }
   SDL_UnlockSurface(s);
 }
 int game_load_scene(GameCore *gc)

@@ -183,6 +183,7 @@ typedef struct _GameCore {
   SDL_Rect dst_stat_plus, dst_stat_minus;
 
   Actor *player;
+  Actor *npc_list; //list of npc's
   PlayMap *current_map;
 
 } GameCore;
