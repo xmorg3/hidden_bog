@@ -126,6 +126,9 @@ int load_resources(GameCore *gc)
 	   gc->screen_size_y -128,
 	   gc->screen_size_x - 7 ,
 	   gc->screen_size_y );
+  //TODO set_rect
+  //vp0_object_left, vp0_object_right, 
+  //vp1_object_left, vp1_object_middle, vp1_object_right;
   set_rect(&gc->button_plus_raised, 327,122,28,28); //rects for plus/minus on the source image
   set_rect(&gc->button_minus_raised, 366, 122,28,28);
   gc->stat_panel_x = 360;

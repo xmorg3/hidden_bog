@@ -176,7 +176,9 @@ typedef struct _GameCore {
   TTF_Font *current_font;
   TTF_Font *font0;
   SDL_Rect *c_text_size;
-  SDL_Rect player_viewport, message_log, tabbed_pane;
+  SDL_Rect player_viewport, message_log, tabbed_pane,
+    vp0_object_left, vp0_object_right, 
+    vp1_object_left, vp1_object_middle, vp1_object_right;
   SDL_Rect button_raised, button_pressed, button_highlighted, button_greyed;//source rects
   SDL_Rect radio_raised, radio_pressed, radio_highlighted, radio_greyed;//source rects
   SDL_Rect button_plus_raised, button_minus_raised; //source rects
