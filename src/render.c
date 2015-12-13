@@ -231,10 +231,10 @@ SDL_Texture * get_texture_by_objectid(GameCore *gc, int textureid)
 void draw_oov0(GameCore *gc, int left, int middle, int right) //drop objects in view
 {
   if( left >=1000 ) {
-  	SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,left), gc->vp0_object_left, &gc->player_viewport);
+  	SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,left), &gc->vp0_object_left, &gc->player_viewport);
   }
   if( right >=1000 ) {
-  	SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,right), gc->vp0_object_right, &gc->player_viewport);
+  	SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,right), &gc->vp0_object_right, &gc->player_viewport);
   }
   if(middle >= 1000) { //its an object
     //printf("we are hitting it\n");
