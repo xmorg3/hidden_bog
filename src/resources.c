@@ -102,14 +102,10 @@ int load_resources(GameCore *gc)
   set_rect(&gc->radio_pressed,18,50,24,24);
   set_rect(&gc->character_doll_rect, 0,0,288,800); //female rect x = 454, w = 220
   set_rect(&gc->player_viewport, //viewport (top left)
-	   5, 5,
-	   //(gc->screen_size_x/4) * 3 - 5,
-	   //gc->screen_size_y - 137 );
+	   5, 5,   //(gc->screen_size_x/4) * 3 - 5,   //gc->screen_size_y - 137 );
 	   gc->screen_size_x, gc->screen_size_y );
   set_rect(&gc->player_viewport_frame,//everything except portraits
-	   0, 0,
-	   //(gc->screen_size_x/4) * 3,// - 5,
-	   //gc->screen_size_y - 137+5 ); //everything except portraits
+	   0, 0,  //(gc->screen_size_x/4) * 3,// - 5,  //gc->screen_size_y - 137+5 ); //everything except portraits
 	   gc->screen_size_x, gc->screen_size_y );
   set_rect(&gc->tabbed_pane, //The automap and extra below.
 	   (gc->screen_size_x / 5) *4 + 5, //x
@@ -127,6 +123,12 @@ int load_resources(GameCore *gc)
 	   gc->screen_size_x - 7 ,
 	   gc->screen_size_y );
   //TODO set_rect
+  set_rect(&gc->vp0_object_left, gc->screen_size_x - (gc->screen_size_x/2),0 //half off the screen
+  	gc->screen_size_x, gc->screen_size_y
+  );
+  set_rect(&gc->vp0_object_right, (gc->screen_size_x/2),0 //+half the screen
+  	gc->screen_size_x, gc->screen_size_y
+  );
   //vp0_object_left, vp0_object_right, 
   //vp1_object_left, vp1_object_middle, vp1_object_right;
   set_rect(&gc->button_plus_raised, 327,122,28,28); //rects for plus/minus on the source image
