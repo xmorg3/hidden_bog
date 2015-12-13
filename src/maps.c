@@ -115,7 +115,8 @@ void read_map_file(PlayMap *m, const char *filename)
   i=0;
   for(y=0; y < m->height; y++) {
     for(x=0; x < m->width; x++) { //object layer.
-      m->object_layer[y][x] = atoi(strtok(NULL, ",\n"));
+      m->collision_layer[y][x] = atoi(strtok(NULL, ",\n"));
+      printf("%d", m->object_layer[y][x]);
       i++;
     }
   }
@@ -127,8 +128,8 @@ void read_map_file(PlayMap *m, const char *filename)
   i=0;
   for(y=0; y < m->height; y++) {
     for(x=0; x < m->width; x++) {
-      m->collision_layer[y][x] = 0;
-      m->collision_layer[y][x] = atoi(strtok(NULL, ",\n"));
+      //m->collision_layer[y][x] = 0;
+      m->object_layer[y][x] = atoi(strtok(NULL, ",\n"));
       i++;
     }
   }

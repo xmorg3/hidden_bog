@@ -78,7 +78,7 @@ int load_data_from_db(GameCore *gc)
 	IMG_Load_w_error(gc, strcat(fullpath, a[actor_count_loop].sprite_path));
     }
   }
-  gc->npc_list = &a;
+  gc->npc_list = a;
   sqlite3_close(db);
   return 0;
 }

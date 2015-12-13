@@ -11,6 +11,8 @@ void draw_playport_east(GameCore *gc);
 void draw_playport_south(GameCore *gc);
 void draw_playport_west(GameCore *gc);
 
+void draw_oov0(GameCore *gc, int left, int middle, int right);
+
 void draw_game_menu(GameCore *gc);
 void draw_chargen_menu(GameCore *gc); //chargen.c
 void draw_options_menu(GameCore *gc); //gameoptions.c
@@ -212,21 +214,25 @@ void draw_fov0(GameCore *gc, int left, int middle, int right)
     SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);
     SDL_RenderCopy(gc->renderer, gc->door_front_fov0_blank, NULL, &gc->player_viewport);
   }
+
+  //void draw_oov0(GameCore *gc, int left, int middle, int right)
 }
 
-SDL_Texture * get_texture_by_objectid(int textureid)
+SDL_Texture * get_texture_by_objectid(GameCore *gc, int textureid)
 {
   int i;
   for(i=0; i<25; i++){
-    if{gc->npc[i].npc_map_id == textureid) {
-      return gc->npc[i].sprite;
+    if(gc->npc_list[i].npc_map_id == textureid) {
+      return gc->npc_list[i].sprite;
     }
   }
+  return NULL;
 }
 void draw_oov0(GameCore *gc, int left, int middle, int right) //drop objects in view
 {
   if(middle >= 1000) { //its an object
-    SDL_RenderCopy(gc->renderer, get_texture_by_objectid(middle), NULL, &gc->player_viewport); //NOTE! make them as big as the viewport!
+    printf("we are hitting it\n");
+    SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,middle), NULL, &gc->player_viewport); //NOTE! make them as big as the viewport!
   }
     
 }
@@ -247,6 +253,10 @@ void draw_playport_north(GameCore *gc)
   draw_fov0(gc, gc->current_map->background_layer[gc->player->map_y][gc->player->map_x-1],
 	    gc->current_map->background_layer[    gc->player->map_y][gc->player->map_x],
 	    gc->current_map->background_layer[    gc->player->map_y][gc->player->map_x+1]);
+  draw_oov0(gc, 
+	    gc->current_map->object_layer[ gc->player->map_y][gc->player->map_x-1],
+	    gc->current_map->object_layer[ gc->player->map_y][gc->player->map_x],
+	    gc->current_map->object_layer[ gc->player->map_y][gc->player->map_x+1]);
 }
 
 void draw_playport_east(GameCore *gc)
@@ -263,6 +273,9 @@ void draw_playport_east(GameCore *gc)
   draw_fov0(gc, gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x],
 	    gc->current_map->background_layer[gc->player->map_y][gc->player->map_x],
 	    gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x]);
+  draw_oov0(gc, gc->current_map->object_layer[gc->player->map_y-1][gc->player->map_x],
+	    gc->current_map->object_layer[gc->player->map_y][gc->player->map_x],
+	    gc->current_map->object_layer[gc->player->map_y+1][gc->player->map_x]);
 }
 void draw_playport_south(GameCore *gc)
 {
@@ -278,7 +291,10 @@ void draw_playport_south(GameCore *gc)
   
   draw_fov0(gc, gc->current_map->background_layer[gc->player->map_y][gc->player->map_x+1],    
 	    gc->current_map->background_layer[gc->player->map_y][gc->player->map_x],
-	    gc->current_map->background_layer[gc->player->map_y][gc->player->map_x-1]);  
+	    gc->current_map->background_layer[gc->player->map_y][gc->player->map_x-1]);
+  draw_oov0(gc, gc->current_map->object_layer[gc->player->map_y-1][gc->player->map_x],
+	    gc->current_map->object_layer[gc->player->map_y][gc->player->map_x],
+	    gc->current_map->object_layer[gc->player->map_y+1][gc->player->map_x]);
 }
 void draw_playport_west(GameCore *gc)
 {
@@ -292,7 +308,10 @@ void draw_playport_west(GameCore *gc)
   
   draw_fov0(gc, gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x],    
 	    gc->current_map->background_layer[    gc->player->map_y  ][gc->player->map_x],
-	    gc->current_map->background_layer[    gc->player->map_y-1][gc->player->map_x]); 
+	    gc->current_map->background_layer[    gc->player->map_y-1][gc->player->map_x]);
+  draw_oov0(gc, gc->current_map->object_layer[gc->player->map_y+1][gc->player->map_x],    
+	    gc->current_map->object_layer[    gc->player->map_y  ][gc->player->map_x],
+	    gc->current_map->object_layer[    gc->player->map_y-1][gc->player->map_x]);
 }
 
 void draw_message_frame(GameCore *gc)
