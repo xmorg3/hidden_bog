@@ -243,6 +243,20 @@ void draw_oov0(GameCore *gc, int left, int middle, int right) //drop objects in 
   
 }
 
+void draw_oov1(GameCore *gc, int left, int middle, int right) //drop objects in view
+{
+  //if( left >=1000 ) {
+  //	SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,left), NULL, &gc->vp0_object_left);//, &gc->player_viewport);
+  //}
+  //if( right >=1000 ) {
+  //	SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,right), NULL,&gc->vp0_object_right);//, &gc->player_viewport);
+  //}
+  if(middle >= 1000) { //its an object
+    //printf("we are hitting it\n");
+    SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,middle), NULL, &gc->vp1_object_middle); //NOTE! make them as big as the viewport!
+  } //vp0_object_left, vp0_object_right, 
+  
+}
 
 void draw_playport_north(GameCore *gc)
 {
