@@ -123,11 +123,11 @@ int load_resources(GameCore *gc)
 	   gc->screen_size_x - 7 ,
 	   gc->screen_size_y );
   //TODO set_rect
-  set_rect(&gc->vp0_object_left, gc->screen_size_x - (gc->screen_size_x/2),0, //half off the screen
-  	gc->screen_size_x, gc->screen_size_y
+  set_rect(&gc->vp0_object_left, 0 - (gc->screen_size_x/2),0, //half off the screen
+  	gc->screen_size_x/2, gc->screen_size_y
   );
   set_rect(&gc->vp0_object_right, (gc->screen_size_x/2),0, //+half the screen
-  	gc->screen_size_x, gc->screen_size_y
+  	gc->screen_size_x+(gc->screen_size_x/2), gc->screen_size_y
   );
   //vp0_object_left, vp0_object_right, 
   //vp1_object_left, vp1_object_middle, vp1_object_right;
