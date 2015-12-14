@@ -214,8 +214,6 @@ void draw_fov0(GameCore *gc, int left, int middle, int right)
     SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);
     SDL_RenderCopy(gc->renderer, gc->door_front_fov0_blank, NULL, &gc->player_viewport);
   }
-
-  //void draw_oov0(GameCore *gc, int left, int middle, int right)
 }
 
 SDL_Texture * get_texture_by_objectid(GameCore *gc, int textureid)
@@ -237,9 +235,8 @@ void draw_oov0(GameCore *gc, int left, int middle, int right) //drop objects in 
   	SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,right), NULL,&gc->vp0_object_right);//, &gc->player_viewport);
   }
   if(middle >= 1000) { //its an object
-    //printf("we are hitting it\n");
     SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,middle), NULL, &gc->player_viewport); //NOTE! make them as big as the viewport!
-  } //vp0_object_left, vp0_object_right, 
+  }
   
 }
 
@@ -252,7 +249,6 @@ void draw_oov1(GameCore *gc, int left, int middle, int right) //drop objects in 
   	SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,right), NULL,&gc->vp1_object_right);//, &gc->player_viewport);
   }
   if(middle >= 1000) { //its an object
-    //printf("we are hitting it\n");
     SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,middle), NULL, &gc->vp1_object_middle); //NOTE! make them as big as the viewport!
   } //vp0_object_left, vp0_object_right, 
   
@@ -269,14 +265,14 @@ void draw_playport_north(GameCore *gc)
 	    gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x-1],
 	    gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x  ],
 	    gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x+1]);
-  
-  draw_fov0(gc, gc->current_map->background_layer[gc->player->map_y][gc->player->map_x-1],
-	    gc->current_map->background_layer[    gc->player->map_y][gc->player->map_x],
-	    gc->current_map->background_layer[    gc->player->map_y][gc->player->map_x+1]);
   draw_oov1(gc,
 	    gc->current_map->object_layer[gc->player->map_y-1][gc->player->map_x-1],
 	    gc->current_map->object_layer[gc->player->map_y-1][gc->player->map_x  ],
-	    gc->current_map->object_layer[gc->player->map_y-1][gc->player->map_x+1]);	   
+	    gc->current_map->object_layer[gc->player->map_y-1][gc->player->map_x+1]);
+  draw_fov0(gc, gc->current_map->background_layer[gc->player->map_y][gc->player->map_x-1],
+	    gc->current_map->background_layer[    gc->player->map_y][gc->player->map_x],
+	    gc->current_map->background_layer[    gc->player->map_y][gc->player->map_x+1]);
+  	   
   draw_oov0(gc, 
 	    gc->current_map->object_layer[ gc->player->map_y][gc->player->map_x-1],
 	    gc->current_map->object_layer[ gc->player->map_y][gc->player->map_x],
