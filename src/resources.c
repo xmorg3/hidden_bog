@@ -127,10 +127,10 @@ int load_resources(GameCore *gc)
   	gc->screen_size_x/2, gc->screen_size_y
   );
   set_rect(&gc->vp0_object_right, (gc->screen_size_x/3),0, //+half the screen
-  	gc->screen_size_x+(gc->screen_size_x/2), gc->screen_size_y
+  	gc->screen_size_x, gc->screen_size_y
   );
   set_rect(&gc->vp1_object_middle, (gc->screen_size_x / 5), (gc->screen_size_y/5), 
-  (gc->screen_size_x/5)*4, (gc->screen_size_y/5)*4);
+  (gc->screen_size_x/2), (gc->screen_size_y/2));
   //vp1_object_left, , vp1_object_right;
   set_rect(&gc->button_plus_raised, 327,122,28,28); //rects for plus/minus on the source image
   set_rect(&gc->button_minus_raised, 366, 122,28,28);
