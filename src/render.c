@@ -289,7 +289,9 @@ void draw_playport_east(GameCore *gc)
   draw_fov1(gc, gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x+1],
 	    gc->current_map->background_layer[gc->player->map_y][gc->player->map_x+1],
 	    gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x+1]);
-  
+  draw_oov1(gc,gc->current_map->object_layer[gc->player->map_y-1][gc->player->map_x+1],
+	    gc->current_map->object_layer[gc->player->map_y][gc->player->map_x+1],
+	    gc->current_map->object_layer[gc->player->map_y+1][gc->player->map_x+1]);
   draw_fov0(gc, gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x],
 	    gc->current_map->background_layer[gc->player->map_y][gc->player->map_x],
 	    gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x]);
@@ -308,7 +310,9 @@ void draw_playport_south(GameCore *gc)
   draw_fov1(gc, gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x+1],
 	    gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x],
 	    gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x-1]);
-  
+  draw_oov1(gc,gc->current_map->object_layer[gc->player->map_y+1][gc->player->map_x+1],
+	    gc->current_map->object_layer[gc->player->map_y+1][gc->player->map_x],
+	    gc->current_map->object_layer[gc->player->map_y+1][gc->player->map_x-1]);
   draw_fov0(gc, gc->current_map->background_layer[gc->player->map_y][gc->player->map_x+1],    
 	    gc->current_map->background_layer[gc->player->map_y][gc->player->map_x],
 	    gc->current_map->background_layer[gc->player->map_y][gc->player->map_x-1]);
@@ -325,7 +329,9 @@ void draw_playport_west(GameCore *gc)
   draw_fov1(gc, gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x-1],
 	    gc->current_map->background_layer[    gc->player->map_y][gc->player->map_x-1],
 	    gc->current_map->background_layer[    gc->player->map_y-1][gc->player->map_x-1]);
-  
+  draw_oov1(gc,gc->current_map->object_layer[gc->player->map_y+1][gc->player->map_x-1],
+	    gc->current_map->object_layer[    gc->player->map_y][gc->player->map_x-1],
+	    gc->current_map->object_layer[    gc->player->map_y-1][gc->player->map_x-1]);
   draw_fov0(gc, gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x],    
 	    gc->current_map->background_layer[    gc->player->map_y  ][gc->player->map_x],
 	    gc->current_map->background_layer[    gc->player->map_y-1][gc->player->map_x]);
