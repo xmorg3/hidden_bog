@@ -19,6 +19,7 @@ SDL_Texture* sdl_printf_font(GameCore *gc, TTF_Font *font, char *message);
 void sdl_set_textpos(GameCore *gc, int x, int y); //text.c
 void set_color(GameCore *gc, int r, int g, int b); //set_font_color;
 void fast_radio(GameCore *gc, int x, int y, char *text, int selected); //does not uncheck? //render.c
+void draw_char_menu_frame(GameCore *gc); //backdrop frame
 
 
 void draw_add_skills_dialogue(GameCore *gc)
@@ -35,20 +36,25 @@ void draw_add_skills_dialogue(GameCore *gc)
   
   fast_button(gc, gc->screen_size_x - 300, gc->screen_size_y -50 -3 -50, "Accept"); //accept button
 }
-void draw_chargen_menu(GameCore *gc)
-{//int screen_size_x, screen_size_y;
+void draw_char_menu_frame(GameCore *gc)
+{
   SDL_Rect dst, src, r;
   SDL_RenderCopy(gc->renderer, gc->w_background, NULL, NULL); //put background
   //put name on the top
   fast_button(gc, 10,10, gc->player->name); //- player name
   //put character here?
-  src = fast_rect(0,0,280,800); //set_rect(&gc->character_doll_rect, 0,0,280,800); //female rect x = 454, w = 220
-  dst = fast_rect(8,65,180,450);
-  SDL_RenderCopy(gc->renderer, gc->character_doll, &gc->character_doll_rect, &dst); //put background
-  //put buttons on the right
+  //src = fast_rect(0,0,280,800); //set_rect(&gc->character_doll_rect, 0,0,280,800); //female rect x = 454, w = 220
+  //dst = fast_rect(8,65,180,450);
   fast_button(gc, 10,gc->screen_size_y - 58, "Back");
   fast_button(gc, 300,gc->screen_size_y - 58, "Next");
-
+}
+void draw_chargen_menu(GameCore *gc)
+{//int screen_size_x, screen_size_y;
+  SDL_Rect dst, src, r;
+  src = fast_rect(0,0,280,800); //set_rect(&gc->character_doll_rect, 0,0,280,800); //female rect x = 454, w = 220
+  dst = fast_rect(8,65,180,450);
+  draw_char_menu_frame(gc); //draw background (with buttons)
+  SDL_RenderCopy(gc->renderer, gc->character_doll, &gc->character_doll_rect, &dst); //put background
   sdl_set_textpos(gc, 210, 80); set_color(gc, 255, 255, 255);
   SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, gc->font0, "Gender"), NULL, gc->c_text_size);
   if(gc->player->sex == 0) { //1 male, 0 female
