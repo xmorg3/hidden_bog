@@ -38,7 +38,7 @@ void draw_add_skills_dialogue(GameCore *gc)
 void draw_chargen_menu(GameCore *gc)
 {//int screen_size_x, screen_size_y;
   SDL_Rect dst, src, r;
-  SDL_RenderCopy(gc->renderer, gc->paper_tavern, NULL, NULL); //put background
+  SDL_RenderCopy(gc->renderer, gc->w_background, NULL, NULL); //put background
   //put name on the top
   fast_button(gc, 10,10, gc->player->name); //- player name
   //put character here?
@@ -61,13 +61,7 @@ void draw_chargen_menu(GameCore *gc)
   }
   sdl_set_textpos(gc, 210, 180); //set_color(gc, 255, 255, 255);
   SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, gc->font0, "Race"), NULL, gc->c_text_size);
-  /*for(i=0;i<4;i++) { 
-race_rect = fast_rect(200,200+i*30,28,28); 
-if(check_clickedin(&race_rect, gc->mouse_x, gc->mouse_y ) == 1) { 
- gc->player->race = i; 
-break; 
-} 
-*/
+
   if(gc->player->race == 0) {  fast_radio(gc, 200, 200, "Human",1); }//0
   else { fast_radio(gc, 200, 200, "Human",0); }
   
@@ -86,9 +80,6 @@ break;
   if(gc->player->race == 5) { fast_radio(gc, 200, 350, "Half-Ork",1); }
   else{fast_radio(gc, 200, 350, "Half-Ork",0);} //5
 
-  //gc->stat_panel_x = 360; //set in resources.c
-  //gc->stat_panel_y = 200; //set location for stat panel
-  //Portrait panel
   r = fast_rect(gc->player->portrait*128,0,128,128);
   gc->char_frame_rect = fast_rect(323, 40, 128, 128 );
  
