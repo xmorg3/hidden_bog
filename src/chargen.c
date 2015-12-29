@@ -45,7 +45,7 @@ void draw_char_menu_frame(GameCore *gc)
   //put character here?
   //src = fast_rect(0,0,280,800); //set_rect(&gc->character_doll_rect, 0,0,280,800); //female rect x = 454, w = 220
   //dst = fast_rect(8,65,180,450);
-  if( gc->gamestate == GAME_PLAYER_STATUS) {
+  if( gc->game_state == GAME_PLAYER_STATUS) {
     fast_button(gc, 10,gc->screen_size_y - 58, "Close");
   }
   else {
