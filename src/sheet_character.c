@@ -16,4 +16,6 @@ void input_char_menu_frame(GameCore *gc) //get mouse functions?
 {
   int i;
   SDL_Rect b1, b2;
+  b1 = fast_rect(10, gc->screen_size_y - 58, 283 , 58);
+  b2 = fast_rect(300, gc->screen_size_y - 58, 283 , 58);
 }
