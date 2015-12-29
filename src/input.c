@@ -54,8 +54,11 @@ void handle_keydown(GameCore *gc)
   else if(k == SDLK_DOWN && gc->game_state == GAME_PLAY_IDLE ) {
     set_player_move_backward(gc);
   }
-  else if(k == SDLK_c) {
-  	draw_sheet_character(GameCore *gc);
+  else if(k == SDLK_c ) { //draw sheet
+  	if (gc->game_state == GAME_PLAYER_STATUS) {
+  		gc->game_state = GAME_PLAY_IDLE;
+  	}
+  	else { gc->game_state = GAME_PLAYER_STATUS;	}
   }
 }
 void handle_mousebutton_down(GameCore *gc)
