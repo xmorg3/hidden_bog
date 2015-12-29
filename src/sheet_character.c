@@ -1,3 +1,4 @@
+#include <SDL.h>
 #include "game.h"
 
 void draw_character_attributes(GameCore *gc, int x, int y, int moddable); //chargen.c
