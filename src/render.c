@@ -23,7 +23,7 @@ void fast_button(GameCore *gc, int x, int y, char *text);
 SDL_Rect fast_rect(int x, int y, int w, int h);
 void fast_radio(GameCore *gc, int x, int y, char *text, int selected); //does not uncheck?
 //void display_render(GameCore *gc);
-
+void draw_sheet_character(GameCore *gc);
 
 //text.c
 SDL_Texture* sdl_printf_font(GameCore *gc, TTF_Font *font, char *message);
@@ -61,6 +61,7 @@ void draw(GameCore *gc)
   else if (gc->game_state == GAME_PLAYER_COMBAT){
   }
   else if (gc->game_state == GAME_PLAYER_STATUS){
+  	draw_sheet_character(gc);
   }
   else if (gc->game_state == GAME_PLAYER_INVENTORY){
   }
