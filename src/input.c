@@ -14,6 +14,8 @@ void set_player_direction(GameCore *gc, int mod); //update.c
 void set_player_move_foreward(GameCore *gc); //update.c
 void set_player_move_backward(GameCore *gc);
 
+void draw_sheet_character(GameCore *gc);
+
 void input(GameCore *gc)
 {
   while (SDL_PollEvent(&gc->sdl_event ) ){
@@ -33,10 +35,8 @@ void handle_keydown(GameCore *gc)
   //gc->game_state = 0;
   k = gc->sdl_event.key.keysym.sym;
   if(k == SDLK_F1) {
-    //resize teh window
-    resize_screen(gc, 1024, 600);
+    resize_screen(gc, 1024, 600); //resize teh window
   }
-  //keys
   if(k == SDLK_ESCAPE ) {
     gc->game_state = GAME_START_MENU;
   }
@@ -53,6 +53,9 @@ void handle_keydown(GameCore *gc)
   }
   else if(k == SDLK_DOWN && gc->game_state == GAME_PLAY_IDLE ) {
     set_player_move_backward(gc);
+  }
+  else if(k == SDLK_c) {
+  	draw_sheet_character(GameCore *gc);
   }
 }
 void handle_mousebutton_down(GameCore *gc)
