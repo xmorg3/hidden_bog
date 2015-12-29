@@ -14,5 +14,6 @@ void draw_sheet_character(GameCore *gc)
 
 void input_char_menu_frame(GameCore *gc) //get mouse functions?
 {
-  
+  int i;
+  SDL_Rect b1, b2;
 }
