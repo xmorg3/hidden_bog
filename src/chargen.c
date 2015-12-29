@@ -45,8 +45,13 @@ void draw_char_menu_frame(GameCore *gc)
   //put character here?
   //src = fast_rect(0,0,280,800); //set_rect(&gc->character_doll_rect, 0,0,280,800); //female rect x = 454, w = 220
   //dst = fast_rect(8,65,180,450);
-  fast_button(gc, 10,gc->screen_size_y - 58, "Back");
-  fast_button(gc, 300,gc->screen_size_y - 58, "Next");
+  if( gc->gamestate == GAME_PLAYER_STATUS) {
+    fast_button(gc, 10,gc->screen_size_y - 58, "Close");
+  }
+  else {
+    fast_button(gc, 10,gc->screen_size_y - 58, "Back");
+    fast_button(gc, 300,gc->screen_size_y - 58, "Next");
+  }
 }
 void draw_chargen_menu(GameCore *gc)
 {//int screen_size_x, screen_size_y;
