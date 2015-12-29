@@ -1,3 +1,4 @@
+#include "game.h"
 
 void draw_char_menu_frame(GameCore *gc); //backdrop frame
 void input_char_menu_frame(GameCore *gc); //mouse functions
