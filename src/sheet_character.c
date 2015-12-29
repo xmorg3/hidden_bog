@@ -6,6 +6,8 @@ void draw_char_menu_frame(GameCore *gc); //backdrop frame
 void input_char_menu_frame(GameCore *gc); //mouse functions
 void draw_sheet_character(GameCore *gc);
 
+SDL_Rect fast_rect(int x, int y, int w, int h);
+
 void draw_sheet_character(GameCore *gc)
 {
   draw_char_menu_frame(gc);
