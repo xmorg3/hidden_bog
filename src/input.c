@@ -15,6 +15,7 @@ void set_player_move_foreward(GameCore *gc); //update.c
 void set_player_move_backward(GameCore *gc);
 
 void draw_sheet_character(GameCore *gc);
+void input_char_menu_frame(GameCore *gc);
 
 void input(GameCore *gc)
 {
