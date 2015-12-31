@@ -120,10 +120,9 @@ typedef struct _PlayMap { //maps.c //newstuff
   char *music;
   char *tileset;
   char map_title[65];
-  //ignore tilesets for now :p
-  int **background_layer;
-  int **object_layer;
-  int **collision_layer;
+  int **background_layer; //walls and what you are standing on
+  int **object_layer; //objects, enemies, doors?
+  int **collision_layer; //not used.
   int **fog_layer;
 } PlayMap; //maps.c
 
