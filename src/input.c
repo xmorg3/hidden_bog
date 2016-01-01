@@ -18,6 +18,8 @@ void set_player_move_backward(GameCore *gc);
 void draw_sheet_character(GameCore *gc);
 void input_char_menu_frame(GameCore *gc);
 
+void get_object_in_0front_location(GameCore *gc);
+
 void input(GameCore *gc)
 {
   while (SDL_PollEvent(&gc->sdl_event ) ){
