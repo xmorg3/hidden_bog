@@ -8,6 +8,7 @@ void handle_mousebutton_down(GameCore *gc);
 void handle_mousebutton_down_start_menu(GameCore *gc);
 void handle_mousebutton_down_chargen_menu(GameCore *gc); //chargen.c
 void handle_mousebutton_down_options_menu(GameCore *gc); //gameoptions.c
+void handle_mousebutton_down_gameplayidle(GameCore *gc);
 
 void resize_screen(GameCore *gc, int size_x, int size_y);//render.c
 void set_player_direction(GameCore *gc, int mod); //update.c
@@ -80,6 +81,7 @@ void handle_mousebutton_down(GameCore *gc)
   //you clicked on the character portrait //open status sheet.
   //you clicked on a "backpack" icon?
   //you clicked an object /chest/monster/npc/door ?what location?
+    handle_mousebutton_down_gameplayidle(gc);
   }
 }
 void handle_mousebutton_down_start_menu(GameCore *gc)
@@ -118,3 +120,9 @@ void handle_mousebutton_down_start_menu(GameCore *gc)
   }
 }
 
+void handle_mousebutton_down_gameplayidle(GameCore *gc) //you clicked on a mouse button during idle
+{
+	//doors - if you are standing in front of a door (direction/and item in front of you)
+	//^^ --return something if you are standing in front of a door.
+	
+}
