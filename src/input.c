@@ -76,6 +76,11 @@ void handle_mousebutton_down(GameCore *gc)
   else if (gc->game_state == GAME_OPTIONS_MENU) {
     handle_mousebutton_down_options_menu(gc);
   }
+  else if (gc->game_state == GAME_PLAY_IDLE) { //what are we clicking on?
+  //you clicked on the character portrait //open status sheet.
+  //you clicked on a "backpack" icon?
+  //you clicked an object /chest/monster/npc/door ?what location?
+  }
 }
 void handle_mousebutton_down_start_menu(GameCore *gc)
 {//find the clickys!
