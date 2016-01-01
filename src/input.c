@@ -18,7 +18,7 @@ void set_player_move_backward(GameCore *gc);
 void draw_sheet_character(GameCore *gc);
 void input_char_menu_frame(GameCore *gc);
 
-void get_object_in_0front_location(GameCore *gc);
+int get_object_in_0front_location(GameCore *gc);
 
 void input(GameCore *gc)
 {
@@ -121,7 +121,13 @@ void handle_mousebutton_down_start_menu(GameCore *gc)
     printf("Options.\n");
   }
 }
-
+int get_object_in_0front_location(GameCore *gc)
+{
+	//what direction am i facing
+	//what is the *int* of object_layer directly in front of me 0=nothing
+	//return that int.
+	return 0; //default
+}
 void handle_mousebutton_down_gameplayidle(GameCore *gc) //you clicked on a mouse button during idle
 {
 	//doors - if you are standing in front of a door (direction/and item in front of you)
