@@ -8,3 +8,11 @@ You arrived in the town of Hamsford answering the lords call, for adventurers.  
 TODOS:
 *Need a collection of portraits for the character selection. - the code is there just need better portraits
 *create code for a message box
+
+Enemies
+- (d)Tentacle worm
+- (d)Wretched undead
+- (d) pirate
+- Drowned rodent
+- Thief
+- Rampaging peasant
