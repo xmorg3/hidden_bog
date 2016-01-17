@@ -60,14 +60,17 @@ void set_player_move_foreward(GameCore *gc) //update.c
 {//if location = n,  current_map[y-1][x] //prevent outof bound loops
   int x,y;
   if(gc->player->direction == NORTH && gc->player->map_y > 2) { 
-    if(gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x] == 1)
-      {  
+    if(gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x] == 1) {  
 	gc->player->map_y--;
 	gc->current_map->fog_layer[gc->player->map_y-1][gc->player->map_x] = 1;
 	gc->current_map->fog_layer[gc->player->map_y-1][gc->player->map_x+1] = 1;
 	gc->current_map->fog_layer[gc->player->map_y-1][gc->player->map_x-1] = 1;
 	if( (gc->player->map_y -2) > 0 )
 	  gc->current_map->fog_layer[gc->player->map_y-2][gc->player->map_x] = 1;
+      }
+      else if (gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x] == 4) { //4=door
+      	//move north through door
+      	//change zone? if its a zone change, interior to exterior?
       }
     
   }
