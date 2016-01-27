@@ -69,8 +69,7 @@ void set_player_move_foreward(GameCore *gc) //update.c
 	  gc->current_map->fog_layer[gc->player->map_y-2][gc->player->map_x] = 1;
       }
       else if (gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x] == 4) { //4=door
-      	//move north through door
-      	//change zone? if its a zone change, interior to exterior?
+      	//move north through door //change zone? if its a zone change, interior to exterior?
       }
     
   }
