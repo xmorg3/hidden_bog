@@ -91,8 +91,8 @@ void draw_playframe(GameCore *gc)
 void draw_playport(GameCore *gc) //draw the play viewport
 {
   //sky and floor
-  SDL_RenderCopy(gc->renderer, gc->floor_bottom_fobx_blank, NULL, &gc->player_viewport);
   SDL_RenderCopy(gc->renderer, gc->sky_top_fobx_blank, NULL, &gc->player_viewport);
+  SDL_RenderCopy(gc->renderer, gc->floor_bottom_fobx_blank, NULL, &gc->player_viewport);
   if(gc->player->direction == NORTH) {
     draw_playport_north(gc);
   }
