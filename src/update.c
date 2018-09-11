@@ -15,6 +15,7 @@ int update(GameCore *gc)
   return gc->game_state;
 }
 
+
 void print_in_messagebox(GameCore *gc, char *text)
 {
   //print a message in the top of the messagebox, and shifts the previous text down. if max is reached shift out.

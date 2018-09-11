@@ -29,13 +29,15 @@ int main(int argc, char** argv){
   gc->player->map_x = 4;
   gc->player->map_y = 4;
 
-  print_in_messagebox(gc, ">");
-  print_in_messagebox(gc, ">");
-  print_in_messagebox(gc, ">");
-  print_in_messagebox(gc, ">");
-  print_in_messagebox(gc, ">");
-  print_in_messagebox(gc, ">");
-
+  //GCC hack, you must assign before running print_in_messagebox?
+  strcpy(gc->messagelist[0],">"); //print_in_messagebox(gc, ">");
+  strcpy(gc->messagelist[1],">"); //print_in_messagebox(gc, ">");
+  strcpy(gc->messagelist[2],">"); //print_in_messagebox(gc, ">");
+  strcpy(gc->messagelist[3],">"); //print_in_messagebox(gc, ">");
+  strcpy(gc->messagelist[4],">"); //print_in_messagebox(gc, ">");
+  strcpy(gc->messagelist[5],">"); //print_in_messagebox(gc, ">");
+  strcpy(gc->messagelist[6],">");
+  strcpy(gc->messagelist[7],">");
  
 
   start_sdl(gc); //gc->game_state = 1, resources.c

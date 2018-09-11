@@ -162,7 +162,7 @@ SDL_Texture * load_texture_by_dir(GameCore *gc, char *directory, char *file)
 }
 void load_map_wall_textures(GameCore *gc, char *directory) //loads all the textures form "directory"
 {
-  clear_textures(gc);
+  //clear_textures(gc); //gcc cordump
   gc->wall_all = load_texture_by_dir(gc, directory, "wall_all0.png"); //new wall
   gc->floor_bottom_fobx_blank = load_texture_by_dir(gc, directory, "floor_bottom_fobx_blank.png");
   gc->sky_top_fobx_blank = load_texture_by_dir(gc, directory, "sky_top_fobx_blank.png");
@@ -197,6 +197,7 @@ void load_map_wall_textures(GameCore *gc, char *directory) //loads all the textu
   gc->item1_fov0 = load_texture_by_dir(gc, directory, "item1_fov0.png");
   //load_texture_by_dir(gc->, "blank/", ".png");
 }
+
 void clear_textures(GameCore *gc)  //clears all loaded textures.
 {
   SDL_DestroyTexture(gc->floor_bottom_fobx_blank);//load_texture_by_dir(gc, directory, "floor_bottom_fobx_blank.png");
