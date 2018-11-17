@@ -1,6 +1,9 @@
 
 #include <SDL_ttf.h>
 #include <SDL.h>
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 #include "game.h"
 
@@ -41,7 +44,7 @@ SDL_Texture* sdl_printf_font(GameCore *gc, TTF_Font *font, char *message)
 { //return a surface/texture that has teh text message
   SDL_Surface *surf;
   SDL_Texture *texture;
-  SDL_Rect ts;
+  //SDL_Rect ts;
 
   TTF_SizeText(gc->font0, message, &gc->c_text_size->w, &gc->c_text_size->h);
   surf = TTF_RenderText_Blended(font, message, gc->current_color);

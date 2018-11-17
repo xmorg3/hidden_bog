@@ -1,5 +1,5 @@
-#include <SDL2/SDL_opengl.h> //new render code.
-#include <SDL2/SDL.h>
+#include <SDL_opengl.h> //new render code.
+#include <SDL.h>
 #include "game.h"
 
 

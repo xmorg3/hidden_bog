@@ -1,4 +1,5 @@
 #include "game.h"
+#include <string.h>
 
 //void handle_keydown(GameCore *gc);
 //void handle_mousebutton_down(GameCore *gc);
@@ -59,7 +60,7 @@ void set_player_direction(GameCore *gc, int mod)
 }
 void set_player_move_foreward(GameCore *gc) //update.c
 {//if location = n,  current_map[y-1][x] //prevent outof bound loops
-  int x,y;
+  //int x,y;
   if(gc->player->direction == NORTH && gc->player->map_y > 2) { 
     if(gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x] == 1) {  
 	gc->player->map_y--;

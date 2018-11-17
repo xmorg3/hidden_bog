@@ -1,6 +1,7 @@
-
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include "game.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 void draw(GameCore *gc); // main drawing
 void draw_playframe(GameCore *gc);
@@ -179,7 +180,7 @@ void draw_fov1(GameCore *gc, int left, int middle, int right)
 void draw_fov0(GameCore *gc, int left, int middle, int right)
 {
   SDL_Rect left_wall, right_wall, middle_wall;
-  SDL_Rect drect;
+  //SDL_Rect drect;
   left_wall = fast_rect(618, 0, 118, 273);
   right_wall = fast_rect(0, 0, 118, 273);
   middle_wall = fast_rect(115, 0, 505,273);
@@ -257,7 +258,7 @@ void draw_oov1(GameCore *gc, int left, int middle, int right) //drop objects in 
 
 void draw_playport_north(GameCore *gc)
 {
-  int current_tile; //set value to whatever tile we are rendering.
+  //int current_tile; //set value to whatever tile we are rendering.
   draw_fov2(gc, gc->current_map->background_layer[gc->player->map_y-2][gc->player->map_x-1],
 	    gc->current_map->background_layer[    gc->player->map_y-2][gc->player->map_x],
 	    gc->current_map->background_layer[    gc->player->map_y-2][gc->player->map_x+1]);
@@ -282,7 +283,7 @@ void draw_playport_north(GameCore *gc)
 
 void draw_playport_east(GameCore *gc)
 {
-  int current_tile; //set value to whatever tile we are rendering.
+  //int current_tile; //set value to whatever tile we are rendering.
   draw_fov2(gc, gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x+2],
 	    gc->current_map->background_layer[    gc->player->map_y  ][gc->player->map_x+2],
 	    gc->current_map->background_layer[    gc->player->map_y+1][gc->player->map_x+2]);
@@ -411,7 +412,7 @@ void draw_character_portraits(GameCore *gc)
 void draw_mapport(GameCore *gc)
 {
   int x,y,i, screen_fract;
-  int fr_x, fr_y, cr_w, cr_h;
+  int fr_x, fr_y; //, cr_w, cr_h;
   int location_x, location_y;
   screen_fract = gc->screen_size_x / 38;
   SDL_Rect amap_tiles[52]; //how many tiles is V---loop*loop
@@ -442,7 +443,7 @@ SDL_Rect fast_rect(int x, int y, int w, int h)
 }
 void fast_button(GameCore *gc, int x, int y, char *text)
 {
-  SDL_Rect r, tr;
+  SDL_Rect r; //, tr;
   r = fast_rect(x, y, 283,55);
   //if x,y colliding with gc->mouse_x, and gc->mouse_y
   if(gc->mouse_x >= x && gc->mouse_x <= x+283 && gc->mouse_y >= y && gc->mouse_y <= y+55) {
@@ -456,7 +457,7 @@ void fast_button(GameCore *gc, int x, int y, char *text)
 }
 void fast_radio(GameCore *gc, int x, int y, char *text, int selected) //does not uncheck?
 {//18,14,40,40...54,14,40,40
-  SDL_Rect r, tr;
+  SDL_Rect r; //, tr;
   r = fast_rect(x, y, 30,30);
   if(selected == 0) {
     SDL_RenderCopy(gc->renderer, gc->t_buttons, &gc->radio_raised, &r);

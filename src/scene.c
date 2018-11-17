@@ -1,5 +1,8 @@
-#include <SDL2/SDL.h>
+//#include <SDL.h>
 #include "game.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 /*
 typedef struct _Scene { //Scene structure.
@@ -63,7 +66,7 @@ int test_fog[20][20] = {
 
 PlayMap * new_map(char *name, int mapsize, char *filename)
 { //creates a new scene
-  int i, j;
+  int i; //, j;
   PlayMap *current_map;
   current_map = (PlayMap*)malloc(sizeof (PlayMap)); //allocate teh current map
   strcpy(current_map->map_title, name); //name of map

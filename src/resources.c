@@ -1,7 +1,10 @@
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include <SDL.h>
+#include <SDL_image.h>
 #include "game.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 /*  New wall dimensions for wall_all
 picture 598x273

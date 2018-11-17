@@ -1,5 +1,5 @@
 #include <SDL.h>
-
+#include <stdio.h>
 #include "game.h"
 
 void draw_chargen_menu(GameCore *gc);
@@ -28,7 +28,7 @@ void draw_add_skills_dialogue(GameCore *gc)
 //frame and frame shadow are the border of the window. inside the window is the skillpane, a black box where the skills
 //will be printed.  Bubblelist_frame is the border of bubblelist. Bubblelist is a box off to the right of the skill
 //defines the skill, and is activated when clicking on a skill. below, near the bottom of the window is the "accept" button.
-  SDL_Rect frame, frame_shadow, skillpane, bubblelist_frame, bubblelist;
+  SDL_Rect frame, frame_shadow, skillpane; //, bubblelist_frame, bubblelist;
   frame = fast_rect(50,50, gc->screen_size_x -50, gc->screen_size_y-50); //make a square
   frame_shadow = fast_rect(50 +3,50 +3, gc->screen_size_x -50 -3, gc->screen_size_x -50 -3); //make it looks nice?
   skillpane = fast_rect( 0 +3+10,50 +3+10, gc->screen_size_x -50 -3-10, gc->screen_size_y-50 -3 -10 );
@@ -38,7 +38,7 @@ void draw_add_skills_dialogue(GameCore *gc)
 }
 void draw_char_menu_frame(GameCore *gc)
 {
-  SDL_Rect dst, src, r;
+  //SDL_Rect dst, src, r;
   SDL_RenderCopy(gc->renderer, gc->w_background, NULL, NULL); //put background
   //put name on the top
   fast_button(gc, 10,10, gc->player->name); //- player name
@@ -128,7 +128,7 @@ void draw_minusplus_buttons(GameCore *gc, int x, int y)
 }
 void draw_character_attributes(GameCore *gc, int x, int y, int moddable)
 {
-  char stat_text[4];
+  //char stat_text[4];
   SDL_Rect stat_bg_frame, stat_fg_frame;
   stat_bg_frame.w = 200;  stat_bg_frame.h = 170; stat_bg_frame.x = x-35;
   stat_bg_frame.y = y-5;

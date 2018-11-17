@@ -1,4 +1,5 @@
 #include <string.h>
+#include <stdlib.h>
 #include "game.h"
 
 Actor * new_actor(char *name);
@@ -23,7 +24,7 @@ char *get_actor_gender(Actor *a)
   else {
     return "neutral";
   }
-  return "neutral";
+  /*return "neutral";*/
 }
 
 void mod_actor_stat(Actor *a, char *stat_name, int value)

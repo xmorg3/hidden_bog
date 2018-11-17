@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include "game.h"
+#include <stdio.h>
 
 void handle_mousebutton_down_options_menu(GameCore *gc);
 void draw_options_menu(GameCore *gc);
@@ -14,7 +15,7 @@ void set_color(GameCore *gc, int r, int g, int b); //set_font_color; //text.c
 void draw_options_menu(GameCore *gc)
 {//int screen_size_x, screen_size_y;
 char optstr[128];
-  SDL_Rect dst, src, r_vidmode;
+  SDL_Rect r_vidmode; // dst, src,
   SDL_RenderCopy(gc->renderer, gc->w_background, NULL, NULL); //put background
   //put name on the top
   fast_button(gc, 10,10, "Player"); //- player name

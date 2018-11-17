@@ -4,7 +4,7 @@
 //{//}
 
 #include "game.h"
-#include <sqlite3.h>
+//#include <sqlite3.h>
 #include <stdio.h>
 
 
@@ -19,6 +19,7 @@ Actor a[RECORD_MAX];
 //  void *,                                    /* 1st argument to callback */
 //  char **errmsg                              /* Error msg written here */
 //);
+/*
 SDL_Texture * IMG_Load_w_error(GameCore *gc, char * imgfile);
 int load_data_from_db(GameCore *gc);
 static int callback(void *NotUsed, int argc, char **argv, char **azColName);
@@ -82,3 +83,4 @@ int load_data_from_db(GameCore *gc)
   sqlite3_close(db);
   return 0;
 }
+*/

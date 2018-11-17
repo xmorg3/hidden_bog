@@ -1,7 +1,8 @@
 
 #include <SDL.h>
-
 #include "game.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 void handle_keydown(GameCore *gc);
 void handle_mousebutton_down(GameCore *gc);

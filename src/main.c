@@ -1,6 +1,9 @@
 
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include "game.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 int start_sdl(GameCore *gc);
 int stop_ttf(GameCore *gc);
@@ -58,4 +61,6 @@ int main(int argc, char** argv){
   stop_ttf(gc);
   free(gc->c_text_size);
   free(gc);
+
+	return 0;
 }
