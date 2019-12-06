@@ -1,0 +1,5 @@
+Install
+   pip3 install pygame
+apt-get install python3-opengl
+	to be installed
+		freeglut3
