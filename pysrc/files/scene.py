@@ -11,6 +11,12 @@ from OpenGL.GL import *
 from OpenGL.GLU import *
 
 from files.primitives import shapes
+from files.textures import GL_Image
+from files.textures import GL_Texture
+from files.textures import CImage
+from files.textures import DCImage
+from files.textures import LDCImage
+from files.textures import loadImage
 
 class scene:
     def __init__(self):
@@ -21,6 +27,7 @@ class scene:
                          ["#", "+", "#"],
                          ["#", "@", "#"]
                           ]
+        self.brickwall = loadImage("tiles.png")
     def draw_farleft_tile(self, tile): #x,y here is as it is on a flat map
         if tile == "#":
             self.s.color(0.2, 0.2, 0.2)

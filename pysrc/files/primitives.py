@@ -36,7 +36,7 @@ edges = (
 texCoords = (
     (0.0, 0.0),  # lower-left corner  
     (1.0, 0.0),  # lower-right corner
-    (1.0, 1.0)   # top-right corner
+    (1.0, 1.0),   # top-right corner
     (0.0, 1.0)   # top left corner
     )
 
