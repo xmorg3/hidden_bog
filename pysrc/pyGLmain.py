@@ -4,7 +4,6 @@ import pygame
 from pygame.locals import *
 from OpenGL.GL import *
 from OpenGL.GLU import *
-
 from files.primitives import shapes
 from files.scene import scene
 
@@ -19,8 +18,7 @@ def draw():
     #s = shapes()
     #glEnable(GL_LIGHTING);
     #glEnable(GL_LIGHT0);
-    glEnable(GL_DEPTH_TEST);
-    
+    glEnable(GL_DEPTH_TEST)    
     #glEnable(GL_LIGHT1) 
     glColorMaterial ( GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE )
     #textures

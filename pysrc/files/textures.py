@@ -1,52 +1,40 @@
-
-import pygame
-from pygame.locals import *
-from OpenGL.GL import *
-from OpenGL.GLU import *
-
-class textures:
-    def load_texture(self, file, t):
-        #TextureImage1 = file
-        texture1 = LoadBMP(file)
-        
 import pygame
 import os
 
 from OpenGL.GL import *
 from OpenGL.GLU import *
 
-def initializeDisplay(w, h):
-    pygame.display.set_mode((w,h), pygame.OPENGL|pygame.DOUBLEBUF)
-
-    glClearColor(0.0, 0.0, 0.0, 1.0)
-    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
-
-    glMatrixMode(GL_PROJECTION)
-    glLoadIdentity();
-    # this puts us in quadrant 1, rather than quadrant 4
-    gluOrtho2D(0, w, h, 0)
-    glMatrixMode(GL_MODELVIEW)
+#def initializeDisplay(w, h):
+#    pygame.display.set_mode((w,h), pygame.OPENGL|pygame.DOUBLEBUF)
+#
+#    glClearColor(0.0, 0.0, 0.0, 1.0)
+#    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT)
+#     glMatrixMode(GL_PROJECTION)
+#    glLoadIdentity();
+#    # this puts us in quadrant 1, rather than quadrant 4
+#    gluOrtho2D(0, w, h, 0)
+#    glMatrixMode(GL_MODELVIEW)
 
     # set up texturing
-    glEnable(GL_TEXTURE_2D)
-    glEnable(GL_BLEND)
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+#   glEnable(GL_TEXTURE_2D)
+#    glEnable(GL_BLEND)
+#    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
 
-def render_init(w,h):
-    """Finds the smallest available resolution that fits the desired
-    viewfield."""
-    pygame.init()
-    modelist = pygame.display.list_modes()
-    nextmode = [l for l in modelist if l[0]>=w and l[1]>=h]
-    bestx, besty = -1,-1
-    for l in nextmode:
-        if (bestx==-1 or bestx>=l[0]) and (besty==-1 or besty>=l[1]):
-            bestx, besty = l[0],l[1]
-
-    print "resolution: ",bestx, besty
-
-    initializeDisplay(bestx, besty)
+#def render_init(w,h):
+#    """Finds the smallest available resolution that fits the desired
+#    viewfield."""
+#    pygame.init()
+#    modelist = pygame.display.list_modes()
+#    nextmode = [l for l in modelist if l[0]>=w and l[1]>=h]
+#    bestx, besty = -1,-1
+#    for l in nextmode:
+#        if (bestx==-1 or bestx>=l[0]) and (besty==-1 or besty>=l[1]):
+#            bestx, besty = l[0],l[1]
+#
+#    print ("resolution: ",bestx, besty)
+#
+#    initializeDisplay(bestx, besty)
 
 def loadImage(image):
     textureSurface = pygame.image.load(image)
@@ -67,12 +55,9 @@ def loadImage(image):
 
 def SurfaceClip(surface, rect):
     textureSurface = surface.subsurface(rect)
-
     textureData = pygame.image.tostring(textureSurface, "RGBA", 1)
-
     width = textureSurface.get_width()
     height = textureSurface.get_height()
-
     texture = glGenTextures(1)
     glBindTexture(GL_TEXTURE_2D, texture)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
