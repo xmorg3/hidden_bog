@@ -3,7 +3,7 @@
 #CC = clang -g 
 CC = gcc -g
 
-LIBS = -lSDL2 -lSDL2_image -lSDL2_ttf -lm #-lsqlite3 #-lGL
+LIBS = -lSDL2 -lSDL2_image -lSDL2_ttf -lm -lsqlite3 #-lGL
 
 FLAGS = `sdl2-config --cflags --libs` -I/usr/local/include -L/usr/local/lib
 
