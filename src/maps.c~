@@ -5,33 +5,35 @@
 #include "game.h"
 
 //#include "maps.h"
+
+
 void read_map_file(PlayMap *m,  const char *filename); 
 //char * lookup_value(char *data, char * tag);
 void free_playmap(PlayMap *m);
 void write_map_file(char *mapname, char **mapchars, int height, int width, const char *fn);
 void world_gen(SDL_Surface *s, int catlevel, int templevel, int evlevel);
 int game_load_scene(GameCore *gc);
-//
-//typedef struct _OsareMap {
-//  int width;
-//  int height;
-//  int tilewidth;
-//  int tileheight;
-//  int location[3]; //
-//  char *music;
-//  char *tileset;
-//  char *map_title;
-//  //ignore tilesets for now :p
-//  unsigned int *background_layer;
-//  unsigned int *object_layer;
-//  unsigned int *collision_layer;
-//} OsareMap;
-
-//char *lookup_value(char *data, char * tag)
-//{
-//  char *new_str;
-//  new_str = strstr(data, tag);
-//}
+/*
+typedef struct _OsareMap {
+  int width;
+  int height;
+  int tilewidth;
+  int tileheight;
+  int location[3]; //
+  char *music;
+  char *tileset;
+  char *map_title;
+  //ignore tilesets for now :p
+  unsigned int *background_layer;
+  unsigned int *object_layer;
+  unsigned int *collision_layer;
+} OsareMap;
+ */
+/*char *lookup_value(char *data, char * tag)
+{
+  char *new_str;
+  new_str = strstr(data, tag);
+}*/
 
 void read_data_file(GameCore *gc, void *table, const char *filename) //read a data file into a struct 
 {
@@ -63,17 +65,19 @@ void read_map_file(PlayMap *m, const char *filename)
   int x, y, i; //loop through reading the map
   
   f = fopen(filename , "rb" ); //Open the file
-  if(f == NULL) { fputs("FileNotFound error",stderr); exit (1); } //error if file not found
-  fseek(f , 0 , SEEK_END); //look through file
-  lSize = ftell(f);//get file size
-  rewind(f);//return to beginning
-  data = (char*) malloc (sizeof(char)*lSize); //allocate memory
-  if (data == NULL){fputs ("Memory error",stderr); exit (2);}
+  if(f == NULL) { fputs("FileNotFound error",stderr); exit (1); }
+  fseek(f , 0 , SEEK_END);
+  lSize = ftell(f);
+  rewind(f);
+  data = (char*) malloc (sizeof(char)*lSize);
+  if (data == NULL) 
+    {fputs ("Memory error",stderr); exit (2);}
   result = fread (data,1,lSize,f); // copy the file into the buffer:
-  if (result != lSize){fputs ("Reading error",stderr); exit (3);}
-  fclose(f); 
+  if (result != lSize) 
+    {fputs ("Reading error",stderr); exit (3);}
+  fclose(f);
   //find width
-  //printf("----freaded, now parsing map, %s--------\n",filename);
+  printf("----freaded, now parsing map, %s--------\n",filename);
   strtok(strstr(data,"width"), "=\n"); //text width
   m->width = atoi( strtok( NULL, "=\n")  ); //number width
   printf("Map width is %d, :D\n", m->width);
@@ -137,10 +141,10 @@ void read_map_file(PlayMap *m, const char *filename)
 
 void free_playmap(PlayMap *m)
 {
-  free(m->collision_layer); //free layer
+  free(m->collision_layer);
   free(m->object_layer);
   free(m->background_layer);
-  free(m); //free map
+  free(m);
 }
 
 void write_map_file(char *mapname, char **mapchars, int height, int width, const char *fn) {
