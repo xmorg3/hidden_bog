@@ -33,10 +33,20 @@ void set_color(GameCore *gc, int r, int g, int b); //set_font_color;
 
 void draw_message_frame(GameCore *gc);
 void resize_screen(GameCore *gc, int size_x, int size_y);
-
+void drawto_frame(GameCore *gc, SDL_Texture* img, const SDL_Rect* dstrect);
+void drawto_viewport(GameCore *gc, SDL_Texture *img);
 //void gl_draw_game_menu(GameCore *gc); //glfunctions.c
-
 //void draw_background_texture(GameCore *gc, SDL_Texture *t);
+//typedef struct renderobj { //That to be rendered?
+//};
+
+void drawto_frame(GameCore *gc, SDL_Texture* img, const SDL_Rect* dstrect) {
+  SDL_RenderCopy(gc->renderer, img, NULL, dstrect);
+}
+void drawto_viewport(GameCore *gc, SDL_Texture* img ) {
+  //SDL_RenderCopy(gc->renderer, img, NULL, &gc->player_viewport);
+  drawto_frame(gc, img, &gc->player_viewport);
+}
 
 void draw(GameCore *gc)
 {
@@ -92,8 +102,8 @@ void draw_playframe(GameCore *gc)
 void draw_playport(GameCore *gc) //draw the play viewport
 {
   //sky and floor
-  SDL_RenderCopy(gc->renderer, gc->sky_top_fobx_blank, NULL, &gc->player_viewport);
-  SDL_RenderCopy(gc->renderer, gc->floor_bottom_fobx_blank, NULL, &gc->player_viewport);
+  drawto_viewport(gc, gc->sky_top_fobx_blank); //SDL_RenderCopy(gc->renderer, gc->sky_top_fobx_blank, NULL, &gc->player_viewport);
+  drawto_viewport(gc, gc->floor_bottom_fobx_blank);//SDL_RenderCopy(gc->renderer, gc->floor_bottom_fobx_blank, NULL, &gc->player_viewport);
   if(gc->player->direction == NORTH) {
     draw_playport_north(gc);
   }
@@ -106,7 +116,8 @@ void draw_playport(GameCore *gc) //draw the play viewport
   if(gc->player->direction == WEST) {
     draw_playport_west(gc);
   }
-  SDL_RenderCopy(gc->renderer, gc->play_port_frame, NULL, &gc->player_viewport_frame);
+  //SDL_RenderCopy(gc->renderer, gc->play_port_frame, NULL, &gc->player_viewport_frame);
+  drawto_frame(gc, gc->play_port_frame, &gc->player_viewport_frame);
 }
 
 
@@ -125,27 +136,28 @@ void draw_fov2(GameCore *gc, int left, int middle, int right)
   right_wall = fast_rect(0, 0, 118, 273);
   middle_wall = fast_rect(115, 0, 505,273);
   if( left == 2) {
-    SDL_RenderCopy(gc->renderer, gc->wall_left_fov2_blank, NULL, &gc->player_viewport);
+    //SDL_RenderCopy(gc->renderer, gc->wall_left_fov2_blank, NULL, &gc->player_viewport);
+    drawto_viewport(gc, gc->wall_left_fov2_blank); 
   }
   if ( left == 3 ) {
-    SDL_RenderCopy(gc->renderer, gc->tall_wall_left_fov2, NULL, &gc->player_viewport);
+    drawto_viewport(gc, gc->tall_wall_left_fov2);
   }
   if( left == 4) {
-    SDL_RenderCopy(gc->renderer, gc->wall_left_fov2_blank, NULL, &gc->player_viewport);
-    SDL_RenderCopy(gc->renderer, gc->door_left_fov2_blank, NULL, &gc->player_viewport);
+    drawto_viewport(gc, gc->wall_left_fov2_blank);
+    drawto_viewport(gc, gc->door_left_fov2_blank);
   }
-  if( right ==2)  {SDL_RenderCopy(gc->renderer, gc->wall_right_fov2_blank, NULL, &gc->player_viewport);}
-  if( right == 3)  {SDL_RenderCopy(gc->renderer, gc->tall_wall_right_fov2, NULL, &gc->player_viewport);}
+  if( right ==2) {drawto_viewport(gc,gc->wall_right_fov2_blank);}
+  if( right == 3) {drawto_viewport(gc,gc->tall_wall_right_fov2);}
   if( right == 4) {
-    SDL_RenderCopy(gc->renderer, gc->wall_right_fov2_blank, NULL, &gc->player_viewport);
-    SDL_RenderCopy(gc->renderer, gc->door_right_fov2_blank, NULL, &gc->player_viewport);
+    drawto_viewport(gc,gc->wall_right_fov2_blank);
+    drawto_viewport(gc,gc->door_right_fov2_blank);
   }
   
-  if( middle==2)  {SDL_RenderCopy(gc->renderer, gc->wall_front_fov1_blank, NULL, &gc->player_viewport);}
-  if( middle ==3)  {SDL_RenderCopy(gc->renderer, gc->tall_wall_front_fov1, NULL, &gc->player_viewport);}
-  if( middle==4)  {
-    SDL_RenderCopy(gc->renderer, gc->wall_front_fov1_blank, NULL, &gc->player_viewport);
-    SDL_RenderCopy(gc->renderer, gc->door_front_fov1_blank, NULL, &gc->player_viewport);
+  if( middle==2) {drawto_viewport(gc,gc->wall_front_fov1_blank);}
+  if( middle==3) {drawto_viewport(gc,gc->tall_wall_front_fov1);}
+  if( middle==4) {
+    drawto_viewport(gc,gc->wall_front_fov1_blank);
+    drawto_viewport(gc,gc->door_front_fov1_blank);
   }
 }
 void draw_fov1(GameCore *gc, int left, int middle, int right)
@@ -155,20 +167,24 @@ void draw_fov1(GameCore *gc, int left, int middle, int right)
   right_wall = fast_rect(0, 0, 118, 273);
   middle_wall = fast_rect(115, 0, 505,273);
   if( left==2 )  {
-    SDL_RenderCopy(gc->renderer, gc->wall_left_fov1_blank, NULL, &gc->player_viewport);
+    //SDL_RenderCopy(gc->renderer, gc->wall_left_fov1_blank, NULL, &gc->player_viewport);
+    drawto_viewport(gc, gc->wall_left_fov1_blank);
   }
   if( left ==3)  {
-    SDL_RenderCopy(gc->renderer, gc->tall_wall_left_fov1, NULL, &gc->player_viewport);
+    //SDL_RenderCopy(gc->renderer, gc->tall_wall_left_fov1, NULL, &gc->player_viewport);
+    drawto_viewport(gc, gc->tall_wall_left_fov1);
   }
   if( left == 4)  {
-    SDL_RenderCopy(gc->renderer, gc->wall_left_fov1_blank, NULL, &gc->player_viewport);
-    SDL_RenderCopy(gc->renderer, gc->door_left_fov1_blank, NULL, &gc->player_viewport);
+    drawto_viewport(gc,gc->wall_left_fov1_blank);
+    drawto_viewport(gc, gc->door_left_fov1_blank);
   }
-  if( right ==2) {SDL_RenderCopy(gc->renderer, gc->wall_right_fov1_blank, NULL, &gc->player_viewport);}
-  if( right ==3) {SDL_RenderCopy(gc->renderer, gc->tall_wall_right_fov1, NULL, &gc->player_viewport);}
+  if( right ==2) { drawto_viewport(gc,gc->wall_right_fov1_blank);}
+  if( right ==3) { drawto_viewport(gc,gc->tall_wall_right_fov1); } 
   if( right == 4)  {
-    SDL_RenderCopy(gc->renderer, gc->wall_right_fov1_blank, NULL, &gc->player_viewport);
-    SDL_RenderCopy(gc->renderer, gc->door_right_fov1_blank, NULL, &gc->player_viewport);
+    //SDL_RenderCopy(gc->renderer, gc->wall_right_fov1_blank, NULL, &gc->player_viewport);
+    //SDL_RenderCopy(gc->renderer, gc->door_right_fov1_blank, NULL, &gc->player_viewport);
+    drawto_viewport(gc,gc->wall_right_fov1_blank);
+    drawto_viewport(gc,gc->door_right_fov1_blank);
   }
   if( middle==2)  {SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);}
   if( middle ==3)  {SDL_RenderCopy(gc->renderer, gc->tall_wall_front_fov0, NULL, &gc->player_viewport);}
