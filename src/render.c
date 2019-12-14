@@ -38,12 +38,12 @@ void drawto_viewport(GameCore *gc, SDL_Texture *img);
 //void gl_draw_game_menu(GameCore *gc); //glfunctions.c
 //void draw_background_texture(GameCore *gc, SDL_Texture *t);
 
-void drawto_frame(GameCore *gc, SDL_Texture *img, const SDL_Rect* size) {
-  draw(gc, img, size);
-}
+//void drawto_frame(GameCore *gc, SDL_Texture *img, const SDL_Rect* size) {
+//  draw(gc, img, size);
+//}
 void drawto_viewport(GameCore *gc, SDL_Texture *img ) {
   //SDL_RenderCopy(gc->renderer, img, NULL, &gc->player_viewport);
-  drawto_frame(gc, img, &gc->player_viewport);
+  draw(gc, img, &gc->player_viewport);
 }
 
 void main_draw_loop(GameCore *gc)
@@ -78,10 +78,7 @@ void main_draw_loop(GameCore *gc)
   }
   else if (gc->game_state == GAME_PLAYER_CRAFTING) {
   }
-  else{
-    //draw_playframe(gc);
-  }
-  //end drawing code
+  else{ }
   SDL_RenderPresent(gc->renderer);
 }
 void draw_playframe(GameCore *gc)
@@ -115,7 +112,7 @@ void draw_playport(GameCore *gc) //draw the play viewport
     draw_playport_west(gc);
   }
   //SDL_RenderCopy(gc->renderer, gc->play_port_frame, NULL, &gc->player_viewport_frame);
-  drawto_frame(gc, gc->play_port_frame, &gc->player_viewport_frame);
+  draw(gc, gc->play_port_frame, &gc->player_viewport_frame);
 }
 
 
@@ -245,27 +242,32 @@ SDL_Texture * get_texture_by_objectid(GameCore *gc, int textureid)
 void draw_oov0(GameCore *gc, int left, int middle, int right) //drop objects in view
 {
   if( left >=1000 ) {
-  	SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,left), NULL, &gc->vp0_object_left);//, &gc->player_viewport);
+    draw(gc, get_texture_by_objectid(gc,left), &gc->vp0_object_left);
+    //SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,left), NULL, &gc->vp0_object_left);//, &gc->player_viewport);
   }
   if( right >=1000 ) {
-  	SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,right), NULL,&gc->vp0_object_right);//, &gc->player_viewport);
+    draw(gc, get_texture_by_objectid(gc,right),&gc->vp0_object_right);
+    //SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,right), NULL,&gc->vp0_object_right);//, &gc->player_viewport);
   }
   if(middle >= 1000) { //its an object
-    SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,middle), NULL, &gc->player_viewport); //NOTE! make them as big as the viewport!
+    draw(gc, get_texture_by_objectid(gc,middle), &gc->player_viewport);
+    //SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,middle), NULL, &gc->player_viewport); //NOTE! make them as big as the viewport!
   }
-  
 }
 
 void draw_oov1(GameCore *gc, int left, int middle, int right) //drop objects in view
 {
   if( left >=1000 ) {
-  	SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,left), NULL, &gc->vp1_object_left);//, &gc->player_viewport);
+    draw(gc, get_texture_by_objectid(gc,left), &gc->vp1_object_left);
+    //SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,left), NULL, &gc->vp1_object_left);//, &gc->player_viewport);
   }
   if( right >=1000 ) {
-  	SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,right), NULL,&gc->vp1_object_right);//, &gc->player_viewport);
+    draw(gc, get_texture_by_objectid(gc,right),&gc->vp1_object_right);
+    //SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,right), NULL,&gc->vp1_object_right);//, &gc->player_viewport);
   }
   if(middle >= 1000) { //its an object
-    SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,middle), NULL, &gc->vp1_object_middle); //NOTE! make them as big as the viewport!
+    draw(gc,  get_texture_by_objectid(gc,middle), &gc->vp1_object_middle);
+    //SDL_RenderCopy(gc->renderer, get_texture_by_objectid(gc,middle), NULL, &gc->vp1_object_middle); //NOTE! make them as big as the viewport!
   } //vp0_object_left, vp0_object_right, 
   
 }
@@ -412,16 +414,7 @@ void draw_character_portraits(GameCore *gc)
   gc->char_frame_rect = fast_rect(fr_x, fr_y, cr_w, cr_h );
   r= fast_rect(gc->player->portrait*128,0,128,128);
   SDL_RenderCopy(gc->renderer, gc->portraits_human_male,&r, &gc->char_frame_rect);
-  SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect);
-  //fr_x = fr_x+128;
-  //gc->char_frame_rect = fast_rect(fr_x, fr_y, cr_w, cr_h );
-  //SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect);
-  //fr_x = fr_x+128;
-  //gc->char_frame_rect = fast_rect(fr_x, fr_y, cr_w, cr_h );
-  //SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect); 
-  //fr_x = fr_x+128;
-  //gc->char_frame_rect = fast_rect(fr_x, fr_y, cr_w, cr_h );
-  //SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect);
+  draw(gc, gc->char_frame, &gc->char_frame_rect); 
 }
 void draw_mapport(GameCore *gc)
 {
@@ -498,8 +491,6 @@ void draw_game_menu(GameCore *gc)
   fast_button(gc, button_col,button_row+55*4, "Exit");
   //display_render(gc);
 }
-
-
 
 void resize_screen(GameCore *gc, int size_x, int size_y)
 { //doesn't work yet, must reload the textures.
