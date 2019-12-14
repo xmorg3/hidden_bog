@@ -22,6 +22,12 @@ void load_map_wall_textures(GameCore *gc, char *directory);
 void start_ttf(GameCore *gc); //text.c
 SDL_Rect fast_rect(int x, int y, int w, int h);//render.c
 void clear_textures(GameCore *gc);
+void draw(GameCore *gc, SDL_Texture *t, const SDL_Rect *size);
+
+void draw(GameCore *gc, SDL_Texture *t, const SDL_Rect *size)
+{
+  SDL_RenderCopy(gc->renderer, t, NULL, size);
+}
 
 int start_sdl(GameCore *gc)
 {
@@ -222,4 +228,10 @@ void clear_textures(GameCore *gc)  //clears all loaded textures.
   SDL_DestroyTexture(gc->tall_wall_right_fov0);// = load_texture_by_dir(gc, directory, "tall_wall_right_fov0.png");
   SDL_DestroyTexture(gc->tall_wall_right_fov1);// = load_texture_by_dir(gc, directory, "tall_wall_right_fov1.png");
   SDL_DestroyTexture(gc->tall_wall_right_fov2);// = load_texture_by_dir(gc, directory, "tall_wall_right_fov2.png");
+}
+
+void change_scene_textures(GameCore *gc, char *directory)
+{
+  clear_textures(gc);
+  load_map_wall_textures(gc, directory);
 }

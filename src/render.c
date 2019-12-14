@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void draw(GameCore *gc); // main drawing
 void draw_playframe(GameCore *gc);
 void draw_playport(GameCore *gc);
 
@@ -33,22 +32,21 @@ void set_color(GameCore *gc, int r, int g, int b); //set_font_color;
 
 void draw_message_frame(GameCore *gc);
 void resize_screen(GameCore *gc, int size_x, int size_y);
+void draw(GameCore *gc, SDL_Texture *t, const SDL_Rect *size);
 void drawto_frame(GameCore *gc, SDL_Texture* img, const SDL_Rect* dstrect);
 void drawto_viewport(GameCore *gc, SDL_Texture *img);
 //void gl_draw_game_menu(GameCore *gc); //glfunctions.c
 //void draw_background_texture(GameCore *gc, SDL_Texture *t);
-//typedef struct renderobj { //That to be rendered?
-//};
 
-void drawto_frame(GameCore *gc, SDL_Texture* img, const SDL_Rect* dstrect) {
-  SDL_RenderCopy(gc->renderer, img, NULL, dstrect);
+void drawto_frame(GameCore *gc, SDL_Texture *img, const SDL_Rect* size) {
+  draw(gc, img, size);
 }
-void drawto_viewport(GameCore *gc, SDL_Texture* img ) {
+void drawto_viewport(GameCore *gc, SDL_Texture *img ) {
   //SDL_RenderCopy(gc->renderer, img, NULL, &gc->player_viewport);
   drawto_frame(gc, img, &gc->player_viewport);
 }
 
-void draw(GameCore *gc)
+void main_draw_loop(GameCore *gc)
 {
   SDL_RenderClear(gc->renderer); //clear screen?  
   if(gc->game_state == GAME_START_MENU) {

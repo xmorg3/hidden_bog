@@ -9,7 +9,7 @@ int start_sdl(GameCore *gc);
 int stop_ttf(GameCore *gc);
 int load_resources(GameCore *gc);
 int update(GameCore *gc); //handle_keydown handle_mousebutton_down
-void draw(GameCore *gc);
+void main_draw_loop(GameCore *gc);
 void input(GameCore *gc);
 #ifdef _SQLITE_
   int load_data_from_db(GameCore *gc);
@@ -53,7 +53,7 @@ int main(int argc, char** argv){
   while(gc->game_state > 0) {
     input(gc);
     update(gc);
-    draw(gc);
+    main_draw_loop(gc);
   }
 
   SDL_Delay(500);
