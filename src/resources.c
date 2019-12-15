@@ -32,23 +32,22 @@ void draw(GameCore *gc, SDL_Texture *t, const SDL_Rect *size)
 int start_sdl(GameCore *gc)
 {
   //Temp settings
-  gc->screen_size_x = 1024; //1360; //640; //set screensize. (why hardcode again?)
-  gc->screen_size_y = 600; //768; //480; //v---- run SDL_Init()
+  //gc->screen_size_x = 1024; //1360; //640; // (why hardcode again?)
+  //gc->screen_size_y = 768; //480; //v---- run SDL_Init()  
   if (SDL_Init( SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_EVENTS
           | SDL_WINDOW_FULLSCREEN_DESKTOP) == -1) {
     printf("SDL_Init: %s \n", SDL_GetError() );
     return 1;
   }
   start_ttf(gc);  //load the fonts
-  SDL_GetCurrentDisplayMode(0, &gc->current_dmode);
-  gc->screen_size_x = gc->current_dmode.w;
-  gc->screen_size_y = gc->current_dmode.h;
-  
+  SDL_GetCurrentDisplayMode(0, &gc->current_dmode); //Get screen size
+  gc->screen_size_x = gc->current_dmode.w; //width
+  gc->screen_size_y = gc->current_dmode.h; //height
   SDL_RendererInfo displayRendererInfo; //new
   SDL_CreateWindowAndRenderer(gc->screen_size_x,
 			      gc->screen_size_y,
 			      //SDL_WINDOW_OPENGL,
-				  SDL_WINDOW_FULLSCREEN_DESKTOP,
+			      SDL_WINDOW_FULLSCREEN_DESKTOP,
 			      &gc->win,
 			      &gc->renderer );
   SDL_GetRendererInfo(gc->renderer, &displayRendererInfo);
@@ -67,11 +66,9 @@ int start_sdl(GameCore *gc)
     printf("Error no font (data/font.ttf) ->from resources.c\n");
     return 1;
   }
-
   gc->game_state = 1; //the game started
   return 0;
 }
-
 
 SDL_Texture * IMG_Load_w_error(GameCore *gc, char * imgfile)
 {
@@ -109,9 +106,11 @@ int load_resources(GameCore *gc)
   set_rect(&gc->button_highlighted,14,282, 283,55);
   set_rect(&gc->radio_raised, 18,14,24,24);
   set_rect(&gc->radio_pressed,18,50,24,24);
-  set_rect(&gc->character_doll_rect, 0,0,288,800); //female rect x = 454, w = 220
+  set_rect(&gc->character_doll_rect, 0,0,288,800);
+  //female rect x = 454, w = 220
   set_rect(&gc->player_viewport, //viewport (top left)
-	   5, 5,   //(gc->screen_size_x/4) * 3 - 5,   //gc->screen_size_y - 137 );
+	   5, 5,   //(gc->screen_size_x/4) * 3-5,
+	   //gc->screen_size_y - 137 );
 	   gc->screen_size_x, gc->screen_size_y );
   set_rect(&gc->player_viewport_frame,//everything except portraits
 	   0, 0,  //(gc->screen_size_x/4) * 3,// - 5,  //gc->screen_size_y - 137+5 ); //everything except portraits
