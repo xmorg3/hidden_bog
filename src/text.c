@@ -53,11 +53,16 @@ SDL_Texture* sdl_printf_fontTTF(GameCore *gc, TTF_Font *font, char *message)
   texture = SDL_CreateTextureFromSurface(gc->renderer, surf);
   return texture;
 }
-SDL_Texture *sdl_printf_font(GameCore *gc, SDL_Surface *font, char *message)
-{
-  
+SDL_Texture *sdl_printf_font(GameCore *gc, void *font, char *message)
+{ //wrap the sdl_printf_font fucntion, with either bitmap fonts, or ttf fonts.
+   SDL_Texture *t;
+  #ifdef SDLTTF
+   t = sdl_printf_fontTTF(gc, (TTF_Font)font, message);
+  #ifndef SDLTTF
+   //do the bitmap font thing.
+  #endif
+   return t;
 }
-
 
 //Same as above but use default font and color.
 SDL_Texture* sdl_printf(GameCore *gc, char *message)
