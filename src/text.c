@@ -26,7 +26,11 @@
    }
  */
 void sdl_set_textpos(GameCore *gc, int x, int y);
-SDL_Texture* sdl_printf_font(GameCore *gc, TTF_Font *font, char *message);
+
+SDL_Texture* sdl_printf_fontTTF(GameCore *gc, TTF_Font *font, char *message);
+SDL_Texture* sdl_printf_font(GameCore *gc, SDL_Surface *font, char *message);
+
+
 SDL_Texture* sdl_printf(GameCore *gc, char *message);
 void set_color(GameCore *gc, int r, int g, int b);
 void start_ttf(GameCore *gc);
@@ -39,18 +43,21 @@ void sdl_set_textpos(GameCore *gc, int x, int y)
   gc->c_text_size->y = y;
 }
 
-SDL_Texture* sdl_printf_font(GameCore *gc, TTF_Font *font, char *message)
+SDL_Texture* sdl_printf_fontTTF(GameCore *gc, TTF_Font *font, char *message)
 { //return a surface/texture that has teh text message
   SDL_Surface *surf;
   SDL_Texture *texture;
   //SDL_Rect ts;
-
   TTF_SizeText(gc->font0, message, &gc->c_text_size->w, &gc->c_text_size->h);
   surf = TTF_RenderText_Blended(font, message, gc->current_color);
   texture = SDL_CreateTextureFromSurface(gc->renderer, surf);
-
   return texture;
 }
+SDL_Texture *sdl_printf_font(GameCore *gc, SDL_Surface *font, char *message)
+{
+  
+}
+
 
 //Same as above but use default font and color.
 SDL_Texture* sdl_printf(GameCore *gc, char *message)
