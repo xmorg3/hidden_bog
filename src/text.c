@@ -15,16 +15,17 @@
 //int TTF_SizeText(TTF_Font *font, const char *text, int *w, int *h);
 //int TTF_FontHeight(const TTF_Font *font)
 //SDL_Surface *TTF_RenderText_Solid(TTF_Font *font, const char *text, SDL_Color fg)
-/* SDL_Color color={0,0,0};
-   SDL_Surface *text_surface;
-   if(!(text_surface=TTF_RenderText_Solid(font,"Hello World!",color))) {
-   //handle error here, perhaps print TTF_GetError at least
-   } else {
-   SDL_BlitSurface(text_surface,NULL,screen,NULL);
-   //perhaps we can reuse it, but I assume not for simplicity.
-   SDL_FreeSurface(text_surface);
-   }
- */
+// SDL_Color color={0,0,0};
+//  SDL_Surface *text_surface;
+//   if(!(text_surface=TTF_RenderText_Solid(font,"Hello World!",color))) {
+//handle error here, perhaps print TTF_GetError at least
+//   } else {
+//   SDL_BlitSurface(text_surface,NULL,screen,NULL);
+//   //perhaps we can reuse it, but I assume not for simplicity.
+//   SDL_FreeSurface(text_surface);
+//   }
+// */
+
 void sdl_set_textpos(GameCore *gc, int x, int y);
 
 SDL_Texture* sdl_printf_fontTTF(GameCore *gc, TTF_Font *font, char *message);
@@ -80,7 +81,6 @@ void set_color(GameCore *gc, int r, int g, int b)
   gc->current_color.g = g;
   gc->current_color.b = b;
 }
-
 
 void start_ttf(GameCore *gc)
 {
