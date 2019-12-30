@@ -38,9 +38,6 @@ void drawto_viewport(GameCore *gc, SDL_Texture *img);
 //void gl_draw_game_menu(GameCore *gc); //glfunctions.c
 //void draw_background_texture(GameCore *gc, SDL_Texture *t);
 
-//void drawto_frame(GameCore *gc, SDL_Texture *img, const SDL_Rect* size) {
-//  draw(gc, img, size);
-//}
 void drawto_viewport(GameCore *gc, SDL_Texture *img ) {
   //SDL_RenderCopy(gc->renderer, img, NULL, &gc->player_viewport);
   draw(gc, img, &gc->player_viewport);
@@ -175,24 +172,32 @@ void draw_fov1(GameCore *gc, int left, int middle, int right)
   if( right ==2) { drawto_viewport(gc,gc->wall_right_fov1_blank);}
   if( right ==3) { drawto_viewport(gc,gc->tall_wall_right_fov1); } 
   if( right == 4)  {
-    //SDL_RenderCopy(gc->renderer, gc->wall_right_fov1_blank, NULL, &gc->player_viewport);
-    //SDL_RenderCopy(gc->renderer, gc->door_right_fov1_blank, NULL, &gc->player_viewport);
     drawto_viewport(gc,gc->wall_right_fov1_blank);
     drawto_viewport(gc,gc->door_right_fov1_blank);
   }
-  if( middle==2)  {
-    //SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);
-    drawto_viewport(gc, gc->wall_front_fov0_blank);
-  }
-  if( middle ==3)  {
-    //SDL_RenderCopy(gc->renderer, gc->tall_wall_front_fov0, NULL, &gc->player_viewport);
-    drawto_viewport(gc, gc->tall_wall_front_fov0);
-  }
-  if( middle == 4)  {
+  //<<<<<<< HEAD
+  if( middle==2)  {drawto_viewport(gc,gc->wall_front_fov0_blank);} //SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);}
+  if( middle ==3) {drawto_viewport(gc,gc->tall_wall_front_fov0);} //SDL_RenderCopy(gc->renderer, gc->tall_wall_front_fov0, NULL, &gc->player_viewport);}
+  if( middle == 4){    
     //SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);
     //SDL_RenderCopy(gc->renderer, gc->door_front_fov0_blank, NULL, &gc->player_viewport);
-    drawto_viewport(gc, gc->wall_front_fov0_blank);
-    drawto_viewport(gc, gc->door_front_fov0_blank);
+    drawto_viewport(gc,gc->wall_front_fov0_blank);
+    drawto_viewport(gc,gc->door_front_fov0_blank);
+    //=======
+    //if( middle==2)  {
+    //SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);
+    //drawto_viewport(gc, gc->wall_front_fov0_blank);
+    //}
+    //if( middle ==3)  {
+    //SDL_RenderCopy(gc->renderer, gc->tall_wall_front_fov0, NULL, &gc->player_viewport);
+    //drawto_viewport(gc, gc->tall_wall_front_fov0);
+    //}
+    //if( middle == 4)  {
+    //SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);
+    //SDL_RenderCopy(gc->renderer, gc->door_front_fov0_blank, NULL, &gc->player_viewport);
+    //drawto_viewport(gc, gc->wall_front_fov0_blank);
+    //drawto_viewport(gc, gc->door_front_fov0_blank);
+    //>>>>>>> b62b7c962b4445b988a9eaaafe46174faa39a759
   }
 }
 void draw_fov0(GameCore *gc, int left, int middle, int right)
@@ -204,28 +209,50 @@ void draw_fov0(GameCore *gc, int left, int middle, int right)
   middle_wall = fast_rect(115, 0, 505,273);
 
   // ------------------------------------->walls
-  if( left==2)  {
-    //SDL_RenderCopy(gc->renderer, gc->wall_left_fov0_blank, NULL, &gc->player_viewport);
+  //LEFT
+  ////SDL_RenderCopy(gc->renderer, gc->wall_left_fov0_blank, NULL, &gc->player_viewport);}
+  if( left == 2) {drawto_viewport(gc,gc->wall_left_fov0_blank); } 
+  if( left == 3) {drawto_viewport(gc,gc->wall_left_fov0_blank); } 
+  if( left == 4) {drawto_viewport(gc,gc->wall_left_fov0_blank);
+    drawto_viewport(gc,gc->door_left_fov0_blank);
+  }
+  //RIGHT
+  if( right == 2) {drawto_viewport(gc,gc->wall_right_fov0_blank); }
+  if( right == 3) {drawto_viewport(gc,gc->tall_wall_right_fov0);
     drawto_viewport(gc, gc->wall_left_fov0_blank);
   }
-  if( left ==3)  {
-    //SDL_RenderCopy(gc->renderer, gc->tall_wall_left_fov0, NULL, &gc->player_viewport);
-    drawto_viewport(gc, gc->tall_wall_left_fov0);
-  }
+  if( left ==3)  { drawto_viewport(gc, gc->tall_wall_left_fov0); }
   if( left == 4)  {
     drawto_viewport(gc, gc->wall_left_fov0_blank);
     drawto_viewport(gc, gc->door_left_fov0_blank);
   }
-  
-  if( right==2  ) {
-    drawto_viewport(gc, gc->wall_right_fov0_blank);
-  }
-  if( right ==3 ) {
-    drawto_viewport(gc, gc->tall_wall_right_fov0);
-  }
+  //if( right==2  ) { drawto_viewport(gc, gc->wall_right_fov0_blank);
+  //}
+  //if( right ==3 ) {
+  //  drawto_viewport(gc, gc->tall_wall_right_fov0);
+  //>>>>>>> b62b7c962b4445b988a9eaaafe46174faa39a759
   if( right == 4)  {
     //SDL_RenderCopy(gc->renderer, gc->wall_right_fov0_blank, NULL, &gc->player_viewport);
     //SDL_RenderCopy(gc->renderer, gc->door_right_fov0_blank, NULL, &gc->player_viewport);
+<<<<<<< HEAD
+    drawto_viewport(gc,gc->wall_right_fov0_blank);
+    drawto_viewport(gc,gc->door_right_fov0_blank);
+  }
+   
+  if( middle==2)  { //middle wall
+    //SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);
+    drawto_viewport(gc,gc->wall_front_fov0_blank);
+  }
+  if( middle ==3)  { //middle wall
+    //SDL_RenderCopy(gc->renderer, gc->tall_wall_front_fov0, NULL, &gc->player_viewport);
+    drawto_viewport(gc,gc->tall_wall_front_fov0);
+  } 
+  if( middle == 4)  {
+    //SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);
+    //SDL_RenderCopy(gc->renderer, gc->door_front_fov0_blank, NULL, &gc->player_viewport);
+    drawto_viewport(gc,gc->wall_front_fov0_blank);
+    drawto_viewport(gc,gc->door_front_fov0_blank);
+=======
     drawto_viewport(gc, gc->wall_right_fov0_blank);
     drawto_viewport(gc, gc->door_right_fov0_blank);
   }
@@ -239,6 +266,7 @@ void draw_fov0(GameCore *gc, int left, int middle, int right)
   if( middle == 4)  {
     drawto_viewport(gc, gc->wall_front_fov0_blank);
     drawto_viewport(gc, gc->door_front_fov0_blank);
+>>>>>>> b62b7c962b4445b988a9eaaafe46174faa39a759
   }
 }
 
