@@ -33,7 +33,6 @@ void draw_add_skills_dialogue(GameCore *gc)
   frame_shadow = fast_rect(50 +3,50 +3, gc->screen_size_x -50 -3, gc->screen_size_x -50 -3); //make it looks nice?
   skillpane = fast_rect( 0 +3+10,50 +3+10, gc->screen_size_x -50 -3-10, gc->screen_size_y-50 -3 -10 );
   //print skills here
-  
   fast_button(gc, gc->screen_size_x - 300, gc->screen_size_y -50 -3 -50, "Accept"); //accept button
 }
 void draw_char_menu_frame(GameCore *gc)

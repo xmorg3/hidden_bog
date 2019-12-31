@@ -19,8 +19,7 @@ void set_rect(SDL_Rect *r, int x, int y, int w, int h);
 int load_resources(GameCore *gc);
 void load_map_wall_textures(GameCore *gc, char *directory);
 
-//void start_ttf(GameCore *gc); //text.c
-void load_font(GameCore *gc, char *bmpfile);
+void start_ttf(GameCore *gc); //text.c
 SDL_Rect fast_rect(int x, int y, int w, int h);//render.c
 void clear_textures(GameCore *gc);
 void draw(GameCore *gc, SDL_Texture *t, const SDL_Rect *size);
@@ -40,9 +39,7 @@ int start_sdl(GameCore *gc)
     printf("SDL_Init: %s \n", SDL_GetError() );
     return 1;
   }
-  //start_ttf(gc);  //load the fonts
-  load_font(gc, "data/font.bmp");
-  
+  start_ttf(gc);  //load the fonts
   SDL_GetCurrentDisplayMode(0, &gc->current_dmode); //Get screen size
   gc->screen_size_x = gc->current_dmode.w; //width
   gc->screen_size_y = gc->current_dmode.h; //height
@@ -63,10 +60,10 @@ int start_sdl(GameCore *gc)
     printf("%s \n", SDL_GetError() );
     return 1;
   }
-  //gc->font0 = TTF_OpenFont("data/font.ttf", 14);//font size?
+  gc->font0 = TTF_OpenFont("data/font.ttf", 14);//font size?
   gc->current_font = gc->font0;
   if (gc->font0 == NULL) {
-    printf("Error no font (data/font.bmp) ->from resources.c\n");
+    printf("Error no font (data/font.ttf) ->from resources.c\n");
     return 1;
   }
   gc->game_state = 1; //the game started
