@@ -380,7 +380,7 @@ void draw_message_frame(GameCore *gc)
   for(i=0; i<6; i++) {
     sdl_set_textpos(gc, gc->message_log.x + 5, gc->message_log.y + 5+(i*20)); 
     SDL_RenderCopy(gc->renderer,
-		   sdl_printf_font(gc, gc->font0, gc->messagelist[i]),
+		   sdl_printf_font(gc, gc->messagelist[i]),
 		   NULL,
 		   gc->c_text_size);
   }
