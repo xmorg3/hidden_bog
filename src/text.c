@@ -45,10 +45,12 @@ SDL_Surface* text(GameCore *gc, char *message)
     //update a font size here?
     SDL_Rect d = fast_rect(i*cfwidth, 0, cfwidth, cfheight);
     printf("blitting surface for char %d\n", i);
-    SDL_BlitSurface(gc->current_font, //surface of font
+    if(c != "\0") {
+      SDL_BlitSurface(gc->current_font, //surface of font
 		   &s,  //place in font to blit
 		   wholetext,//output string surface
-		   &d);		   
+		   &d);
+    }
     //text output as a surface
     //it should now be ready to convert/copy to a texture
   }
