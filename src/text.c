@@ -11,18 +11,18 @@ void load_font(GameCore *gc, char *bmpfile); //Load a bmp file into current_font
 void sdl_set_textpos(GameCore *gc, int x, int y); //text.c
 void set_color(GameCore *gc, int r, int g, int b); //set_font_color;
 SDL_Surface* text(GameCore *gc, char *message);
-sdl_printf_font(GameCore *gc, SDL_Surface *f, char * message);
+SDL_Texture* sdl_printf_font(GameCore *gc, SDL_Surface *f, char * message);
 
 void load_font(GameCore *gc, char *bmpfile)
 {
-  gc->font0 = SDL_LoadBMP(const char* file);
+  gc->font0 = SDL_LoadBMP(bmpfile);
   //gc->current_font = gc->font0;
 }
 
 void sdl_set_textpos(GameCore *gc, int x, int y) //text.c
 {
-  gc->c_text_size = x;
-  gc->c_text_size = y;
+  gc->c_text_size->x = x;
+  gc->c_text_size->y = y;
 }
 SDL_Surface* text(GameCore *gc, char *message)
 {
@@ -33,8 +33,8 @@ SDL_Surface* text(GameCore *gc, char *message)
   for(int i=0; i < l; i++) {
     c = message[i]; //current letter in string
     a = atoi(c);
-    cfwidth = gc->current_font->w / 96;
-    cfheight = gc->current_font->h;
+    int cfwidth = gc->current_font->w / 96;
+    int cfheight = gc->current_font->h;
     SDL_Rect s = fast_rect(a*cfwidth,    //X
 			   0,            //Y
 			   cfwidth,      //W
