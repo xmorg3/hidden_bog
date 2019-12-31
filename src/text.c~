@@ -29,7 +29,7 @@ void sdl_set_textpos(GameCore *gc, int x, int y) //text.c
 
 SDL_Surface* text(GameCore *gc, char *message)
 {
-  int l = strlen(message);
+  int l = strlen(message) -1;
   SDL_Surface *wholetext;
   char c; //current letter in string
   int  a; //c as int

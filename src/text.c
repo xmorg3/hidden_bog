@@ -29,7 +29,7 @@ void sdl_set_textpos(GameCore *gc, int x, int y) //text.c
 
 SDL_Surface* text(GameCore *gc, char *message)
 {
-  int l = strlen(message) -1;
+  int l = strlen(message);
   SDL_Surface *wholetext;
   char c; //current letter in string
   int  a; //c as int
@@ -45,21 +45,23 @@ SDL_Surface* text(GameCore *gc, char *message)
     //update a font size here?
     SDL_Rect d = fast_rect(i*cfwidth, 0, cfwidth, cfheight);
     printf("blitting surface for char %c %d\n", c, i);
-    if(c != '\0') {
-      SDL_BlitSurface(gc->current_font, //surface of font
+    //if(c != '\0') {
+    SDL_BlitSurface(gc->current_font, //surface of font
 		   &s,  //place in font to blit
 		   wholetext,//output string surface
 		   &d);
-    }
+    //}
     //text output as a surface
     //it should now be ready to convert/copy to a texture
   }
+  printf("finished all blits");
   return wholetext;
 }
 SDL_Texture* sdl_printf_font(GameCore *gc, char * message)
 {
   SDL_Texture *t;
   SDL_Surface *s = text(gc, message);
+  printf("got surface, creating texture\n");
   t = SDL_CreateTextureFromSurface(gc->renderer, s);
   return t;
 }
