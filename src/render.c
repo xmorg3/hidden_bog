@@ -473,7 +473,7 @@ void fast_button(GameCore *gc, int x, int y, char *text)
     SDL_RenderCopy(gc->renderer, gc->t_buttons, &gc->button_raised, &r);
   }
   sdl_set_textpos(gc, x+50, y+15); set_color(gc, 255, 255, 255);
-  SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, gc->font0, text), NULL, gc->c_text_size);
+  SDL_RenderCopy(gc->renderer, sdl_printf_font(gc,  text), NULL, gc->c_text_size);
 }
 void fast_radio(GameCore *gc, int x, int y, char *text, int selected) //does not uncheck?
 {//18,14,40,40...54,14,40,40
@@ -486,7 +486,7 @@ void fast_radio(GameCore *gc, int x, int y, char *text, int selected) //does not
     SDL_RenderCopy(gc->renderer, gc->t_buttons, &gc->radio_pressed, &r);
   }
   sdl_set_textpos(gc, x+36, y); set_color(gc, 255, 255, 255);
-  SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, gc->font0, text), NULL, gc->c_text_size);
+  SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, text), NULL, gc->c_text_size);
 }
 void draw_game_menu(GameCore *gc)
 {
