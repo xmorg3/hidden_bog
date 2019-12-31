@@ -26,16 +26,16 @@ void sdl_set_textpos(GameCore *gc, int x, int y) //text.c
 }
 SDL_Surface* text(GameCore *gc, char *message)
 {
-  l = strlen(message);
+  int l = strlen(message);
   SDL_Surface *wholetext;
   char c; //current letter in string
   int  a; //c as int
   for(int i=0; i < l; i++) {
     c = message[i]; //current letter in string
-    a = atoi(c);
+    //a = atoi(c);
     int cfwidth = gc->current_font->w / 96;
     int cfheight = gc->current_font->h;
-    SDL_Rect s = fast_rect(a*cfwidth,    //X
+    SDL_Rect s = fast_rect(c*cfwidth,    //X
 			   0,            //Y
 			   cfwidth,      //W
 			   cfheight);    //H
