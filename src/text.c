@@ -11,7 +11,7 @@ void load_font(GameCore *gc, char *bmpfile); //Load a bmp file into current_font
 void sdl_set_textpos(GameCore *gc, int x, int y); //text.c
 void set_color(GameCore *gc, int r, int g, int b); //set_font_color;
 SDL_Surface* text(GameCore *gc, char *message);
-SDL_Texture* sdl_printf_font(GameCore *gc, SDL_Surface *f, char * message);
+SDL_Texture* sdl_printf_font(GameCore *gc, char * message);
 
 void load_font(GameCore *gc, char *bmpfile)
 {
@@ -50,9 +50,9 @@ SDL_Surface* text(GameCore *gc, char *message)
   }
   return wholetext;
 }
-SDL_Texture* sdl_printf_font(GameCore *gc, SDL_Surface *f, char * message)
+SDL_Texture* sdl_printf_font(GameCore *gc, char * message)
 {
-  SDL_Texture t;
+  SDL_Texture *t;
   SDL_Surface *s = text(gc, message);
   t = SDL_CreateTextureFromSurface(gc->renderer, s);
   return t;

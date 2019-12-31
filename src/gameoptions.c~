@@ -8,7 +8,7 @@ void draw_options_menu(GameCore *gc);
 void fast_button(GameCore *gc, int x, int y, char *text);//render.c
 SDL_Rect fast_rect(int x, int y, int w, int h);//render.c
 
-SDL_Texture* sdl_printf_font(GameCore *gc, char *message); //text.c
+SDL_Texture* sdl_printf_font(GameCore *gc, TTF_Font *font, char *message); //text.c
 void sdl_set_textpos(GameCore *gc, int x, int y);//text.c
 void set_color(GameCore *gc, int r, int g, int b); //set_font_color; //text.c
 

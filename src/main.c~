@@ -6,7 +6,7 @@
 #include <string.h>
 
 int start_sdl(GameCore *gc);
-//int stop_ttf(GameCore *gc);
+int stop_ttf(GameCore *gc);
 int load_resources(GameCore *gc);
 int update(GameCore *gc); //handle_keydown handle_mousebutton_down
 void main_draw_loop(GameCore *gc);
@@ -61,7 +61,7 @@ int main(int argc, char** argv){
   SDL_DestroyTexture(gc->t_background);
   SDL_DestroyRenderer(gc->renderer);
   SDL_DestroyWindow(gc->win);
-  //stop_ttf(gc);
+  stop_ttf(gc);
   free(gc->c_text_size);
   free(gc);
 
