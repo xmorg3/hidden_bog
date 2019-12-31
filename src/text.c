@@ -63,7 +63,7 @@ SDL_Texture* sdl_printf_font(GameCore *gc, char * message)
 void set_color(GameCore *gc, int r, int g, int b) //set_font_color;
 {
   //SDL_Color current_color; //current color to draw in (like for text)
-  gc->current_color->r = r;
-  gc->current_color->b = b;
-  gc->current_color->g = g;
+  gc->current_color.r = r;
+  gc->current_color.b = b;
+  gc->current_color.g = g;
 }
