@@ -44,7 +44,7 @@ SDL_Surface* text(GameCore *gc, char *message)
 			   cfheight);    //H
     //update a font size here?
     SDL_Rect d = fast_rect(i*cfwidth, 0, cfwidth, cfheight);
-    printf("blitting surface for char %d\n", i);
+    printf("blitting surface for char %c %d\n", c, i);
     if(c != '\0') {
       SDL_BlitSurface(gc->current_font, //surface of font
 		   &s,  //place in font to blit
