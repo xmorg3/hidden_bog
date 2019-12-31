@@ -25,26 +25,27 @@ void sdl_set_textpos(GameCore *gc, int x, int y);
 //SDL_Texture* sdl_printf_fontTTF(GameCore *gc, TTF_Font *font, char *message);
 //SDL_Texture* sdl_printf_font(GameCore *gc, SDL_Surface *font, char *message);
 //SDL_Texture* sdl_printf(GameCore *gc, char *message);
-SDL_Surface *sdlprint(char *s, int x, int y);
+SDL_Surface *sdlprint(bitmapfont *b, char *s);
 void set_color(GameCore *gc, int r, int g, int b);
 //void start_ttf(GameCore *gc);
 //void stop_ttf(GameCore *gc);
 
-SDL_Rect *getchar_rect(bitmapfont *b, char c)
+SDL_Rect *getchar_rect(bitmapfont *b, SDL_Rect *cr, char c)
 {// [THE FONT IMAGE######[char here]######]
-  SDL_Rect cr; //char rect
+  //SDL_Rect cr; //char rect
   int charcode;
   int x;
+  //const char atc = ;
   charcode = atoi(c);
-  cr.x = charcode * b->width;//position of char in font
-  cr.y = 0; //no assumed rows in font
-  cr.w = b->width;
-  cr.h = b->height;
+  cr->x = charcode * b->width;//position of char in font
+  cr->y = 0; //no assumed rows in font
+  cr->w = b->width;
+  cr->h = b->height;
   return &cr;
 }
-SDL_Surface *sdlprint(bitmapfont b, char *s)
+SDL_Surface *sdlprint(bitmapfont *b, char *s)
 {//getting a surface with the string printed onto it.
-  int lenth;
+  int len;
   SDL_Rect string_rect;
   SDL_Rect charrect; //size of the whole string as a rectangle
   SDL_Surface *string_surf;
@@ -55,14 +56,14 @@ SDL_Surface *sdlprint(bitmapfont b, char *s)
   //string_recy->y = 0;
   for(int i=0; i<len; i++) {
     //loop through i, and place characters in the right place.
-    charrect.w = b->w;
-    charrect.h = b->h;
-    charrect.x = i*b->w;
+    charrect.w = b->width;
+    charrect.h = b->height;
+    charrect.x = i*b->width;
     charrect.y = 0;
     SDL_BlitSurface(b->img, //blit the font
-		    getchar_rect(b, s[i]), //source rect of font
+		    getchar_rect(b, &charrect, s[i]), //source rect of font
 		    string_surf, //... to string_surf
-		    &charrect);//the dest rect on string_surf
+		    &charrect);  //the dest rect on string_surf
   }
   return string_surf; //return string surface
 }
@@ -85,16 +86,16 @@ SDL_Texture* sdl_printf_fontTTF(GameCore *gc, TTF_Font *font, char *message)
   //texture = SDL_CreateTextureFromSurface(gc->renderer, surf);
   //return texture;
 }
-SDL_Texture *sdl_printf_font(GameCore *gc, void *font, char *message)
-{ //wrap the sdl_printf_font fucntion, with either bitmap fonts, or ttf fonts.
-   SDL_Texture *t;
-  #ifdef SDLTTF
-   t = sdl_printf_fontTTF(gc, (TTF_Font)font, message);
-  #ifndef SDLTTF
+//SDL_Texture *sdl_printf_font(GameCore *gc, void *font, char *message)
+//{ //wrap the sdl_printf_font fucntion, with either bitmap fonts, or ttf fonts.
+//   SDL_Texture *t;
+   //#ifdef SDLTTF
+   //t = sdl_printf_fontTTF(gc, (TTF_Font)font, message);
+   //#ifndef SDLTTF
    //do the bitmap font thing.
-  #endif
-   return t;
-}
+//  #endif
+//   return t;
+//}
 
 //Same as above but use default font and color.
 SDL_Texture* sdl_printf(GameCore *gc, char *message)
@@ -102,11 +103,13 @@ SDL_Texture* sdl_printf(GameCore *gc, char *message)
   SDL_Surface *surf;
   SDL_Texture *texture;
   //SDL_Surface *sdlprint(bitmapfont b, char *s, int x, int y)
-  surf = sdlprint(gc->bmpfont, message);
+  surf = sdlprint(gc->current_font, message);
   //surf = TTF_RenderText_Blended(gc->current_font, message, gc->current_color);
   texture = SDL_CreateTextureFromSurface(gc->renderer, surf);
   return texture;
 }
+
+//void load_font(GameCore *gc, SDL_Surface)
 
 void set_color(GameCore *gc, int r, int g, int b)
 {
@@ -115,21 +118,21 @@ void set_color(GameCore *gc, int r, int g, int b)
   gc->current_color.b = b;
 }
 
-void start_ttf(GameCore *gc)
-{
-  if(!TTF_WasInit() && TTF_Init()==-1) {
-    printf("TTF_Init: %s\n", TTF_GetError());
-    exit(1);
-  }
+//void start_ttf(GameCore *gc)
+//{
+//  if(!TTF_WasInit() && TTF_Init()==-1) {
+//    printf("TTF_Init: %s\n", TTF_GetError());
+//    exit(1);
+//  }
   //TTF_Font *font0;
-  gc->font0 = TTF_OpenFont("data/font.ttf", 18);
-  if(!gc->font0) {
-    printf("TTF_OpenFont: %s\n", TTF_GetError()); // handle error
-  }
-}
-void stop_ttf(GameCore *gc)
-{
-  TTF_CloseFont(gc->font0);
-  gc->font0=NULL; // to be safe...
-  TTF_Quit();
-}
+//  gc->font0 = TTF_OpenFont("data/font.ttf", 18);
+//  if(!gc->font0) {
+//    printf("TTF_OpenFont: %s\n", TTF_GetError()); // handle error
+//  }
+//}
+//void stop_ttf(GameCore *gc)
+//{
+//  TTF_CloseFont(gc->font0);
+//  gc->font0=NULL; // to be safe...
+//  TTF_Quit();
+//}

@@ -26,7 +26,7 @@ See SDL documentation for additional info
 https://wiki.libsdl.org/Installation#Linux.2FUnix
 SDL2 development libs
      Mint/Ubuntu
-	sudo apt-get install libsdl2-2.0  libsdl2-ttf-dev libsdl2-ttf-2.0-0 libsdl2-dev sdl2-image-2.0-0 sdl2-image-dev
+	sudo apt-get install libsdl2-2.0  libsdl2-ttf-dev libsdl2-ttf-2.0-0 libsdl2-dev libsdl2-image-2.0-0 libsdl2-image-dev
 Required to run:
 	 sdl2 sdl2-image sdl2-ttf
 Experimental code
