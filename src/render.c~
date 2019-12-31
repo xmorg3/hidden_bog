@@ -29,7 +29,7 @@ void draw_sheet_character(GameCore *gc);
 //text.c
 SDL_Texture* sdl_printf_font(GameCore *gc, char *message);
 void sdl_set_textpos(GameCore *gc, int x, int y);
-void set_color(GameCore *gc, int r, int g, int b); //text.c
+void set_color(GameCore *gc, int r, int g, int b); //set_font_color;
 
 void draw_message_frame(GameCore *gc);
 void resize_screen(GameCore *gc, int size_x, int size_y);
