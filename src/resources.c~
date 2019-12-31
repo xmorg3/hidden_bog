@@ -18,6 +18,7 @@ SDL_Texture * IMG_Load_w_error(GameCore *gc, char * imgfile);
 void set_rect(SDL_Rect *r, int x, int y, int w, int h);
 int load_resources(GameCore *gc);
 void load_map_wall_textures(GameCore *gc, char *directory);
+
 //void start_ttf(GameCore *gc); //text.c
 void load_font(GameCore *gc, char *bmpfile);
 SDL_Rect fast_rect(int x, int y, int w, int h);//render.c
@@ -41,6 +42,7 @@ int start_sdl(GameCore *gc)
   }
   //start_ttf(gc);  //load the fonts
   load_font(gc, "data/font.bmp");
+  
   SDL_GetCurrentDisplayMode(0, &gc->current_dmode); //Get screen size
   gc->screen_size_x = gc->current_dmode.w; //width
   gc->screen_size_y = gc->current_dmode.h; //height

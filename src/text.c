@@ -17,7 +17,8 @@ void set_color(GameCore *gc, int r, int g, int b); //set_font_color;
 
 void load_font(GameCore *gc, char *bmpfile)
 {
-  gc->font0 = SDL_LoadBMP(bmpfile);  //gc->current_font = gc->font0;
+  gc->font0 = SDL_LoadBMP(bmpfile);
+  gc->current_font = gc->font0;
 }
 
 void sdl_set_textpos(GameCore *gc, int x, int y) //text.c

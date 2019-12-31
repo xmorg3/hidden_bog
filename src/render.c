@@ -465,7 +465,6 @@ void fast_button(GameCore *gc, int x, int y, char *text)
 {
   SDL_Rect r; //, tr;
   r = fast_rect(x, y, 283,55);
-  //if x,y colliding with gc->mouse_x, and gc->mouse_y
   if(gc->mouse_x >= x && gc->mouse_x <= x+283 && gc->mouse_y >= y && gc->mouse_y <= y+55) {
     SDL_RenderCopy(gc->renderer, gc->t_buttons, &gc->button_highlighted, &r);
   }
