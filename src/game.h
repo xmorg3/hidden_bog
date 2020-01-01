@@ -174,7 +174,7 @@ typedef struct _GameCore {
   SDL_Color current_color; //current color to draw in (like for text)
   //TTF_Font *current_font;
   //TTF_Font *font0;
-  SDL_Surface *current_font;
+  SDL_Texture *current_font;
   SDL_Surface *font0;
   SDL_Rect *c_text_size;
   SDL_Rect player_viewport, message_log, tabbed_pane,
