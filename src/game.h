@@ -175,7 +175,7 @@ typedef struct _GameCore {
   //TTF_Font *current_font;
   //TTF_Font *font0;
   SDL_Texture *current_font;
-  SDL_Surface *font0;
+  SDL_Texture *font0;
   SDL_Rect *c_text_size;
   SDL_Rect player_viewport, message_log, tabbed_pane,
     vp0_object_left, vp0_object_right, 
