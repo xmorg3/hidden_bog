@@ -40,7 +40,7 @@ int start_sdl(GameCore *gc)
     return 1;
   }
   //start_ttf(gc);  //load the fonts
-  load_font(gc, "data/font.bmp");
+  //load_font(gc, "data/font.png"); //moved to below. 
   SDL_GetCurrentDisplayMode(0, &gc->current_dmode); //Get screen size
   gc->screen_size_x = gc->current_dmode.w; //width
   gc->screen_size_y = gc->current_dmode.h; //height
@@ -62,7 +62,9 @@ int start_sdl(GameCore *gc)
     return 1;
   }
   //gc->font0 = TTF_OpenFont("data/font.ttf", 14);//font size?
-  gc->current_font = gc->font0;
+  //gc->font0 =  load_font(gc, "data/font.png");
+  //gc->current_font = gc->font0;
+  load_font(gc, "data/font.png");
   if (gc->font0 == NULL) {
     printf("Error no font (data/font.bmp) ->from resources.c\n");
     return 1;
