@@ -286,12 +286,10 @@ void draw_oov1(GameCore *gc, int left, int middle, int right) //drop objects in 
 }
 
 void draw_playport_north(GameCore *gc)
-{
-  //int current_tile; //set value to whatever tile we are rendering.
+{  //int current_tile; //set value to whatever tile we are rendering.
   draw_fov2(gc, gc->current_map->background_layer[gc->player->map_y-2][gc->player->map_x-1],
 	    gc->current_map->background_layer[    gc->player->map_y-2][gc->player->map_x],
-	    gc->current_map->background_layer[    gc->player->map_y-2][gc->player->map_x+1]);
-  
+	    gc->current_map->background_layer[    gc->player->map_y-2][gc->player->map_x+1]);  
   draw_fov1(gc,
 	    gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x-1],
 	    gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x  ],
@@ -303,7 +301,6 @@ void draw_playport_north(GameCore *gc)
   draw_fov0(gc, gc->current_map->background_layer[gc->player->map_y][gc->player->map_x-1],
 	    gc->current_map->background_layer[    gc->player->map_y][gc->player->map_x],
 	    gc->current_map->background_layer[    gc->player->map_y][gc->player->map_x+1]);
-  	   
   draw_oov0(gc, 
 	    gc->current_map->object_layer[ gc->player->map_y][gc->player->map_x-1],
 	    gc->current_map->object_layer[ gc->player->map_y][gc->player->map_x],
@@ -311,12 +308,10 @@ void draw_playport_north(GameCore *gc)
 }
 
 void draw_playport_east(GameCore *gc)
-{
-  //int current_tile; //set value to whatever tile we are rendering.
+{  //int current_tile; //set value to whatever tile we are rendering.
   draw_fov2(gc, gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x+2],
 	    gc->current_map->background_layer[    gc->player->map_y  ][gc->player->map_x+2],
 	    gc->current_map->background_layer[    gc->player->map_y+1][gc->player->map_x+2]);
-  
   draw_fov1(gc, gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x+1],
 	    gc->current_map->background_layer[gc->player->map_y][gc->player->map_x+1],
 	    gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x+1]);
@@ -331,9 +326,7 @@ void draw_playport_east(GameCore *gc)
 	    gc->current_map->object_layer[gc->player->map_y+1][gc->player->map_x]);
 }
 void draw_playport_south(GameCore *gc)
-{
-  //int current_tile; //set value to whatever tile we are rendering.
-  //current_tile = gc->current_map->tiles[gc->player->map_y-1][gc->player->map_x+2];
+{  //int current_tile; //set value to whatever tile we are rendering.
   draw_fov2(gc, gc->current_map->background_layer[gc->player->map_y+2][gc->player->map_x+1],
 	    gc->current_map->background_layer[gc->player->map_y+2][gc->player->map_x],
 	    gc->current_map->background_layer[gc->player->map_y+2][gc->player->map_x-1]);
