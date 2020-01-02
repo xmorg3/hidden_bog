@@ -48,6 +48,7 @@ SDL_Texture* rendertext(GameCore *gc, char *message) {
   return wholetext;
 }
 SDL_Texture* sdl_printf_font(GameCore *gc, char * message) {
+  //SDL_RenderCopy(gc->renderer, gc->wall_right_fov0_blank, NULL, &gc->player_viewport);
   SDL_Texture *t = rendertext(gc, message);//SDL_CreateTextureFromSurface(gc->renderer, s);
   SDL_RenderCopy(gc->renderer, t, NULL, gc->c_text_size);  //output to the screen.
   return t;
