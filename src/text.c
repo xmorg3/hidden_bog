@@ -7,7 +7,7 @@
 #include "game.h"
 
 SDL_Rect fast_rect(int x, int y, int w, int h); //render.c
-IMG_Load_w_error(GameCore *gc, char * imgfile); //resources.c
+SDL_Texture* IMG_Load_w_error(GameCore *gc, char * imgfile); //resources.c
 void load_font(GameCore *gc, char *bmpfile); //Load a bmp file into current_font
 void sdl_set_textpos(GameCore *gc, int x, int y); //text.c
 SDL_Texture* rendertext(GameCore *gc, char *message); //put text out.
