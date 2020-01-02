@@ -7,6 +7,7 @@
 #include "game.h"
 
 SDL_Rect fast_rect(int x, int y, int w, int h); //render.c
+IMG_Load_w_error(GameCore *gc, char * imgfile); //resources.c
 void load_font(GameCore *gc, char *bmpfile); //Load a bmp file into current_font
 void sdl_set_textpos(GameCore *gc, int x, int y); //text.c
 SDL_Texture* rendertext(GameCore *gc, char *message); //put text out.
@@ -14,8 +15,9 @@ SDL_Texture* sdl_printf_font(GameCore *gc, char * message); //calls txt currentl
 void set_color(GameCore *gc, int r, int g, int b); //set_font_color;
 
 void load_font(GameCore *gc, char *bmpfile) {
-  SDL_Surface *s = SDL_LoadBMP(bmpfile); //load the surface
-  gc->font0 = SDL_CreateTextureFromSurface(gc->renderer, s); //surf to tex
+  //SDL_Surface *s = SDL_LoadBMP(bmpfile); //load the surface
+  //gc->font0 = SDL_CreateTextureFromSurface(gc->renderer, s); //surf to tex
+  gc->font0 = IMG_Load_w_error(gc, bmpfile);
   gc->current_font = gc->font0; //pointer to pointer
 }
 
