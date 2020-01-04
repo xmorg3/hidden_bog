@@ -27,7 +27,8 @@ void fast_radio(GameCore *gc, int x, int y, char *text, int selected); //does no
 void draw_sheet_character(GameCore *gc);
 
 //text.c
-SDL_Texture* sdl_printf_font(GameCore *gc, char *message);
+void rendertext(GameCore *gc, char *message);
+//SDL_Texture* sdl_printf_font(GameCore *gc, char *message);
 void sdl_set_textpos(GameCore *gc, int x, int y);
 void set_color(GameCore *gc, int r, int g, int b); //text.c
 
@@ -42,6 +43,15 @@ void drawto_viewport(GameCore *gc, SDL_Texture *img);
 //void drawto_frame(GameCore *gc, SDL_Texture *img, const SDL_Rect* size) {
 //  draw(gc, img, size);
 //}
+
+SDL_Rect fast_rect(int x, int y, int w, int h)
+{
+  SDL_Rect r;
+  r.x = x; r.y = y; r.w=w; r.h=h;
+  return r;			   
+}
+
+
 void drawto_viewport(GameCore *gc, SDL_Texture *img ) {
   //SDL_RenderCopy(gc->renderer, img, NULL, &gc->player_viewport);
   draw(gc, img, &gc->player_viewport);
@@ -81,15 +91,7 @@ void main_draw_loop(GameCore *gc)
   else{ }
   SDL_RenderPresent(gc->renderer);
 }
-void draw_playframe(GameCore *gc)
-{ //draw frame with other items inside.
-  //SDL_RenderCopy(gc->renderer, gc->t_background, NULL, NULL); //put background
-  //SDL_GetRenderDrawColor(gc->renderer, 0,0,0,0); 
-  //SDL_SetRenderDrawColor(gc->renderer, 0,0,0,0);
-  //SDL_RenderFillRect(gc->renderer, &gc->player_viewport);  // message_log, tabbed_pane;
-  //SDL_RenderFillRect(gc->renderer, &gc->message_log);
-  //SDL_RenderFillRect(gc->renderer, &gc->tabbed_pane);
-  //draw_message_frame(gc);
+void draw_playframe(GameCore *gc) { 
   draw_character_portraits(gc);
   draw_mapport(gc);
 }
@@ -176,22 +178,16 @@ void draw_fov1(GameCore *gc, int left, int middle, int right)
   if( right ==2) { drawto_viewport(gc,gc->wall_right_fov1_blank);}
   if( right ==3) { drawto_viewport(gc,gc->tall_wall_right_fov1); } 
   if( right == 4)  {
-    //SDL_RenderCopy(gc->renderer, gc->wall_right_fov1_blank, NULL, &gc->player_viewport);
-    //SDL_RenderCopy(gc->renderer, gc->door_right_fov1_blank, NULL, &gc->player_viewport);
     drawto_viewport(gc,gc->wall_right_fov1_blank);
     drawto_viewport(gc,gc->door_right_fov1_blank);
   }
   if( middle==2)  {
-    //SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);
     drawto_viewport(gc, gc->wall_front_fov0_blank);
   }
   if( middle ==3)  {
-    //SDL_RenderCopy(gc->renderer, gc->tall_wall_front_fov0, NULL, &gc->player_viewport);
     drawto_viewport(gc, gc->tall_wall_front_fov0);
   }
   if( middle == 4)  {
-    //SDL_RenderCopy(gc->renderer, gc->wall_front_fov0_blank, NULL, &gc->player_viewport);
-    //SDL_RenderCopy(gc->renderer, gc->door_front_fov0_blank, NULL, &gc->player_viewport);
     drawto_viewport(gc, gc->wall_front_fov0_blank);
     drawto_viewport(gc, gc->door_front_fov0_blank);
   }
@@ -371,11 +367,12 @@ void draw_message_frame(GameCore *gc)
   int i;
   set_color(gc, 255, 255, 255);
   for(i=0; i<6; i++) {
-    sdl_set_textpos(gc, gc->message_log.x + 5, gc->message_log.y + 5+(i*20)); 
-    SDL_RenderCopy(gc->renderer,
-		   sdl_printf_font(gc, gc->messagelist[i]),
-		   NULL,
-		   gc->c_text_size);
+    sdl_set_textpos(gc, gc->message_log.x + 5, gc->message_log.y + 5+(i*20));
+    rendertext(gc, gc->messagelist[i]);
+    //SDL_RenderCopy(gc->renderer,
+    //sdl_printf_font(gc, gc->messagelist[i]); //,
+    //		   NULL,
+    //	   gc->c_text_size);
   }
 }
 
@@ -448,12 +445,7 @@ void draw_mapport(GameCore *gc)
   SDL_SetRenderDrawColor(gc->renderer, 0,0,0,0);
   set_color(gc, 255, 255, 255);
 }
-SDL_Rect fast_rect(int x, int y, int w, int h)
-{
-  SDL_Rect r;
-  r.x = x; r.y = y; r.w=w; r.h=h;
-  return r;			   
-}
+
 void fast_button(GameCore *gc, int x, int y, char *text)
 {
   SDL_Rect r; //, tr;
@@ -465,7 +457,9 @@ void fast_button(GameCore *gc, int x, int y, char *text)
     SDL_RenderCopy(gc->renderer, gc->t_buttons, &gc->button_raised, &r);
   }
   sdl_set_textpos(gc, x+50, y+15); set_color(gc, 255, 255, 255);
-  SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, text), NULL, gc->c_text_size);
+  //SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, text), NULL, gc->c_text_size);
+  //sdl_printf_font(gc, text);
+  rendertext(gc, text);
 }
 void fast_radio(GameCore *gc, int x, int y, char *text, int selected) //does not uncheck?
 {//18,14,40,40...54,14,40,40
@@ -478,7 +472,9 @@ void fast_radio(GameCore *gc, int x, int y, char *text, int selected) //does not
     SDL_RenderCopy(gc->renderer, gc->t_buttons, &gc->radio_pressed, &r);
   }
   sdl_set_textpos(gc, x+36, y); set_color(gc, 255, 255, 255);
-  SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, text), NULL, gc->c_text_size);
+  //SDL_RenderCopy(gc->renderer,
+  //sdl_printf_font(gc, text);//, NULL, gc->c_text_size);
+  rendertext(gc, text);
 }
 void draw_game_menu(GameCore *gc)
 {

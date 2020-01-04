@@ -15,7 +15,7 @@ void fast_button(GameCore *gc, int x, int y, char *text);//render.c
 SDL_Rect fast_rect(int x, int y, int w, int h);//render.c
 void set_rect(SDL_Rect *r, int x, int y, int w, int h);
 
-SDL_Texture* sdl_printf_font(GameCore *gc, char *message);
+void rendertext(GameCore *gc, char *message);
 void sdl_set_textpos(GameCore *gc, int x, int y); //text.c
 void set_color(GameCore *gc, int r, int g, int b); //set_font_color;
 void fast_radio(GameCore *gc, int x, int y, char *text, int selected); //does not uncheck? //render.c
@@ -60,7 +60,8 @@ void draw_chargen_menu(GameCore *gc)
   draw_char_menu_frame(gc); //draw background (with buttons)
   SDL_RenderCopy(gc->renderer, gc->character_doll, &gc->character_doll_rect, &dst); //put background
   sdl_set_textpos(gc, 210, 80); set_color(gc, 255, 255, 255);
-  SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, "Gender"), NULL, gc->c_text_size);
+  //SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, "Gender"), NULL, gc->c_text_size);
+  rendertext(gc, "Gender");
   if(gc->player->sex == 0) { //1 male, 0 female
     fast_radio(gc, 200, 100, "Male", 0 );
     fast_radio(gc, 200, 130, "Female", 1 );
@@ -70,8 +71,9 @@ void draw_chargen_menu(GameCore *gc)
     fast_radio(gc, 200,130, "Female", 0);
   }
   sdl_set_textpos(gc, 210, 180); //set_color(gc, 255, 255, 255);
-  SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, "Race"), NULL, gc->c_text_size);
-
+  //SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, "Race"), NULL, gc->c_text_size);
+  rendertext(gc, "Race"); 
+  
   if(gc->player->race == 0) {  fast_radio(gc, 200, 200, "Human",1); }//0
   else { fast_radio(gc, 200, 200, "Human",0); }
   
@@ -111,10 +113,12 @@ void draw_character_1attribute(GameCore *gc, int x, int y, int stat, char *str)
 {
   char stat_text[4];
   sdl_set_textpos(gc, x, y);
-  SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, str), NULL, gc->c_text_size);
+  //SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, str), NULL, gc->c_text_size);
+  rendertext(gc, str);
   sdl_set_textpos(gc,x+130,y);
   sprintf(stat_text, "%2d", stat);
-  SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, stat_text), NULL, gc->c_text_size);
+  //SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, stat_text), NULL, gc->c_text_size);
+  rendertext(gc, stat_text);
 }
 void draw_minusplus_buttons(GameCore *gc, int x, int y)
 {
