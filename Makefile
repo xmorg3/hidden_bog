@@ -22,6 +22,7 @@ FILES = src/main.c \
 	src/sheet_character.c \
 	src/sheet_dialogue.c \
 	src/sheet_inventory.c \
+	src/renderports.c \
 #	src/data.c
 
 #src/glfunctions.c

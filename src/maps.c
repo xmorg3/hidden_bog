@@ -11,6 +11,7 @@ void free_playmap(PlayMap *m);
 void write_map_file(char *mapname, char **mapchars, int height, int width, const char *fn);
 void world_gen(SDL_Surface *s, int catlevel, int templevel, int evlevel);
 int game_load_scene(GameCore *gc);
+void load_exits(GameCore *gc); //parse maps looking for exit tags.
 //
 //typedef struct _OsareMap {
 //  int width;
@@ -128,6 +129,15 @@ void read_map_file(PlayMap *m, const char *filename)
       m->object_layer[y][x] = atoi(strtok(NULL, ",\n"));
       i++;
     }
+  }
+
+  //finding exits -> exit=1,1,map.txt\n
+  i=0;
+  for(i=0; i<7; i++) {
+    tempstr = strtok( strstr(data, "exit"), ",=\n" );
+    tempstr = strtok( NULL, ",=\n" ); //=
+    //atoi x,y
+    //assign mapname to exit to be loaded later.
   }
   //fclose(f);
   printf("finished reading file\n");

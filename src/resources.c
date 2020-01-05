@@ -62,8 +62,6 @@ int start_sdl(GameCore *gc)
     return 1;
   }
   //gc->font0 = TTF_OpenFont("data/font.ttf", 14);//font size?
-  //gc->font0 =  load_font(gc, "data/font.png");
-  //gc->current_font = gc->font0;
   load_font(gc, "data/font.png");
   if (gc->font0 == NULL) {
     printf("Error no font (data/font.bmp) ->from resources.c\n");

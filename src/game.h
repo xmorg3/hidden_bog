@@ -63,7 +63,7 @@ typedef struct _Actor {
     luck,
     bonus_attr;
     
-    /*  new skills  */
+  // ----- new skills -------
   int skill_dagger,
     skill_sword,
     skill_axe,
@@ -111,6 +111,11 @@ typedef struct _Actor {
   int map_x, map_y; //xy on current map
 } Actor;
 
+typedef struct _MapExit { //points to where the map exits
+  int x,y; //coordinates on the map;
+  char *mapfile; //filename of the map.
+} MapExit;
+
 typedef struct _PlayMap { //maps.c //newstuff
   int width;
   int height;
@@ -124,6 +129,7 @@ typedef struct _PlayMap { //maps.c //newstuff
   int **object_layer; //objects, enemies, doors?
   int **collision_layer; //not used.
   int **fog_layer;
+  MapExit exit[7]; //total of 8 exits possible per map.
 } PlayMap; //maps.c
 
 typedef struct Npctab { //tab
@@ -188,7 +194,6 @@ typedef struct _GameCore {
   Actor *player;
   Actor *npc_list; //list of npc's
   PlayMap *current_map;
-
 } GameCore;
 
 /* Maps.h */
