@@ -65,6 +65,12 @@ void handle_keydown(GameCore *gc)
   	}
   	else { gc->game_state = GAME_PLAYER_STATUS;	}
   }
+   else if(k == SDLK_i ) { //draw sheet
+  	if (gc->game_state == GAME_PLAYER_INVENTORY) {
+  		gc->game_state = GAME_PLAY_IDLE;
+  	}
+  	else { gc->game_state = GAME_PLAYER_INVENTORY;	}
+  }
 }
 void handle_mousebutton_down(GameCore *gc)
 {

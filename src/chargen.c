@@ -52,16 +52,11 @@ void draw_char_menu_frame(GameCore *gc)
     fast_button(gc, 300,gc->screen_size_y - 58, "Next");
   }
 }
-void draw_chargen_menu(GameCore *gc)
-{//int screen_size_x, screen_size_y;
-  SDL_Rect dst, src, r;
-  src = fast_rect(0,0,280,800); //set_rect(&gc->character_doll_rect, 0,0,280,800); //female rect x = 454, w = 220
-  dst = fast_rect(8,65,180,450);
-  draw_char_menu_frame(gc); //draw background (with buttons)
-  SDL_RenderCopy(gc->renderer, gc->character_doll, &gc->character_doll_rect, &dst); //put background
-  sdl_set_textpos(gc, 210, 80); set_color(gc, 255, 255, 255);
-  //SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, "Gender"), NULL, gc->c_text_size);
-  rendertext(gc, "Gender");
+
+void draw_gender_radio(GameCore *gc)
+{
+  SDL_Rect r;
+  r = fast_rect(gc->player->portrait*128,0,128,128);
   if(gc->player->sex == 0) { //1 male, 0 female
     fast_radio(gc, 200, 100, "Male", 0 );
     fast_radio(gc, 200, 130, "Female", 1 );
@@ -70,9 +65,29 @@ void draw_chargen_menu(GameCore *gc)
     fast_radio(gc, 200, 100, "Male", 1);
     fast_radio(gc, 200,130, "Female", 0);
   }
+  if(gc->player->sex == 0) {  //check sex for portraits
+  SDL_RenderCopy(gc->renderer, gc->portraits_human_male,&r, &gc->char_frame_rect); //TODO: get female portraits
+  //check race, there are a total of 10 png's 
+  }
+  else { //1
+    SDL_RenderCopy(gc->renderer, gc->portraits_human_male,&r, &gc->char_frame_rect); //male portraits
+    //check race, there are a total of 10 png's 
+  }
+}
+
+void draw_chargen_menu(GameCore *gc)
+{//int screen_size_x, screen_size_y;
+  SDL_Rect dst, src, r;
+  src = fast_rect(0,0,280,800); //set_rect(&gc->character_doll_rect, 0,0,280,800); //female rect x = 454, w = 220
+  dst = fast_rect(8,65,180,450);
+  draw_char_menu_frame(gc); //draw background (with buttons)
+  SDL_RenderCopy(gc->renderer, gc->character_doll, &gc->character_doll_rect, &dst); //put background
+  sdl_set_textpos(gc, 210, 80); set_color(gc, 255, 255, 255);
+  rendertext(gc, "Gender"); //draw text for gender radios
+  draw_gender_radio(gc); //draw the male-female radio buttons.
   sdl_set_textpos(gc, 210, 180); //set_color(gc, 255, 255, 255);
   //SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, "Race"), NULL, gc->c_text_size);
-  rendertext(gc, "Race"); 
+  rendertext(gc, "Race");  //draw text for the race picker.
   
   if(gc->player->race == 0) {  fast_radio(gc, 200, 200, "Human",1); }//0
   else { fast_radio(gc, 200, 200, "Human",0); }
@@ -93,19 +108,21 @@ void draw_chargen_menu(GameCore *gc)
   else{fast_radio(gc, 200, 350, "Half-Ork",0);} //5
 
   r = fast_rect(gc->player->portrait*128,0,128,128);
-  gc->char_frame_rect = fast_rect(323, 40, 128, 128 );
+  gc->char_frame_rect = fast_rect(353, 40, 128, 128 );
  
- if(gc->player->sex == 0) {  //check sex for portraits
-  SDL_RenderCopy(gc->renderer, gc->portraits_human_male,&r, &gc->char_frame_rect); //TODO: get female portraits
+  //if(gc->player->sex == 0) {  //check sex for portraits
+  //SDL_RenderCopy(gc->renderer, gc->portraits_human_male,&r, &gc->char_frame_rect); //TODO: get female portraits
   //check race, there are a total of 10 png's 
- }
- else { //1
-  SDL_RenderCopy(gc->renderer, gc->portraits_human_male,&r, &gc->char_frame_rect); //male portraits
+  //}
+  //else { //1
+  //SDL_RenderCopy(gc->renderer, gc->portraits_human_male,&r, &gc->char_frame_rect); //male portraits
   //check race, there are a total of 10 png's 
- }
+  //}
   SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect);  
   draw_minusplus_buttons(gc, 443, 145);
-  draw_character_attributes(gc, gc->stat_panel_x, gc->stat_panel_y, 1);
+  //gc->stat_panel_x+=100;
+  //gc->stat_panel_y+=100;
+  draw_character_attributes(gc, gc->stat_panel_x, gc->stat_panel_y, 1); //added +100 on 4/17
 }
 
 #include <string.h>
@@ -113,11 +130,9 @@ void draw_character_1attribute(GameCore *gc, int x, int y, int stat, char *str)
 {
   char stat_text[4];
   sdl_set_textpos(gc, x, y);
-  //SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, str), NULL, gc->c_text_size);
   rendertext(gc, str);
-  sdl_set_textpos(gc,x+130,y);
+  sdl_set_textpos(gc,x+180,y);
   sprintf(stat_text, "%2d", stat);
-  //SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, stat_text), NULL, gc->c_text_size);
   rendertext(gc, stat_text);
 }
 void draw_minusplus_buttons(GameCore *gc, int x, int y)
@@ -200,7 +215,6 @@ void handle_mousebutton_down_chargen_menu(GameCore *gc)
 
   pagi  = fast_rect(gc->dst_stat_minus.x, gc->dst_stat_plus.y  +20*2, gc->dst_stat_plus.w, gc->dst_stat_plus.h);
   magi  = fast_rect(gc->dst_stat_plus.x, gc->dst_stat_plus.y  +20*2, gc->dst_stat_plus.w, gc->dst_stat_plus.h);
-
 
   pwisdom  = fast_rect(gc->dst_stat_minus.x, gc->dst_stat_plus.y  +20*3, gc->dst_stat_plus.w, gc->dst_stat_plus.h);
   mwisdom  = fast_rect(gc->dst_stat_plus.x, gc->dst_stat_plus.y  +20*3, gc->dst_stat_plus.w, gc->dst_stat_plus.h);
@@ -331,20 +345,5 @@ void handle_mousebutton_down_chargen_menu(GameCore *gc)
       gc->player->race = i;
       break;
     }
-  }
-  
-
-  //loop through these and see if one was clicked?
-  //race  a->race = 0;
-  /*  fast_radio(gc, 200, 200, "Human",0); //0
-  fast_radio(gc, 200, 230, "Elf",0); //1
-  fast_radio(gc, 200, 260, "Dwarf",0); //2
-  fast_radio(gc, 200, 290, "Dark Elf",0);//3
-  fast_radio(gc, 200, 320, "Goblin",0); //4
-  fast_radio(gc, 200, 350, "Half-Ork",0); //4*/
-  //else if ( check_clickedin(&rradio_race_human, gc->mouse_x, gc->mouse_y ) == 1 ) {
-  //  a->race=human;
-  //}
-  //gc->dst_stat_minus = fast_rect(gc->stat_panel_x-32+20, gc->stat_panel_y, 20, 20); //first buttons for plus/minus on
-  //gc->dst_stat_plus = fast_rect( gc->stat_panel_x-32, gc->stat_panel_y, 20, 20); //stat sheets
+  } 
 }

@@ -17,12 +17,15 @@ void draw_oov0(GameCore *gc, int left, int middle, int right);
 void draw_game_menu(GameCore *gc);
 void draw_chargen_menu(GameCore *gc); //chargen.c
 void draw_options_menu(GameCore *gc); //gameoptions.c
+void render_inventory(GameCore *gc);
 void draw_mapport(GameCore *gc);
 void draw_character_portraits(GameCore *gc);
 void set_map_tile_color(GameCore *gc, int location_x, int location_y, int x, int y);
 void fast_button(GameCore *gc, int x, int y, char *text);
 SDL_Rect fast_rect(int x, int y, int w, int h);
 void fast_radio(GameCore *gc, int x, int y, char *text, int selected); //does not uncheck?
+void main_draw_loop(GameCore *gc); //called in main.c
+
 //void display_render(GameCore *gc);
 void draw_sheet_character(GameCore *gc);
 
@@ -59,7 +62,7 @@ void drawto_viewport(GameCore *gc, SDL_Texture *img ) {
   draw(gc, img, &gc->player_viewport);
 }
 
-void main_draw_loop(GameCore *gc)
+void main_draw_loop(GameCore *gc) //called in main.c
 {
   SDL_RenderClear(gc->renderer); //clear screen?  
   if(gc->game_state == GAME_START_MENU) {
@@ -79,10 +82,12 @@ void main_draw_loop(GameCore *gc)
   }
   else if (gc->game_state == GAME_PLAYER_MOVE) { }
   else if (gc->game_state == GAME_PLAYER_COMBAT){ }
-  else if (gc->game_state == GAME_PLAYER_STATUS){
+  else if (gc->game_state == GAME_PLAYER_STATUS){ //character sheet
   	draw_sheet_character(gc);
   }
-  else if (gc->game_state == GAME_PLAYER_INVENTORY){ }
+  else if (gc->game_state == GAME_PLAYER_INVENTORY){
+    render_inventory(gc); //render.
+  }
   else if (gc->game_state == GAME_PLAYER_CONVERSATION){ }
   else if (gc->game_state == GAME_PLAYER_CRAFTING) { }
   else{ }

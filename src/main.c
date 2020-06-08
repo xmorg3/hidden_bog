@@ -16,9 +16,7 @@ void input(GameCore *gc);
 #endif
 void print_in_messagebox(GameCore *gc, char *text);
 
-
 Actor * new_actor(char *name); //actors.c
-
 PlayMap * new_map(char *name, int mapsize, char *filename); //scene.c
 
 int main(int argc, char** argv){
@@ -51,9 +49,9 @@ int main(int argc, char** argv){
   #endif
   gc->game_state = GAME_START_MENU;
   while(gc->game_state > 0) {
-    input(gc);
-    update(gc);
-    main_draw_loop(gc);
+    input(gc);   //input.c
+    update(gc);  //update.c
+    main_draw_loop(gc);  //render.c
   }
 
   SDL_Delay(500);
