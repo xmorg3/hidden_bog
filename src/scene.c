@@ -14,7 +14,8 @@ typedef struct _Scene { //Scene structure.
 //4 archway, 5 water, 6 hole(void?)
 
 PlayMap * new_map(char *name, int mapsize, char *filename ); //create the scene (map)
-void read_map_file(PlayMap *m, const char *filename); //maps.c
+void read_map_file(PlayMap *m, const char *filename); //maps.c old osare format
+void read_csv_map_file(PlayMap *m, int maplayer, const char *filename); //csv format
 void on_load_new_scene(GameCore *gc, PlayMap *m, char *scne_type); //what happens whne you load a new scene
 void load_map_wall_textures(GameCore *gc, char *scene_type);
 
@@ -70,6 +71,8 @@ PlayMap * new_map(char *name, int mapsize, char *filename)
   PlayMap *current_map;
   current_map = (PlayMap*)malloc(sizeof (PlayMap)); //allocate teh current map
   strcpy(current_map->map_title, name); //name of map
+  current_map->width = mapsize;
+  current_map->height = mapsize;
   current_map->background_layer = (int**)malloc(mapsize * sizeof(int*)); //backgroun layer(osare)
   current_map->object_layer = (int**)malloc(mapsize * sizeof(int*)); //objects(like treasure chests?)
   current_map->collision_layer = (int**)malloc(mapsize * sizeof(int*)); //walls?
@@ -80,8 +83,17 @@ PlayMap * new_map(char *name, int mapsize, char *filename)
 	current_map->collision_layer[i] = (int*) malloc(mapsize * sizeof(int));
 	current_map->fog_layer[i] = (int*) malloc(mapsize * sizeof(int));
   }
+  
   if(filename != NULL){
-	  read_map_file(current_map, filename);
+    //read_map_file(current_map, filename);
+    //char backgroundname[250];
+    //strcat(backgroundname, filename);
+    //strcat(backgroundname, "_background.csv");
+    //char objectname[250];
+    //strcat(objectname, filename);
+    //strcat (objectname, "_objects.csv");
+    read_csv_map_file(current_map, 0, "data/maps/testmap_background.csv");//backgroundname);
+    read_csv_map_file(current_map, 1, "data/maps/testmap_objects.csv");//objectname);
   }
 return current_map;
 }

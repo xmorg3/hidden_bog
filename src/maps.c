@@ -5,13 +5,15 @@
 #include "game.h"
 
 //#include "maps.h"
-void read_map_file(PlayMap *m,  const char *filename); 
+//void read_map_file(PlayMap *m,  const char *filename); 
 //char * lookup_value(char *data, char * tag);
 void free_playmap(PlayMap *m);
 void write_map_file(char *mapname, char **mapchars, int height, int width, const char *fn);
 void world_gen(SDL_Surface *s, int catlevel, int templevel, int evlevel);
 int game_load_scene(GameCore *gc);
 void load_exits(GameCore *gc); //parse maps looking for exit tags.
+void read_csv_map_file(PlayMap *m, int maplayer, const char *filename);
+//scene.c calls read_map_file functions in function PlayMap *new_map
 //
 //typedef struct _OsareMap {
 //  int width;
@@ -34,46 +36,8 @@ void load_exits(GameCore *gc); //parse maps looking for exit tags.
 //  new_str = strstr(data, tag);
 //}
 
-
-#define JSMN_HEADER
-#include "jsmn.h"  //parse the new jasn format
-
-static const char *JSON_STRING =
-  "{\"user\": \"johndoe\", \"admin\": false, \"uid\": 1000,\n  "
-    "\"groups\": [\"users\", \"wheel\", \"audio\", \"video\"]}";
-
-void read_map_file_json(PlayMap *m, const char *filename)
-{
-  FILE *f;
-  long lSize;
-  //int count, end, state;
-  char *data;
-  char *tempstr;
-  size_t result;
-  //parse the json here.
-}
-
-/*void read_data_file(GameCore *gc, void *table, const char *filename) //not used, just for instuction?
-{
-  FILE *f;  long lSize;
-  //int count, end, state;
-  char *data; //,*tempstr;
-  size_t result;
-  //int x, y, i; //loop through reading the map
-  
-  f = fopen(filename , "rb" ); //Open the file
-  if(f == NULL) { fputs("FileNotFound error",stderr); exit (1); }
-  fseek(f, 0, SEEK_END);
-  lSize = ftell(f);
-  rewind(f);
-  data = (char*) malloc (sizeof(char)*lSize);
-  if (data == NULL) 
-    {fputs ("Memory error",stderr); exit (2);}
-  result = fread (data,1,lSize,f); // copy the file into the buffer:
-  }*/
-
-//reads the old OSARE/flare map format
-void read_map_file(PlayMap *m, const char *filename) 
+//reads the CSV map format.  tiled seems to have stopped supporting osar's format so here is the CSV.  CSV files are stored separatly per layer. but *should* be easier to work with. called from loadresources in resources.c
+void read_csv_map_file(PlayMap *m, int maplayer, const char *filename)
 {
   FILE *f;
   long lSize;
@@ -82,7 +46,8 @@ void read_map_file(PlayMap *m, const char *filename)
   char *tempstr;
   size_t result;
   int x, y, i; //loop through reading the map
-  
+  printf("filename for map is %s\n", filename);
+  printf("size of the map is %d x %d\n", m->width, m->height);
   f = fopen(filename , "rb" ); //Open the file
   if(f == NULL) { fputs("FileNotFound error",stderr); exit (1); } //error if file not found
   fseek(f , 0 , SEEK_END); //look through file
@@ -92,78 +57,32 @@ void read_map_file(PlayMap *m, const char *filename)
   if (data == NULL){fputs ("Memory error",stderr); exit (2);}
   result = fread (data,1,lSize,f); // copy the file into the buffer:
   if (result != lSize){fputs ("Reading error",stderr); exit (3);}
-  fclose(f); 
-  //find width
-  //printf("----freaded, now parsing map, %s--------\n",filename);
-  strtok(strstr(data,"width"), "=\n"); //text width
-  m->width = atoi( strtok( NULL, "=\n")  ); //number width
-  printf("Map width is %d, :D\n", m->width);
-  strtok(strstr(data,"height"), "=\n"); //find height
-  m->height = atoi( strtok(NULL, "=\n"));
-  printf("Map height is %d, :D\n", m->height);  //We are OK up to here. (line3)
-  for(y = 0; y < m->height; y++) {
-    for(x = 0; x < m->width; x++) {
-      m->fog_layer[y][x] = 0;
-    }
-  }  
-  tempstr = strtok( strstr(data, "background"), "=" );
-  tempstr = strtok( strstr(data, "background"), "=" );
-  tempstr = strtok( strstr(data, "background"), "=" );
-  tempstr = strtok( strstr(data, "background"), "=" );
-  tempstr = strtok( strstr(data, "background"), "=" );
-  printf("Looking for background: %s\n", tempstr);
-  tempstr = strtok( strstr(data, "data"), "=\n" ); 
-  printf("Looking for \"data\": %s\n", tempstr);
-  tempstr = strtok( NULL, "=\n" );
-  printf("Looking for map %s\n", tempstr);
-  i=0;
-  for(y = 0; y < m->height; y++) {
-    for(x = 0; x < m->width; x++) { //ground layer
-      m->background_layer[y][x] = atoi(strtok(NULL, ",\n"));
-      i++;
+  fclose(f);
+  //int **background_layer; //walls and what you are standing on
+  //int **object_layer; //objects, enemies, doors?
+  //int **collision_layer; //walls?.
+  tempstr = strtok(data, ",\n");
+  if(maplayer == 0) { //background layer
+    
+    //m->background_layer[y][x] = atoi(strtok(data, ",\n")); //first strtok
+    for(y=0; y< m->height -1; y++) {
+      for(x=0; x< m->width -1; x++) {
+	m->background_layer[y][x] = atoi(strtok(NULL, ",\n")); //printf("b %d x %d\n", x, y);
+      }
     }
   }
-  //Get the next layer(note this layer is with tiles 32x64?
-  strtok(NULL, "\n");
-  tempstr = strtok( strstr(data, "data"), "=\n" ); 
-  printf("Looking for object data: %s\n", tempstr);
-  tempstr = strtok( NULL, "=\n" );
-  printf("looking for object layer.\n");
-  i=0;
-  for(y=0; y < m->height; y++) {
-    for(x=0; x < m->width; x++) { //object layer.
-      m->collision_layer[y][x] = atoi(strtok(NULL, ",\n"));
-      printf("%d", m->object_layer[y][x]);
-      i++;
+  else if(maplayer == 1) { //object layer
+    for(y=0; y< m->height -1; y++) {
+      for(x=0; x< m->width -1; x++) {
+	m->object_layer[y][x] = atoi(strtok(NULL, ",\n")); //printf("o %d x %d\n", x, y);
+      }
     }
   }
-
-  tempstr = strtok( strstr(data, "data"), "=\n" );
-  printf("Looking for collision data: %s\n", tempstr);
-  tempstr = strtok( NULL, "=\n" );
-  printf("looking for collision layer.\n");
-  i=0;
-  for(y=0; y < m->height; y++) {
-    for(x=0; x < m->width; x++) {
-      //m->collision_layer[y][x] = 0;
-      m->object_layer[y][x] = atoi(strtok(NULL, ",\n"));
-      i++;
-    }
-  }
-
-  //finding exits -> exit=1,1,map.txt\n
-  i=0;
-  for(i=0; i<7; i++) {
-    tempstr = strtok( strstr(data, "exit"), ",=\n" );
-    tempstr = strtok( NULL, ",=\n" ); //=
-    //atoi x,y
-    //assign mapname to exit to be loaded later.
-  }
-  //fclose(f);
   printf("finished reading file\n");
   free(data);
-  //return m;
 }
+
+
 
 void free_playmap(PlayMap *m)
 {
@@ -224,3 +143,6 @@ int game_load_scene(GameCore *gc)
 {
   return 0;
 }
+
+
+

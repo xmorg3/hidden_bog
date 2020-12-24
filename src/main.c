@@ -26,10 +26,10 @@ int main(int argc, char** argv){
   player = new_actor("player");//(Actor *) malloc(sizeof(Actor));
   gc->c_text_size = (SDL_Rect *) malloc(sizeof(SDL_Rect));
   gc->player = player;
-  gc->mapsize = 20;
-  gc->current_map = new_map("nomap", 20, "data/maps/v_hamsford.txt");
-  gc->player->map_x = 4;
-  gc->player->map_y = 4;
+  gc->mapsize = 100;
+  gc->current_map = new_map("nomap", 100, "data/maps/testmap"); //?
+  gc->player->map_x = 35;
+  gc->player->map_y = 35;
 
   //GCC hack, you must assign before running print_in_messagebox?
   strcpy(gc->messagelist[0],">"); //print_in_messagebox(gc, ">");
@@ -43,7 +43,7 @@ int main(int argc, char** argv){
  
 
   start_sdl(gc); //gc->game_state = 1, resources.c
-  load_resources(gc);
+  load_resources(gc); //resources.c
   #ifdef _SQLITE_
   load_data_from_db(gc);
   #endif

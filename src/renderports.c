@@ -21,6 +21,10 @@ SDL_Texture * get_texture_by_objectid(GameCore *gc, int textureid);
 void draw_oov0(GameCore *gc, int left, int middle, int right);
 void draw_oov1(GameCore *gc, int left, int middle, int right);
 
+//legend
+#define WOOD_WALL  1
+#define STONE_WALL 2
+#define GREEN_TREE 5
 
 void draw_playport_north(GameCore *gc)
 {  //int current_tile; //set value to whatever tile we are rendering.
@@ -111,19 +115,19 @@ void draw_fov2(GameCore *gc, int left, int middle, int right)
   left_wall = fast_rect(618, 0, 118, 273);
   right_wall = fast_rect(0, 0, 118, 273);
   middle_wall = fast_rect(115, 0, 505,273);
-  if( left == 2) { drawto_viewport(gc, gc->wall_left_fov2_blank);  }
-  if ( left == 3 ) { drawto_viewport(gc, gc->tall_wall_left_fov2); }
+  if( left == WOOD_WALL) { drawto_viewport(gc, gc->wall_left_fov2_blank);  }
+  if ( left == STONE_WALL ) { drawto_viewport(gc, gc->tall_wall_left_fov2); }
   if( left == 4) {  drawto_viewport(gc, gc->wall_left_fov2_blank);
     drawto_viewport(gc, gc->door_left_fov2_blank);
   }
-  if( right ==2) { drawto_viewport(gc,gc->wall_right_fov2_blank);}
-  if( right == 3) { drawto_viewport(gc,gc->tall_wall_right_fov2);}
+  if( right == WOOD_WALL) { drawto_viewport(gc,gc->wall_right_fov2_blank);}
+  if( right == STONE_WALL) { drawto_viewport(gc,gc->tall_wall_right_fov2);}
   if( right == 4) { drawto_viewport(gc,gc->wall_right_fov2_blank);
     drawto_viewport(gc,gc->door_right_fov2_blank);
   }
   
-  if( middle==2) {drawto_viewport(gc,gc->wall_front_fov1_blank);}
-  if( middle==3) {drawto_viewport(gc,gc->tall_wall_front_fov1);}
+  if( middle== WOOD_WALL) {drawto_viewport(gc,gc->wall_front_fov1_blank);}
+  if( middle== STONE_WALL) {drawto_viewport(gc,gc->tall_wall_front_fov1);}
   if( middle==4) {drawto_viewport(gc,gc->wall_front_fov1_blank);
     drawto_viewport(gc,gc->door_front_fov1_blank);
   }
@@ -134,18 +138,18 @@ void draw_fov1(GameCore *gc, int left, int middle, int right)
   left_wall = fast_rect(618, 0, 118, 273);
   right_wall = fast_rect(0, 0, 118, 273);
   middle_wall = fast_rect(115, 0, 505,273);
-  if( left==2 )  { drawto_viewport(gc, gc->wall_left_fov1_blank); }
-  if( left ==3)  { drawto_viewport(gc, gc->tall_wall_left_fov1);  }
+  if( left==WOOD_WALL )  { drawto_viewport(gc, gc->wall_left_fov1_blank); }
+  if( left ==STONE_WALL)  { drawto_viewport(gc, gc->tall_wall_left_fov1);  }
   if( left == 4)  { drawto_viewport(gc,gc->wall_left_fov1_blank);
     drawto_viewport(gc, gc->door_left_fov1_blank);
   }
-  if( right ==2) { drawto_viewport(gc,gc->wall_right_fov1_blank);}
-  if( right ==3) { drawto_viewport(gc,gc->tall_wall_right_fov1); } 
+  if( right ==WOOD_WALL) { drawto_viewport(gc,gc->wall_right_fov1_blank);}
+  if( right ==STONE_WALL) { drawto_viewport(gc,gc->tall_wall_right_fov1); } 
   if( right == 4)  { drawto_viewport(gc,gc->wall_right_fov1_blank);
     drawto_viewport(gc,gc->door_right_fov1_blank);
   }
-  if( middle==2)  { drawto_viewport(gc, gc->wall_front_fov0_blank); }
-  if( middle ==3)  {drawto_viewport(gc, gc->tall_wall_front_fov0);  }
+  if( middle==WOOD_WALL)  { drawto_viewport(gc, gc->wall_front_fov0_blank); }
+  if( middle ==STONE_WALL)  {drawto_viewport(gc, gc->tall_wall_front_fov0);  }
   if( middle == 4)  { drawto_viewport(gc, gc->wall_front_fov0_blank);
     drawto_viewport(gc, gc->door_front_fov0_blank);
   }
@@ -159,21 +163,21 @@ void draw_fov0(GameCore *gc, int left, int middle, int right)
   right_wall = fast_rect(0, 0, 118, 273);
   middle_wall = fast_rect(115, 0, 505,273);
   // ------------------------------------->walls
-  if( left==2)  { drawto_viewport(gc, gc->wall_left_fov0_blank);  }
-  if( left ==3)  { drawto_viewport(gc, gc->tall_wall_left_fov0);  }
+  if( left==WOOD_WALL)  { drawto_viewport(gc, gc->wall_left_fov0_blank);  }
+  if( left ==STONE_WALL)  { drawto_viewport(gc, gc->tall_wall_left_fov0);  }
   if( left == 4)  { drawto_viewport(gc, gc->wall_left_fov0_blank);
     drawto_viewport(gc, gc->door_left_fov0_blank);
   }
-  if( right==2  ) { drawto_viewport(gc, gc->wall_right_fov0_blank); }
-  if( right ==3 ) { drawto_viewport(gc, gc->tall_wall_right_fov0);  }
+  if( right==WOOD_WALL  ) { drawto_viewport(gc, gc->wall_right_fov0_blank); }
+  if( right ==STONE_WALL ) { drawto_viewport(gc, gc->tall_wall_right_fov0);  }
   if( right == 4)  {
     drawto_viewport(gc, gc->wall_right_fov0_blank);
     drawto_viewport(gc, gc->door_right_fov0_blank);
   }
-  if( middle==2)  { //middle wall
+  if( middle==WOOD_WALL)  { //middle wall
     drawto_viewport(gc, gc->wall_front_fov0_blank);
   }
-  if( middle ==3)  { //middle wall
+  if( middle ==STONE_WALL)  { //middle wall
     drawto_viewport(gc, gc->tall_wall_front_fov0);
   } 
   if( middle == 4)  {
