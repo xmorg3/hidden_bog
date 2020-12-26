@@ -162,22 +162,14 @@ typedef struct _GameCore {
   SDL_Texture *character_doll;
   SDL_Texture *portraits_human_male;
   //note, there should be a func to load these textures on the fly?
-  SDL_Texture *floor_bottom_fobx_blank,*sky_top_fobx_blank, //wood town
+  SDL_Texture *floor_bottom_fobx_blank,*sky_top_fobx_blank,
     *wall_front_fov0_blank, *wall_front_fov1_blank,
     *wall_left_fov0_blank, *wall_left_fov1_blank,
     *wall_left_fov2_blank, *wall_right_fov0_blank,
     *wall_right_fov1_blank, *wall_right_fov2_blank;
-  SDL_Texture  *tall_wall_front_fov0, *tall_wall_front_fov1,  //stone walls
+  SDL_Texture  *tall_wall_front_fov0, *tall_wall_front_fov1,
     *tall_wall_left_fov0,  *tall_wall_left_fov1,  *tall_wall_left_fov2,
   	 *tall_wall_right_fov0, *tall_wall_right_fov1, *tall_wall_right_fov2;
-  //Now loading dungeon walls
-  SDL_Texture *dfloor_bottom_fobx_blank,*dsky_top_fobx_blank, //dungeon walls
-    *dwall_front_fov0_blank, *dwall_front_fov1_blank,
-    *dwall_left_fov0_blank,  *dwall_left_fov1_blank,
-    *dwall_left_fov2_blank,  *dwall_right_fov0_blank,
-    *dwall_right_fov1_blank, *dwall_right_fov2_blank;
-  //Load water "walls" actually just tiles on the floor
-  //end water walls
   SDL_Texture *wall_all; //gc->wall_all = load_texture_by_dir(gc, directory, "wall_all0.png");
   SDL_Texture *door_front_fov0_blank, *door_front_fov1_blank, *door_left_fov0_blank, *door_left_fov1_blank,
     *door_left_fov2_blank, *door_right_fov0_blank, *door_right_fov1_blank, *door_right_fov2_blank,
@@ -223,14 +215,6 @@ typedef struct _GameCore {
 } PlayMap;*/
 
 
-#define GRASS          0
-#define WOOD_WALL      1
-#define STONE_WALL     2
-#define DOOR           3
-#define STONE_DOOR     4
-#define TREE_PINE      5
-#define TREE_DEAD      6
-#define BOULDER        7
-#define WATER_CLEAR    8
-#define DUNGEON_FLOOR  9
-#define DUNGEON_WALL  10
+#define GRASS 0
+#define WOOD_WALL 1
+#define STONE_WALL 2
