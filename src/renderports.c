@@ -21,10 +21,10 @@ SDL_Texture * get_texture_by_objectid(GameCore *gc, int textureid);
 void draw_oov0(GameCore *gc, int left, int middle, int right);
 void draw_oov1(GameCore *gc, int left, int middle, int right);
 
-//legend
-#define WOOD_WALL  1
-#define STONE_WALL 2
-#define GREEN_TREE 5
+//legend moved to game.h
+//#define WOOD_WALL  1
+//#define STONE_WALL 2
+//#define GREEN_TREE 5
 
 void draw_playport_north(GameCore *gc)
 {  //int current_tile; //set value to whatever tile we are rendering.

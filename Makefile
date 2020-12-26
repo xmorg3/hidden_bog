@@ -1,8 +1,8 @@
 #Makefile for mySDL
 
 #CC = clang -g 
-#CC = tcc
-CC = gcc -ggdb
+CC = tcc
+#CC = gcc -ggdb
 
 LIBS = -lSDL2 -lSDL2_image -lSDL2_ttf -lm #-lsqlite3 #-lGL
 

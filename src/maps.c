@@ -63,17 +63,15 @@ void read_csv_map_file(PlayMap *m, int maplayer, const char *filename)
   //int **collision_layer; //walls?.
   tempstr = strtok(data, ",\n");
   if(maplayer == 0) { //background layer
-    
-    //m->background_layer[y][x] = atoi(strtok(data, ",\n")); //first strtok
-    for(y=0; y< m->height -1; y++) {
-      for(x=0; x< m->width -1; x++) {
+    for(y=1; y< m->height ; y++) {
+      for(x=0; x< m->width ; x++) {
 	m->background_layer[y][x] = atoi(strtok(NULL, ",\n")); //printf("b %d x %d\n", x, y);
       }
     }
   }
   else if(maplayer == 1) { //object layer
-    for(y=0; y< m->height -1; y++) {
-      for(x=0; x< m->width -1; x++) {
+    for(y=1; y< m->height; y++) {
+      for(x=0; x< m->width; x++) {
 	m->object_layer[y][x] = atoi(strtok(NULL, ",\n")); //printf("o %d x %d\n", x, y);
       }
     }

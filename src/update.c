@@ -8,6 +8,8 @@ void set_player_direction(GameCore *gc, int mod);
 void set_player_move_foreward(GameCore *gc);
 void set_player_move_backward(GameCore *gc);
 void print_in_messagebox(GameCore *gc, char *text);
+void print_debug_map(GameCore *gc); //update.c
+int get_movable(int tile); //update.c get movable tile 0 cant move 1 can move
 
 int update(GameCore *gc)
 { //basic game updater code
@@ -28,21 +30,36 @@ void print_in_messagebox(GameCore *gc, char *text)
   strcpy(gc->messagelist[1], gc->messagelist[0]);
   strcpy(gc->messagelist[0], text);
 }
+int get_moveable(int tile) // 0 cant move, 1 can move
+{
+  if(tile == GRASS) {
+    return 1;
+  }
+  else {
+    return 0;
+  }
+}
 void print_debug_map(GameCore *gc)
 {
   int x,y;
-  for(y = gc->player->map_y-3; y < gc->player->map_y+3; y++) {
-    for(x = gc->player->map_x-3; x < gc->player->map_x+3; x++) {
+  static int player_moves = 0;
+
+  player_moves++;
+  printf("player at x: %d y: %d move: %d\n", gc->player->map_x, gc->player->map_y, player_moves);
+  //for(y = gc->player->map_y-3; y < gc->player->map_y+3; y++) {
+  //  for(x = gc->player->map_x-3; x < gc->player->map_x+3; x++) {
+  for(y = 0; y < gc->current_map->height; y++) {
+    for(x=0; x < gc->current_map->width; x++) {
       if(y== gc->player->map_y && x == gc->player->map_x){
-	//printf("@");
+	printf("@");
       }
       else {
 	if(y >= 0 && x >= 0 && y < gc->mapsize && x < gc->mapsize) {
-	  //printf("%d", gc->current_map->tiles[y][x]);
+	  printf("%d", gc->current_map->background_layer[y][x]);
 	}
       }
-    }//printf("\n");
-  }//printf("\n");
+    }printf("\n");
+  }printf("\n");
 }
 
 void set_player_direction(GameCore *gc, int mod)
@@ -62,7 +79,7 @@ void set_player_move_foreward(GameCore *gc) //update.c
 {//if location = n,  current_map[y-1][x] //prevent outof bound loops
   //int x,y;
   if(gc->player->direction == NORTH && gc->player->map_y > 2) { 
-    if(gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x] == 1) {  
+    if( get_moveable(gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x] ) == 1) {  
 	gc->player->map_y--;
 	gc->current_map->fog_layer[gc->player->map_y-1][gc->player->map_x] = 1;
 	gc->current_map->fog_layer[gc->player->map_y-1][gc->player->map_x+1] = 1;
@@ -76,7 +93,7 @@ void set_player_move_foreward(GameCore *gc) //update.c
     
   }
   if(gc->player->direction == EAST && gc->player->map_x < gc->mapsize -2) {
-    if(gc->current_map->background_layer[gc->player->map_y][gc->player->map_x+1] == 1)
+    if( get_moveable( gc->current_map->background_layer[gc->player->map_y][gc->player->map_x+1] ) == 1)
       {
 	gc->player->map_x++;
 	gc->current_map->fog_layer[gc->player->map_y][gc->player->map_x+1] = 1;
@@ -87,7 +104,7 @@ void set_player_move_foreward(GameCore *gc) //update.c
       }
   }
   if(gc->player->direction == SOUTH && gc->player->map_y < gc->mapsize -2) { 
-    if(gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x] == 1)
+    if(get_moveable(gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x] ) == 1)
       {
 	gc->player->map_y++;
 	gc->current_map->fog_layer[gc->player->map_y+1][gc->player->map_x] = 1;
@@ -99,7 +116,7 @@ void set_player_move_foreward(GameCore *gc) //update.c
       }
   }
   if(gc->player->direction == WEST && gc->player->map_x > 2) {
-    if(gc->current_map->background_layer[gc->player->map_y][gc->player->map_x-1] == 1)
+    if( get_moveable(gc->current_map->background_layer[gc->player->map_y][gc->player->map_x-1]) == 1)
       {
 	gc->player->map_x--;
 	gc->current_map->fog_layer[gc->player->map_y][gc->player->map_x-1] = 1;
@@ -114,19 +131,19 @@ void set_player_move_foreward(GameCore *gc) //update.c
 void set_player_move_backward(GameCore *gc) //update.c                                                                                                                  
 {
   if(gc->player->direction == NORTH) {
-    if(gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x] == 1)
+    if(get_moveable(gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x]) == 1)
     gc->player->map_y++;
   }
   if(gc->player->direction == EAST) { 
-    if(gc->current_map->background_layer[gc->player->map_y][gc->player->map_x-1] == 1)
+    if(get_moveable(gc->current_map->background_layer[gc->player->map_y][gc->player->map_x-1]) == 1)
     gc->player->map_x--;
   }
   if(gc->player->direction == SOUTH) {
-    if(gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x] == 1)
+    if(get_moveable(gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x]) == 1)
     gc->player->map_y--;
   }
   if(gc->player->direction == WEST) {
-    if(gc->current_map->background_layer[gc->player->map_y][gc->player->map_x+1] == 1)
+    if(get_moveable(gc->current_map->background_layer[gc->player->map_y][gc->player->map_x+1]) == 1)
     gc->player->map_x++;
   } 
   print_debug_map(gc);

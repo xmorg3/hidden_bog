@@ -215,3 +215,6 @@ typedef struct _GameCore {
 } PlayMap;*/
 
 
+#define GRASS 0
+#define WOOD_WALL 1
+#define STONE_WALL 2

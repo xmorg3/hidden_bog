@@ -26,10 +26,10 @@ int main(int argc, char** argv){
   player = new_actor("player");//(Actor *) malloc(sizeof(Actor));
   gc->c_text_size = (SDL_Rect *) malloc(sizeof(SDL_Rect));
   gc->player = player;
-  gc->mapsize = 100;
-  gc->current_map = new_map("nomap", 100, "data/maps/testmap"); //?
-  gc->player->map_x = 35;
-  gc->player->map_y = 35;
+  gc->mapsize = 30;
+  gc->current_map = new_map("nomap", 30, "data/maps/testmap"); //?
+  gc->player->map_x = 12;
+  gc->player->map_y = 12;
 
   //GCC hack, you must assign before running print_in_messagebox?
   strcpy(gc->messagelist[0],">"); //print_in_messagebox(gc, ">");
