@@ -4,11 +4,11 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void draw_playframe(GameCore *gc);
-void draw_playport(GameCore *gc);
+void draw_playframe(GameCore *gc); //overlay the windows with character portraints and map
+void draw_playport(GameCore *gc);  //play window with 3d view.
 
-void draw_playport_north(GameCore *gc);
-void draw_playport_east(GameCore *gc);
+void draw_playport_north(GameCore *gc); //show each direction.
+void draw_playport_east(GameCore *gc);  //renderports.c
 void draw_playport_south(GameCore *gc);
 void draw_playport_west(GameCore *gc);
 
@@ -63,7 +63,7 @@ void drawto_viewport(GameCore *gc, SDL_Texture *img ) {
 }
 
 void main_draw_loop(GameCore *gc) //called in main.c
-{
+{ //switching to the various windows/rending windows.
   SDL_RenderClear(gc->renderer); //clear screen?  
   if(gc->game_state == GAME_START_MENU) {
     draw_game_menu(gc);
@@ -94,11 +94,12 @@ void main_draw_loop(GameCore *gc) //called in main.c
   SDL_RenderPresent(gc->renderer);
 }
 void draw_playframe(GameCore *gc) { 
+  //overlay the play windows with character portraints and map windows.
   draw_character_portraits(gc);
   draw_mapport(gc);
 }
 
-void draw_playport(GameCore *gc) //draw the play viewport
+void draw_playport(GameCore *gc) //draw the 3d view
 {
   //sky and floor
   drawto_viewport(gc, gc->sky_top_fobx_blank); //SDL_RenderCopy(gc->renderer, gc->sky_top_fobx_blank, NULL, &gc->player_viewport);
