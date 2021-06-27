@@ -14,7 +14,7 @@ void handle_mousebutton_down_gameplayidle(GameCore *gc);
 void resize_screen(GameCore *gc, int size_x, int size_y);//render.c
 void set_player_direction(GameCore *gc, int mod); //update.c
 void set_player_move_foreward(GameCore *gc); //update.c
-void set_player_move_backward(GameCore *gc);
+void set_player_move_backward(GameCore *gc); //update.c?
 
 void draw_sheet_character(GameCore *gc);
 void input_char_menu_frame(GameCore *gc);
@@ -42,22 +42,22 @@ void handle_keydown(GameCore *gc)
   if(k == SDLK_F1) {
     resize_screen(gc, 1024, 600); //resize teh window
   }
-  if(k == SDLK_ESCAPE ) {
+  if(k == SDLK_ESCAPE ) {   //---------------------------------ESCAPE
     gc->game_state = GAME_START_MENU;
   }
-  if(k == SDLK_LEFT && gc->game_state == GAME_PLAY_IDLE) {
+  if(k == SDLK_LEFT && gc->game_state == GAME_PLAY_IDLE) { //--LEFT
     set_player_direction(gc, -1);
 
   }
-  else if(k == SDLK_RIGHT && gc->game_state == GAME_PLAY_IDLE ) {
+  else if(k == SDLK_RIGHT && gc->game_state == GAME_PLAY_IDLE ) {//RIGHT
     set_player_direction(gc, 1);
   }
-  else if(k == SDLK_UP && gc->game_state == GAME_PLAY_IDLE ) {
+  else if(k == SDLK_UP && gc->game_state == GAME_PLAY_IDLE ) {//UP
     //move forward.
     set_player_move_foreward(gc); //update.c
   }
-  else if(k == SDLK_DOWN && gc->game_state == GAME_PLAY_IDLE ) {
-    set_player_move_backward(gc);
+  else if(k == SDLK_DOWN && gc->game_state == GAME_PLAY_IDLE ) {//DOWN
+    set_player_move_backward(gc); //??
   }
   else if(k == SDLK_c ) { //draw sheet
   	if (gc->game_state == GAME_PLAYER_STATUS) {
@@ -71,6 +71,11 @@ void handle_keydown(GameCore *gc)
   	}
   	else { gc->game_state = GAME_PLAYER_INVENTORY;	}
   }
+   else if(k == SDLK_n ) {
+     if ( gc->game_state == GAME_START_MENU ) {
+       gc->game_state = GAME_CHARGEN_MENU;
+     }
+   }
 }
 void handle_mousebutton_down(GameCore *gc)
 {

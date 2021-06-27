@@ -28,9 +28,10 @@ void draw_oov1(GameCore *gc, int left, int middle, int right);
 
 void draw_playport_north(GameCore *gc)
 {  //int current_tile; //set value to whatever tile we are rendering.
-  draw_fov2(gc, gc->current_map->background_layer[gc->player->map_y-2][gc->player->map_x-1],
-	    gc->current_map->background_layer[    gc->player->map_y-2][gc->player->map_x],
-	    gc->current_map->background_layer[    gc->player->map_y-2][gc->player->map_x+1]);  
+  if(gc->player->map_y-2 > 0)
+    draw_fov2(gc, gc->current_map->background_layer[gc->player->map_y-2][gc->player->map_x-1],
+	      gc->current_map->background_layer[    gc->player->map_y-2][gc->player->map_x],
+	      gc->current_map->background_layer[    gc->player->map_y-2][gc->player->map_x+1]);  if(gc->player->map_y-1 > 0)
   draw_fov1(gc,
 	    gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x-1],
 	    gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x  ],
@@ -68,9 +69,12 @@ void draw_playport_east(GameCore *gc)
 }
 void draw_playport_south(GameCore *gc)
 {  //int current_tile; //set value to whatever tile we are rendering.
-  draw_fov2(gc, gc->current_map->background_layer[gc->player->map_y+2][gc->player->map_x+1],
-	    gc->current_map->background_layer[gc->player->map_y+2][gc->player->map_x],
-	    gc->current_map->background_layer[gc->player->map_y+2][gc->player->map_x-1]);
+  int ms = gc->mapsize;
+  int mapy = gc->player->map_y;
+  if(mapy +2 > ms)
+    draw_fov2(gc, gc->current_map->background_layer[gc->player->map_y+2][gc->player->map_x+1],
+	      gc->current_map->background_layer[gc->player->map_y+2][gc->player->map_x],
+	      gc->current_map->background_layer[gc->player->map_y+2][gc->player->map_x-1]);
   
   draw_fov1(gc, gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x+1],
 	    gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x],
@@ -89,9 +93,12 @@ void draw_playport_south(GameCore *gc)
 }
 void draw_playport_west(GameCore *gc)
 {
-  draw_fov2(gc, gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x-2],
-	    gc->current_map->background_layer[    gc->player->map_y][gc->player->map_x-2],
-	    gc->current_map->background_layer[    gc->player->map_y-1][gc->player->map_x-2]);
+  int ms=gc->mapsize;
+  int mapx = gc->player->map_x;
+  if(mapx -2 > 0)
+    draw_fov2(gc, gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x-2],
+	      gc->current_map->background_layer[ gc->player->map_y][gc->player->map_x-2],
+	      gc->current_map->background_layer[ gc->player->map_y-1][gc->player->map_x-2]);
   
   draw_fov1(gc, gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x-1],
 	    gc->current_map->background_layer[    gc->player->map_y][gc->player->map_x-1],

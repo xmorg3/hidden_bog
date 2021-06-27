@@ -78,7 +78,7 @@ void set_player_direction(GameCore *gc, int mod)
 void set_player_move_foreward(GameCore *gc) //update.c
 {//if location = n,  current_map[y-1][x] //prevent outof bound loops
   //int x,y;
-  if(gc->player->direction == NORTH && gc->player->map_y > 2) { 
+  if(gc->player->direction == NORTH && gc->player->map_y > 1) { 
     if( get_moveable(gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x] ) == 1) {  
 	gc->player->map_y--;
 	gc->current_map->fog_layer[gc->player->map_y-1][gc->player->map_x] = 1;
@@ -92,7 +92,7 @@ void set_player_move_foreward(GameCore *gc) //update.c
       }
     
   }
-  if(gc->player->direction == EAST && gc->player->map_x < gc->mapsize -2) {
+  if(gc->player->direction == EAST && gc->player->map_x < gc->mapsize -1) {
     if( get_moveable( gc->current_map->background_layer[gc->player->map_y][gc->player->map_x+1] ) == 1)
       {
 	gc->player->map_x++;
@@ -103,7 +103,8 @@ void set_player_move_foreward(GameCore *gc) //update.c
 	  gc->current_map->fog_layer[gc->player->map_y][gc->player->map_x+2] = 1;
       }
   }
-  if(gc->player->direction == SOUTH && gc->player->map_y < gc->mapsize -2) { 
+  if(gc->player->direction == SOUTH && gc->player->map_y < gc->mapsize -1) {
+    printf("DEBUG: Test get_movable on south\n");
     if(get_moveable(gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x] ) == 1)
       {
 	gc->player->map_y++;
@@ -115,7 +116,7 @@ void set_player_move_foreward(GameCore *gc) //update.c
 	
       }
   }
-  if(gc->player->direction == WEST && gc->player->map_x > 2) {
+  if(gc->player->direction == WEST && gc->player->map_x > 1) {
     if( get_moveable(gc->current_map->background_layer[gc->player->map_y][gc->player->map_x-1]) == 1)
       {
 	gc->player->map_x--;
@@ -130,7 +131,7 @@ void set_player_move_foreward(GameCore *gc) //update.c
 }
 void set_player_move_backward(GameCore *gc) //update.c                                                                                                                  
 {
-  if(gc->player->direction == NORTH) {
+  if(gc->player->direction == NORTH && gc->player->map_y < gc->mapsize-1) {
     if(get_moveable(gc->current_map->background_layer[gc->player->map_y+1][gc->player->map_x]) == 1)
     gc->player->map_y++;
   }
@@ -138,7 +139,7 @@ void set_player_move_backward(GameCore *gc) //update.c
     if(get_moveable(gc->current_map->background_layer[gc->player->map_y][gc->player->map_x-1]) == 1)
     gc->player->map_x--;
   }
-  if(gc->player->direction == SOUTH) {
+  if(gc->player->direction == SOUTH && gc->player->map_y > 1) {
     if(get_moveable(gc->current_map->background_layer[gc->player->map_y-1][gc->player->map_x]) == 1)
     gc->player->map_y--;
   }
