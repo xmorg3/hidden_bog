@@ -47,7 +47,6 @@ void handle_keydown(GameCore *gc)
   }
   if(k == SDLK_LEFT && gc->game_state == GAME_PLAY_IDLE) { //--LEFT
     set_player_direction(gc, -1);
-
   }
   else if(k == SDLK_RIGHT && gc->game_state == GAME_PLAY_IDLE ) {//RIGHT
     set_player_direction(gc, 1);
@@ -60,22 +59,22 @@ void handle_keydown(GameCore *gc)
     set_player_move_backward(gc); //??
   }
   else if(k == SDLK_c ) { //draw sheet
-  	if (gc->game_state == GAME_PLAYER_STATUS) {
-  		gc->game_state = GAME_PLAY_IDLE;
-  	}
-  	else { gc->game_state = GAME_PLAYER_STATUS;	}
+    if (gc->game_state == GAME_PLAYER_STATUS) {
+      gc->game_state = GAME_PLAY_IDLE;
+    }
+    else { gc->game_state = GAME_PLAYER_STATUS;	}
   }
-   else if(k == SDLK_i ) { //draw sheet
-  	if (gc->game_state == GAME_PLAYER_INVENTORY) {
-  		gc->game_state = GAME_PLAY_IDLE;
-  	}
-  	else { gc->game_state = GAME_PLAYER_INVENTORY;	}
+  else if(k == SDLK_i ) { //draw sheet
+    if (gc->game_state == GAME_PLAYER_INVENTORY) {
+      gc->game_state = GAME_PLAY_IDLE;
+    }
+    else { gc->game_state = GAME_PLAYER_INVENTORY;	}
   }
-   else if(k == SDLK_n ) {
-     if ( gc->game_state == GAME_START_MENU ) {
-       gc->game_state = GAME_CHARGEN_MENU;
-     }
-   }
+  else if(k == SDLK_n ) {
+    if ( gc->game_state == GAME_START_MENU ) {
+      gc->game_state = GAME_CHARGEN_MENU;
+    }
+  }
 }
 void handle_mousebutton_down(GameCore *gc)
 {

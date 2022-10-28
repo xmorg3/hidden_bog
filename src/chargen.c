@@ -37,6 +37,7 @@ void draw_add_skills_dialogue(GameCore *gc)
 }
 void draw_char_menu_frame(GameCore *gc)
 {
+  printf("draw_char_menu_frame\n");
   //SDL_Rect dst, src, r;
   SDL_RenderCopy(gc->renderer, gc->w_background, NULL, NULL); //put background
   //put name on the top
@@ -55,15 +56,19 @@ void draw_char_menu_frame(GameCore *gc)
 
 void draw_gender_radio(GameCore *gc)
 {
+  printf("debug: draw_gender_radio\n");
+  //set_rect(&gc->radio_raised, 18,14,24,24);
+  //set_rect(&gc->radio_pressed,18,50,24,24);
+
   SDL_Rect r;
   r = fast_rect(gc->player->portrait*128,0,128,128);
   if(gc->player->sex == 0) { //1 male, 0 female
-    fast_radio(gc, 200, 100, "Male", 0 );
-    fast_radio(gc, 200, 130, "Female", 1 );
+    printf("debug: fast_radia Male\n"); fast_radio(gc, 200, 100, "Male", 0 );
+    printf("debug: fast_radia Female\n");fast_radio(gc, 200, 130, "Female", 1 );
   }
   else { //male 1
-    fast_radio(gc, 200, 100, "Male", 1);
-    fast_radio(gc, 200,130, "Female", 0);
+    printf("debug: fast_radia Male\n"); fast_radio(gc, 200, 100, "Male", 1);
+    printf("debug: fast_radia Female\n"); fast_radio(gc, 200,130, "Female", 0);
   }
   if(gc->player->sex == 0) {  //check sex for portraits
   SDL_RenderCopy(gc->renderer, gc->portraits_human_male,&r, &gc->char_frame_rect); //TODO: get female portraits
@@ -73,10 +78,12 @@ void draw_gender_radio(GameCore *gc)
     SDL_RenderCopy(gc->renderer, gc->portraits_human_male,&r, &gc->char_frame_rect); //male portraits
     //check race, there are a total of 10 png's 
   }
+  printf("debug:(done) draw_gender_radio\n");
 }
 
 void draw_chargen_menu(GameCore *gc)
 {//int screen_size_x, screen_size_y;
+  printf("debug: draw_chargen_menu\n");
   SDL_Rect dst, src, r;
   src = fast_rect(0,0,280,800); //set_rect(&gc->character_doll_rect, 0,0,280,800); //female rect x = 454, w = 220
   dst = fast_rect(8,65,180,450);
@@ -119,15 +126,16 @@ void draw_chargen_menu(GameCore *gc)
   //check race, there are a total of 10 png's 
   //}
   SDL_RenderCopy(gc->renderer, gc->char_frame, NULL, &gc->char_frame_rect);  
-  draw_minusplus_buttons(gc, 443, 145);
+  //draw_minusplus_buttons(gc, 443, 145);
   //gc->stat_panel_x+=100;
   //gc->stat_panel_y+=100;
-  draw_character_attributes(gc, gc->stat_panel_x, gc->stat_panel_y, 1); //added +100 on 4/17
+  //draw_character_attributes(gc, gc->stat_panel_x, gc->stat_panel_y, 1); //added +100 on 4/17
 }
 
 #include <string.h>
 void draw_character_1attribute(GameCore *gc, int x, int y, int stat, char *str)
 {
+  printf("debug: draw_character_1attribute\n");
   char stat_text[4];
   sdl_set_textpos(gc, x, y);
   rendertext(gc, str);
@@ -137,6 +145,7 @@ void draw_character_1attribute(GameCore *gc, int x, int y, int stat, char *str)
 }
 void draw_minusplus_buttons(GameCore *gc, int x, int y)
 {
+  printf("debug: draw_minusplus_buttons\n");
   SDL_Rect dst, dst2;
   dst = fast_rect(x-32+20, y, 20, 20);
   dst2 = fast_rect(x-32, y, 20, 20);
@@ -146,6 +155,7 @@ void draw_minusplus_buttons(GameCore *gc, int x, int y)
 }
 void draw_character_attributes(GameCore *gc, int x, int y, int moddable)
 {
+  printf("debug: draw_character_attributes\n");
   //char stat_text[4];
   SDL_Rect stat_bg_frame, stat_fg_frame;
   stat_bg_frame.w = 200;  stat_bg_frame.h = 170; stat_bg_frame.x = x-35;

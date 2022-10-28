@@ -35,7 +35,8 @@ int start_sdl(GameCore *gc)
   //gc->screen_size_x = 1024; //1360; //640; // (why hardcode again?)
   //gc->screen_size_y = 768; //480; //v---- run SDL_Init()  
   if (SDL_Init( SDL_INIT_VIDEO | SDL_INIT_TIMER | SDL_INIT_EVENTS
-          | SDL_WINDOW_FULLSCREEN_DESKTOP) == -1) {
+		| SDL_WINDOW_FULLSCREEN_DESKTOP) == -1){
+		//      | SDL_WINDOW_FULLSCREEN_DESKTOP) == -1) {
     printf("SDL_Init: %s \n", SDL_GetError() );
     return 1;
   }
@@ -62,7 +63,8 @@ int start_sdl(GameCore *gc)
     return 1;
   }
   //gc->font0 = TTF_OpenFont("data/font.ttf", 14);//font size?
-  load_font(gc, "data/font.png");
+  //load_font(gc, "data/font.png");
+  gc->font0 = IMG_Load_w_error(gc, "data/font.png"); //loadfont
   if (gc->font0 == NULL) {
     printf("Error no font (data/font.bmp) ->from resources.c\n");
     return 1;
@@ -203,7 +205,8 @@ void load_map_wall_textures(GameCore *gc, char *directory) //loads all the textu
   gc->door_right_fov0_blank = load_texture_by_dir(gc, directory, "door_right_fov0_blank.png");
   gc->door_right_fov1_blank = load_texture_by_dir(gc, directory, "door_right_fov1_blank.png");
   gc->door_right_fov2_blank = load_texture_by_dir(gc, directory, "door_right_fov2_blank.png");
-  gc->item1_fov0 = load_texture_by_dir(gc, directory, "item1_fov0.png");
+  //gc->item1_fov0 = load_texture_by_dir(gc, directory, "item1_fov0.png");
+  gc->pinetree0 = load_texture_by_dir(gc, directory, "pinetree_00.png");
   //load_texture_by_dir(gc->, "blank/", ".png");
 }
 
@@ -228,6 +231,7 @@ void clear_textures(GameCore *gc)  //clears all loaded textures.
   SDL_DestroyTexture(gc->tall_wall_right_fov0);// = load_texture_by_dir(gc, directory, "tall_wall_right_fov0.png");
   SDL_DestroyTexture(gc->tall_wall_right_fov1);// = load_texture_by_dir(gc, directory, "tall_wall_right_fov1.png");
   SDL_DestroyTexture(gc->tall_wall_right_fov2);// = load_texture_by_dir(gc, directory, "tall_wall_right_fov2.png");
+  SDL_DestroyTexture(gc->pinetree0); //destroy pine tree.
 }
 
 void change_scene_textures(GameCore *gc, char *directory)

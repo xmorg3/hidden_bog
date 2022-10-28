@@ -170,6 +170,8 @@ typedef struct _GameCore {
   SDL_Texture  *tall_wall_front_fov0, *tall_wall_front_fov1,  //stone walls
     *tall_wall_left_fov0,  *tall_wall_left_fov1,  *tall_wall_left_fov2,
   	 *tall_wall_right_fov0, *tall_wall_right_fov1, *tall_wall_right_fov2;
+  //the trees. (trying new resize and flip code?
+  SDL_Texture *pinetree0;
   //Now loading dungeon walls
   SDL_Texture *dfloor_bottom_fobx_blank,*dsky_top_fobx_blank, //dungeon walls
     *dwall_front_fov0_blank, *dwall_front_fov1_blank,
