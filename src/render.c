@@ -30,9 +30,10 @@ void main_draw_loop(GameCore *gc); //called in main.c
 void draw_sheet_character(GameCore *gc);
 
 //text.c
-void rendertext(GameCore *gc, char *message); //there needs to be an x/y of text
+void rendertext(SDL_Renderer *r, SDL_Texture *t, int x, int y, char *message);
+//void rendertext(GameCore *gc, char *message); //there needs to be an x/y of text
 //SDL_Texture* sdl_printf_font(GameCore *gc, char *message);
-void sdl_set_textpos(GameCore *gc, int x, int y);
+//void sdl_set_textpos(GameCore *gc, int x, int y);
 //void set_color(GameCore *gc, int r, int g, int b); //text.c
 
 void draw_message_frame(GameCore *gc);
@@ -135,8 +136,11 @@ void draw_message_frame(GameCore *gc)
 	int i;
 	//set_color(gc, 255, 255, 255); //removed from text.c
 	for(i=0; i<6; i++) {
-		sdl_set_textpos(gc, gc->message_log.x + 5, gc->message_log.y + 5+(i*20));
-		rendertext(gc, gc->messagelist[i]);
+	  //sdl_set_textpos(gc, gc->message_log.x + 5, gc->message_log.y + 5+(i*20));
+	  rendertext(gc->renderer, gc->font0,
+		     gc->message_log.x + 5,
+		     gc->message_log.y + 5+(i*20),
+		     gc->messagelist[i]);
 		//SDL_RenderCopy(gc->renderer,
 		//sdl_printf_font(gc, gc->messagelist[i]); //,
 		//		   NULL,
@@ -190,29 +194,29 @@ void draw_character_portraits(GameCore *gc)
 }
 void draw_mapport(GameCore *gc)
 {
-	int x,y,i, screen_fract;
-	int fr_x, fr_y; //, cr_w, cr_h;
-	int location_x, location_y;
-	screen_fract = gc->screen_size_x / 38;
-	SDL_Rect amap_tiles[52]; //how many tiles is V---loop*loop
-	i=0;
-	//SDL_RenderCopy(gc->renderer, gc->automap_frame, NULL, &gc->automap_frame_rect);//&gc->tabbed_pane);
-	for(y=0; y < 7; y++) { //vertical loop
-		for(x=0; x < 7; x++) { //horizantal loop
-			fr_x = gc->tabbed_pane.x + 1+(x * screen_fract); //set start x
-			fr_y = gc->tabbed_pane.y + 1 + (y * screen_fract); //set start y
-			amap_tiles[i] = fast_rect( fr_x, fr_y, screen_fract -1, screen_fract -1);
-			location_x = gc->player->map_x -4+x;
-			location_y = gc->player->map_y -4+y;
-			set_map_tile_color(gc, location_x, location_y, x, y); //set thecolor
-			SDL_RenderFillRect(gc->renderer, &amap_tiles[i]); //render it
-			//render something here.
-			SDL_RenderCopy(gc->renderer, NULL, NULL, &amap_tiles[i]);
-			i++;
-		}
-	}
-	SDL_SetRenderDrawColor(gc->renderer, 0,0,0,0);
-	//set_color(gc, 255, 255, 255); //removed from text.c
+  int x,y,i, screen_fract;
+  int fr_x, fr_y; //, cr_w, cr_h;
+  int location_x, location_y;
+  screen_fract = gc->screen_size_x / 38;
+  SDL_Rect amap_tiles[52]; //how many tiles is V---loop*loop
+  i=0;
+  //SDL_RenderCopy(gc->renderer, gc->automap_frame, NULL, &gc->automap_frame_rect);//&gc->tabbed_pane);
+  for(y=0; y < 7; y++) { //vertical loop
+    for(x=0; x < 7; x++) { //horizantal loop
+      fr_x = gc->tabbed_pane.x + 1+(x * screen_fract); //set start x
+      fr_y = gc->tabbed_pane.y + 1 + (y * screen_fract); //set start y
+      amap_tiles[i] = fast_rect( fr_x, fr_y, screen_fract -1, screen_fract -1);
+      location_x = gc->player->map_x -4+x;
+      location_y = gc->player->map_y -4+y;
+      set_map_tile_color(gc, location_x, location_y, x, y); //set thecolor
+      SDL_RenderFillRect(gc->renderer, &amap_tiles[i]); //render it
+      //render something here.
+      SDL_RenderCopy(gc->renderer, NULL, NULL, &amap_tiles[i]);
+      i++;
+    }
+  }
+  SDL_SetRenderDrawColor(gc->renderer, 0,0,0,0);
+  //set_color(gc, 255, 255, 255); //removed from text.c
 }
 
 void fast_button(GameCore *gc, int x, int y, char *text)
@@ -225,10 +229,7 @@ void fast_button(GameCore *gc, int x, int y, char *text)
   else {
     SDL_RenderCopy(gc->renderer, gc->t_buttons, &gc->button_raised, &r);
   }
-  //sdl_set_textpos(gc, x+50, y+15); //set_color(gc, 255, 255, 255);
-  //SDL_RenderCopy(gc->renderer, sdl_printf_font(gc, text), NULL, gc->c_text_size);
-  //sdl_printf_font(gc, text);
-  rendertext(gc, text);
+  rendertext(gc->renderer, gc->font0, x+50, y+15, text);
 }
 void fast_radio(GameCore *gc, int x, int y, char *text, int selected) //does not uncheck?
 {//18,14,40,40...54,14,40,40
@@ -250,39 +251,39 @@ void fast_radio(GameCore *gc, int x, int y, char *text, int selected) //does not
   //sdl_set_textpos(gc, x+36, y); set_color(gc, 255, 255, 255);
   //SDL_RenderCopy(gc->renderer,
   //sdl_printf_font(gc, text);//, NULL, gc->c_text_size);
-  //rendertext(gc, text);
+  rendertext(gc->renderer, gc->font0, x+36, y, text);
 }
 void draw_game_menu(GameCore *gc)
 {
-	int button_row, button_col; //, button_col1_to;
-	button_row = 150;//+55
-	button_col = 15;//
-	SDL_RenderCopy(gc->renderer, gc->w_background, NULL, NULL); //put background
-	//draw_background_texture(gc, gc->w_background);//SDLTexture *t
-
-	//gl_draw_game_menu(gc);
-	fast_button(gc, button_col,button_row,      "New Game");
-	fast_button(gc, button_col,button_row+55*1, "Load Game");
-	fast_button(gc, button_col,button_row+55*2, "Save Game");
-	fast_button(gc, button_col,button_row+55*3, "Options");
-	fast_button(gc, button_col,button_row+55*4, "Exit");
-	//display_render(gc);
+  int button_row, button_col; //, button_col1_to;
+  button_row = 150;//+55
+  button_col = 15;//
+  SDL_RenderCopy(gc->renderer, gc->w_background, NULL, NULL); //put background
+  //draw_background_texture(gc, gc->w_background);//SDLTexture *t
+  
+  //gl_draw_game_menu(gc);
+  fast_button(gc, button_col,button_row,      "New Game");
+  fast_button(gc, button_col,button_row+55*1, "Load Game");
+  fast_button(gc, button_col,button_row+55*2, "Save Game");
+  fast_button(gc, button_col,button_row+55*3, "Options");
+  fast_button(gc, button_col,button_row+55*4, "Exit");
+  //display_render(gc);
 }
 
 void resize_screen(GameCore *gc, int size_x, int size_y)
 { //doesn't work yet, must reload the textures.
-	SDL_Rect vp;
-	vp.x=0;
-	vp.y=0;
-	vp.w = size_x;
-	vp.h = size_y;
-	SDL_DestroyRenderer(gc->renderer);
-	SDL_SetWindowSize(gc->win, size_x, size_y);
-	SDL_SetWindowFullscreen(gc->win, SDL_WINDOW_FULLSCREEN);
-	gc->renderer =
-		SDL_CreateRenderer(gc->win, -1,
-		                   SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-	if (gc->renderer == NULL) {
-		printf("%s \n", SDL_GetError() );
-	}
+  SDL_Rect vp;
+  vp.x=0;
+  vp.y=0;
+  vp.w = size_x;
+  vp.h = size_y;
+  SDL_DestroyRenderer(gc->renderer);
+  SDL_SetWindowSize(gc->win, size_x, size_y);
+  SDL_SetWindowFullscreen(gc->win, SDL_WINDOW_FULLSCREEN);
+  gc->renderer =
+    SDL_CreateRenderer(gc->win, -1,
+		       SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+  if (gc->renderer == NULL) {
+    printf("%s \n", SDL_GetError() );
+  }
 }

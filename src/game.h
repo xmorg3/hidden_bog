@@ -146,6 +146,9 @@ typedef struct _GameCore {
   SDL_Renderer *renderer;
   SDL_Event sdl_event;
   SDL_DisplayMode current_dmode;
+  //struct nk_context *ctx; /*Experimental Nuklear test?*/
+  //struct nk_colorf nk_bg;
+
   int screen_size_x, screen_size_y;
   int game_state;
   int mapsize;

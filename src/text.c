@@ -4,10 +4,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "nuklear.h"
 #include "game.h"
 
 #define FWIDTH 16
 #define FHEIGHT 24
+
+
 
 SDL_Rect fast_rect(int x, int y, int w, int h);
 
@@ -34,14 +37,14 @@ void rendertext(SDL_Renderer *r, SDL_Texture *t, int x, int y, char *message);
 void sdl_set_textpos(SDL_Rect *text_rect, int x, int y) { //text.c
 	text_rect->x = x;
 	text_rect->y = y;
-	text_rect->w = 16;
-	text_rect->h = 24;
+	text_rect->w = FWIDTH;
+	text_rect->h = FHEIGHT;
 }
 
 //top = (ascii - 32) / 16 * 12;
 //left = (ascii - 32) % 16 * 8;
-void rendertext(SDL_Renderer *r, SDL_Texture *t, int x, int y, char *message){
-  //printf("render text starting: %s\n", message);
+void rendertext(SDL_Renderer *r, SDL_Texture *t, int x, int y, char *message) {
+  printf("render text starting: %s\n", message);
   int l = strlen(message);
   SDL_Texture *wholetext;
   char c; //current letter in string
@@ -53,7 +56,7 @@ void rendertext(SDL_Renderer *r, SDL_Texture *t, int x, int y, char *message){
 			   top,   //Y
 			   8,     //W
 			   12);   //H
-    SDL_Rect d = fast_rect(x,y,8,12);
+    SDL_Rect d = fast_rect(x +(i * 16),y,FWIDTH,FHEIGHT);
     SDL_RenderCopy(r,   //renderer
     		   t,   //text of font
     		   &s,  //letter of font to render
@@ -63,11 +66,11 @@ void rendertext(SDL_Renderer *r, SDL_Texture *t, int x, int y, char *message){
 }
 
 
-  void set_color(GameCore *gc, int r, int g, int b) { //set_font_color;
+void set_color(GameCore *gc, int r, int g, int b) { //set_font_color;
   gc->current_color.r = r;
   gc->current_color.b = b;
   gc->current_color.g = g;
-  }
+}
   
 
 /*SDL_Rect fast_rect(int x, int y, int w, int h){
