@@ -31,3 +31,5 @@ Required to run:
 	 sdl2 sdl2-image sdl2-ttf
 Experimental code
 	 sqlite3
+
+NOTES: This is my new github repository.  I lost access to xmorg.(2fa issue)
