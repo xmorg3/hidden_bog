@@ -1,10 +1,13 @@
 #Makefile for mySDL
 
+#CC=musl-clang #produces all kinds of linker errors.  make SDL with MUSL?
 #CC = clang -g 
-CC = tcc
-#CC = gcc -ggdb
+#CC = tcc
+#CC = scc
+CC = gcc -ggdb
 
-LIBS = -lSDL2 -lSDL2_image -lSDL2_ttf -lm #-lsqlite3 #-lGL
+#LIBS = #-lSDL2 -lSDL2_image #-lSDL2_ttf -lm #-lsqlite3 #-lGL
+LIBS = -lm `sdl2-config --libs` -lSDL2_image
 
 FLAGS = `sdl2-config --cflags --libs` -I/usr/local/include -L/usr/local/lib
 
